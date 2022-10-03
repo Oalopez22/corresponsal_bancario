@@ -1,0 +1,73 @@
+<resources>
+    <string name="app_name">mvpLoginAgenda</string>
+    <string name="txtLogintitle">Login</string>
+    <string name="txtLoginCorreo">Correo</string>
+    <string name="txtLoginPassword">Contraseña</string>
+    <string name="btnIngresar">Ingresar</string>
+    <string name="btnRegistrar">Registrarse</string>
+
+    /* Formulario de registro */
+    <string name="txtNewtitle">Formulario de registro</string>
+    <string name="txtNewCorreo">Correo</string>
+    <string name="txtNewNombre">Nombre</string>
+    <string name="txtNewPassword">Contraseña</string>
+    <string name="btnNewRegistro">Registrarse</string>
+
+    /*ADMIN BUTTONS */
+    <string name="btnUpdateCop">Actualizar Corresponsal</string>
+    <string name="btnUpdateClient">Actualizar Clientes</string>
+    <string name="btnClosesessionAdmin">Cerrar Sesión</string>
+
+
+    /* ADMIN CREAR CLIENTE*/
+    <string name="txtAddAdmintitle">Crear cliente</string>
+    <string name="txtAddAdminCliente">Nombre del cliente</string>
+    <string name="txtAddAdminCC">Número de cedula</string>
+    <string name="txtAdminSaldo">Saldo inicial</string>
+    <string name="txtTitlePin">Ingrese su pin</string>
+    <string name="txtTitleConfirmPin">Confirmar pin</string>
+    <string name="btnAceptarPin">Aceptar</string>
+    <string name="btnCancelPin">Cancelar</string>
+    <string name="btnAceptarConfirmPin">Aceptar</string>
+    <string name="btnCancelConfirmPin">Cancelar</string>
+
+    <string name="txtAddAdminPin">PIN</string>
+
+
+    <string name="txtAddAdminConfirmPin">Ingrese nuevamente su pin</string>
+    <string name="txtAddAdminbtnConfirmar">Confirmar</string>
+    <string name="txtAddAdminbtnCancelar">Cancelar</string>
+    <string name="txtConfirmTitleData">Confirmar datos cliente</string>
+
+
+    <string name="btnConfirmDataClient">Confirmar</string>
+    <string name="btnCancelDataClient">Cancelar</string>
+    <string name="btnAceptClient">Aceptar</string>
+
+
+    /* ADMIN CREAR CORRESPONSAL*/
+    <string name="txtAddAdmintitlecop">Registrar corresponsal</string>
+    <string name="txtAddAdminnamecop">Nombre del corresponsal</string>
+    <string name="txtAddAdminNitcop">NIT corresponsal</string>
+    <string name="txtAddAdminEmailcop">Correo Corresponsal</string>
+    <string name="txtAddAminPascop">Contraseña Corresponsal</string>
+
+    /* ADMIN BUSCAR CORRESPONSAL /*
+    <string name="txtSearcAdmintitlecop">Consultar corresponsal</string>
+    <string name="txtSearcAdminNitcop">Número de NIT a consultar</string>
+    <string name="btnSearchAdminConfimCop">Confirmar</string>
+    <string name="btnSearchAdminCancelCop">Cancelar</string>
+
+    /* ADMIN DATA CORRESPONSAL */
+
+    <string name="btnDataHabilitarAdminCop">Habilitar</string>
+    <string name="btnDataDeshabilitarAdminCop">Deshabilitar</string>
+    /* ADMIN USER DATA
+    <string name="txtSearcAdmintitleUser">Consultar cliente</string>
+    <string name="txtSearcAdminCcUser">Número cédula a consultar</string>
+    <string name="btnSearchAdminConfimUser">Confirmar</string>
+    <string name="btnSearchAdminCancelUser">Cancelar</string>
+    /* ADMIN LIST USERS */
+    <string name="txtTitleListUsers">Listado clientes</string>
+    <string name="SearchListCcClientes">Cédula cliente</string>
+</resources>

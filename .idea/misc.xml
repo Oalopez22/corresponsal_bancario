@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/cloud/Desktop/PRUEBAS-OMAR/MVPLOGIN/app/src/main/res/layout/activity_admin_corresponsal.xml" value="0.4" />
+        <entry key="..\:/Users/cloud/Desktop/PRUEBAS-OMAR/MVPLOGIN/app/src/main/res/layout/activity_data_admin_client.xml" value="0.3625" />
+        <entry key="..\:/Users/cloud/Desktop/PRUEBAS-OMAR/MVPLOGIN/app/src/main/res/layout/activity_data_admin_cop.xml" value="0.3484375" />
+        <entry key="..\:/Users/cloud/Desktop/PRUEBAS-OMAR/MVPLOGIN/app/src/main/res/layout/activity_list_admin_clientes.xml" value="0.3625" />
+        <entry key="..\:/Users/cloud/Desktop/PRUEBAS-OMAR/MVPLOGIN/app/src/main/res/layout/activity_list_admin_cop.xml" value="0.3625" />
+        <entry key="..\:/Users/cloud/Desktop/PRUEBAS-OMAR/MVPLOGIN/app/src/main/res/layout/activity_main.xml" value="0.3569230769230769" />
+        <entry key="..\:/Users/cloud/Desktop/PRUEBAS-OMAR/MVPLOGIN/app/src/main/res/layout/activity_pin_register_client_admin.xml" value="0.3484375" />
+        <entry key="..\:/Users/cloud/Desktop/PRUEBAS-OMAR/MVPLOGIN/app/src/main/res/layout/activity_register.xml" value="0.3569230769230769" />
+        <entry key="..\:/Users/cloud/Desktop/PRUEBAS-OMAR/MVPLOGIN/app/src/main/res/layout/activity_register_admin_corresponsal.xml" value="0.3625" />
+        <entry key="..\:/Users/cloud/Desktop/PRUEBAS-OMAR/MVPLOGIN/app/src/main/res/layout/activity_registrarse.xml" value="0.3569230769230769" />
+        <entry key="..\:/Users/cloud/Desktop/PRUEBAS-OMAR/MVPLOGIN/app/src/main/res/layout/activity_search_admin_corresponsal.xml" value="0.3625" />
+        <entry key="..\:/Users/cloud/Desktop/PRUEBAS-OMAR/MVPLOGIN/app/src/main/res/layout/activity_search_client_admin.xml" value="0.3625" />
+        <entry key="..\:/Users/cloud/Desktop/PRUEBAS-OMAR/MVPLOGIN/app/src/main/res/layout/activity_search_user_admin.xml" value="0.3625" />
+        <entry key="..\:/Users/cloud/Desktop/PRUEBAS-OMAR/MVPLOGIN/app/src/main/res/layout/activity_user_data_admin.xml" value="0.3625" />
+        <entry key="..\:/Users/cloud/Desktop/PRUEBAS-OMAR/MVPLOGIN/app/src/main/res/layout/dialog_confirm_pin.xml" value="0.3125" />
+        <entry key="..\:/Users/cloud/Desktop/PRUEBAS-OMAR/MVPLOGIN/app/src/main/res/layout/dialog_perzonalizado.xml" value="0.3625" />
+        <entry key="..\:/Users/cloud/Desktop/PRUEBAS-OMAR/MVPLOGIN/app/src/main/res/layout/dialog_pin.xml" value="0.3625" />
+        <entry key="..\:/Users/cloud/Desktop/PRUEBAS-OMAR/MVPLOGIN/app/src/main/res/layout/lista_clientes_admin.xml" value="0.271875" />
+        <entry key="..\:/Users/cloud/Desktop/PRUEBAS-OMAR/MVPLOGIN/app/src/main/res/layout/lista_cops_admin.xml" value="0.3625" />
+        <entry key="..\:/Users/cloud/Desktop/PRUEBAS-OMAR/MVPLOGIN/app/src/main/res/layout/listadatacopadmin.xml" value="0.3125" />
+        <entry key="..\:/Users/cloud/Desktop/PRUEBAS-OMAR/MVPLOGIN/app/src/main/res/menu/menuadmincop.xml" value="0.3625" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

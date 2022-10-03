@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/MenuUpdateCop"
+        android:title="@string/btnUpdateCop" />
+    <item
+        android:id="@+id/MenuUpdateClient"
+        android:title="@string/btnUpdateClient" />
+    <item
+        android:id="@+id/MenuCloseSession"
+        android:title="@string/btnClosesessionAdmin" />
+</menu>
