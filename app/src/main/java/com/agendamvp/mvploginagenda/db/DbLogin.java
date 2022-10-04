@@ -108,6 +108,20 @@ public class DbLogin extends DbHelper{
         cursor.close();
         return dataUser;
     }
+    public  boolean actualizarEstado(Usuario user, SharedPreferences sp){
+        boolean correcto = true;
+        try{
+            db.execSQL(" UPDATE " + TABLE_CORRESPONSAL + " SET estado_corresponsal" + " =" + user.getCorresponsal_status() + "' WHERE id_libro='" +sp.getNitCop() + "' ");
+        correcto = true;
+        }catch (Exception ex){
+            ex.toString();
+            correcto = false;
+        }
+        finally {
+            db.close();
+        }
+        return correcto;
+    }
 
     public boolean buscarCliente(SharedPreferences sp){
         Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_CLIENT + " WHERE " + COLUMNA_DOCUMENTO + " = ?", new String[]{sp.getCcUSer()} );

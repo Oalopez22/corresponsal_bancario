@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,6 +25,7 @@ public class DataAdminCop extends AppCompatActivity implements InterfacesDataCop
     TextView viewDataNameCop,viewDataNitCop,viewDataSaldoCop,viewDataEmailCop;
     SharedPreferences sp;
     DataAdminCopAdapter adapter;
+    Button btnHabilitarCop,btnDeshabilitarCop;
     ImageView imgarrowback;
     RecyclerView RviewDataCop;
     @Override
@@ -43,6 +45,29 @@ public class DataAdminCop extends AppCompatActivity implements InterfacesDataCop
                 finish();
             }
         });
+
+        if (user != null){
+            int status= user.getCorresponsal_status();
+            if (status == 0){
+                btnDeshabilitarCop.setVisibility(View.INVISIBLE);
+            }else{
+                btnHabilitarCop.setVisibility(View.INVISIBLE);
+            }
+        }
+
+        btnHabilitarCop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        btnDeshabilitarCop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
     @Override
@@ -53,5 +78,7 @@ public class DataAdminCop extends AppCompatActivity implements InterfacesDataCop
         viewDataSaldoCop = findViewById(R.id.txtDataSaldoCop);
         viewDataEmailCop = findViewById(R.id.txtDataEmailCop);
         imgarrowback = findViewById(R.id.imgArrowBackAdmin);
+        btnHabilitarCop = findViewById(R.id.btndataHabilitar);
+        btnDeshabilitarCop = findViewById(R.id.btndataDesabilitar);
     }
 }

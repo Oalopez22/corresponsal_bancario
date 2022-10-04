@@ -16,5 +16,8 @@ public class PresenterDataCop implements InterfacesDataCop.presenter {
     }
 
 
-
+    @Override
+    public boolean actualizar_estado(Usuario user, SharedPreferences sp) {
+        return false;
+    }
 }

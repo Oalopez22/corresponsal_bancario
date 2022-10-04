@@ -4,6 +4,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -55,23 +56,23 @@ public class Register extends AppCompatActivity implements View.OnClickListener,
         btnCancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String data = "12328904";
-                Random cardRandom = new Random();
-                int numeroCard = cardRandom.nextInt(6 - 3 + 1 )+3;
-                String CardNumber = "";
-                if (data.length() <= 8){
-                    int aleatorio = 0;
-                    aleatorio = (int) (Math.random()*1000);
+                AlertDialog.Builder buildercancel = new AlertDialog.Builder(Register.this);
 
-                    CardNumber = numeroCard + data + String.valueOf(aleatorio);
-                }
-                if (data.length() <= 10){
-                    int aleatorio = 0;
-                    aleatorio = (int) (Math.random()*100);
-
-                    CardNumber = numeroCard + data + String.valueOf(aleatorio);
-                }
-                String numeros  =  CardNumber + String.valueOf(1010);
+                LayoutInflater inflater = getLayoutInflater();
+                View view = inflater.inflate(R.layout.dialog_cancel_client,null);
+                buildercancel.setView(view);
+                AlertDialog dialog = buildercancel.create();
+                dialog.setCancelable(false);
+                dialog.setCanceledOnTouchOutside(false);
+                dialog.show();
+                Button btnExit;
+                btnExit = view.findViewById(R.id.btnSalir);
+                btnExit.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        salir();
+                    }
+                });
             }
         });
     }
@@ -89,7 +90,6 @@ public class Register extends AppCompatActivity implements View.OnClickListener,
         txtnewNombre = findViewById(R.id.txtNewClienteAdmin);
         txtNewdocumento = findViewById(R.id.txtNewAdminCC);
         txtNewsaldo = findViewById(R.id.txtNewAdminSaldo);
-        data = findViewById(R.id.data);
         btnRegistrar = findViewById(R.id.btnConfirmarNewCliente);
         btnCancelar = findViewById(R.id.btnCancelClient);
     }
@@ -108,16 +108,20 @@ public class Register extends AppCompatActivity implements View.OnClickListener,
         LayoutInflater inflater = getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_pin,null);
         builder.setView(view);
+
         AlertDialog dialog = builder.create();
+
         dialog.show();
         dialog.setCancelable(false);
         dialog.setCanceledOnTouchOutside(false);
+
         EditText txtpin;
         txtpin = view.findViewById(R.id.txtClientPin);
 
 
-        Button btnAceptPin;
+        Button btnAceptPin,btnCancelPin;
         btnAceptPin = view.findViewById(R.id.btnAceptPin);
+        btnCancelPin = view.findViewById(R.id.btnCancelPin);
         btnAceptPin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -125,8 +129,33 @@ public class Register extends AppCompatActivity implements View.OnClickListener,
                 if (cadenaVacia(ntxtpin)){
                     int newpin = Integer.parseInt(ntxtpin);
                  confirmarpin(nombre,documento,balance,newpin, contexto);
+                }else {
+                    Toast.makeText(contexto, "Campo obligatorio", Toast.LENGTH_SHORT).show();
                 }
             }
+        });
+        btnCancelPin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder buildercancel = new AlertDialog.Builder(contexto);
+
+                LayoutInflater inflater = getLayoutInflater();
+                View view = inflater.inflate(R.layout.dialog_cancel_client,null);
+                buildercancel.setView(view);
+                AlertDialog dialog = buildercancel.create();
+                dialog.setCancelable(false);
+                dialog.setCanceledOnTouchOutside(false);
+                dialog.show();
+                Button btnExit;
+                btnExit = view.findViewById(R.id.btnSalir);
+                btnExit.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        salir();
+                    }
+                });
+            }
+
         });
     }
 
@@ -142,7 +171,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener,
         dialog.show();
         EditText txtConfirmPin;
         txtConfirmPin = view.findViewById(R.id.txtConfirmClientPin);
-        Button btnAceptConfirmPin;
+        Button btnAceptConfirmPin, btnCancelConfirm;
 
         btnAceptConfirmPin = view.findViewById(R.id.btnConfirmAceptPin);
         btnAceptConfirmPin.setOnClickListener(new View.OnClickListener() {
@@ -161,32 +190,41 @@ public class Register extends AppCompatActivity implements View.OnClickListener,
                 }
             }
         });
+        btnCancelConfirm = view.findViewById(R.id.btnCancelConfirmPin);
+        btnCancelConfirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder buildercancel = new AlertDialog.Builder(contexto);
 
-    }
-    public  void cancelar(){
-        Intent intent = new Intent(this,Admin_corresponsal.class);
-        startActivity(intent);
-    }
-    private  String calculo_cc(String cc){
-            String cedula = new String();
-            try {
-                if (cc.length() == 8){
-                    int aleatorio = 0;
-                    aleatorio = (int) (Math.random()*100);
-                    cedula = cc + aleatorio;
-                    return  cedula;
-                }
-            }catch (Exception ex){
-                ex.toString();
+                LayoutInflater inflater = getLayoutInflater();
+                View view = inflater.inflate(R.layout.dialog_cancel_client,null);
+                buildercancel.setView(view);
+                AlertDialog dialog = buildercancel.create();
+                dialog.setCancelable(false);
+                dialog.setCanceledOnTouchOutside(false);
+                dialog.show();
+                Button btnExit;
+                btnExit = view.findViewById(R.id.btnSalir);
+                btnExit.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        salir();
+                    }
+                });
             }
-            return cedula;
+        });
     }
+
      public  void redirigir(String nombre, String documento, int balance,int pin,Context context){
         Intent intent = new Intent(context,PinRegisterClientAdmin.class);
         intent.putExtra("DATA_CLIENT_NAME",nombre);
         intent.putExtra("DATA_CLIENT_CC",documento);
         intent.putExtra("DATA_CLIENT_BALANCE",balance);
         intent.putExtra("DATA_CLIENT_PIN",pin);
+        startActivity(intent);
+    }
+    private void salir(){
+        Intent intent = new Intent(this,Admin_corresponsal.class);
         startActivity(intent);
     }
 }

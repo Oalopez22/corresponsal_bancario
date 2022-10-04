@@ -6,9 +6,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 
+import android.text.Layout;
 import android.util.Patterns;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,7 +25,7 @@ import java.util.regex.Pattern;
 
 public class RegisterAdminCorresponsal extends AppCompatActivity implements InterfacesRegisterCorresponsal.view {
     EditText txtNewCopName,txtNewCopNit,txtNewCopEmail,txtNewCopPass;;
-    Button btnConfirmNewCop;
+    Button btnConfirmNewCop,btnCancel;
     InterfacesRegisterCorresponsal.presenter presenter;
     Usuario user;
 
@@ -48,18 +51,59 @@ public class RegisterAdminCorresponsal extends AppCompatActivity implements Inte
                 String nit = txtNewCopNit.getText().toString();
                 String password = txtNewCopPass.getText().toString();
                 String email = txtNewCopEmail.getText().toString();
-                if ( cadenaVacia(nombre) && cadenaVacia(nit) && validarEmail(email) && cadenaVacia(password)){
+                if ( cadenaVacia(nombre) && cadenaVacia(nit) && validarEmail(email) && validarPassword(password)){
                     user.setCorresponsal_name(nombre);
                     user.setCorresponsal_nit(nit);
                     user.setCorresponsal_email(email);
                     user.setCorresponsal_password(password);
                     long id = presenter.registrar_corresponsal(user);
                         if (id > 0 ){
-                            Toast.makeText(RegisterAdminCorresponsal.this, " Corresponsal creado", Toast.LENGTH_SHORT).show();
+                            AlertDialog.Builder buildercancel = new AlertDialog.Builder(RegisterAdminCorresponsal.this);
+                            LayoutInflater inflater = getLayoutInflater();
+                            View view = inflater.inflate(R.layout.dialog_success_client,null);
+                            buildercancel.setView(view);
+                            AlertDialog dialog = buildercancel.create();
+                            dialog.setCancelable(false);
+                            dialog.setCanceledOnTouchOutside(false);
+                            dialog.show();
+                            Button btnExit;
+                            btnExit = view.findViewById(R.id.btnSalir);
+                            btnExit.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    salir();
+                                }
+                            });
                         }else {
                             Toast.makeText(RegisterAdminCorresponsal.this, "Error al registrar el corresponsal", Toast.LENGTH_SHORT).show();
                         }
+                }else{
+                    txtNewCopName.setError("Campo obligatorio");
+                    txtNewCopNit.setError("Campo obligatorio");
+                    txtNewCopEmail.setError("Campo obligatorio");
                 }
+            }
+        });
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder buildercancel = new AlertDialog.Builder(RegisterAdminCorresponsal.this);
+
+                LayoutInflater inflater = getLayoutInflater();
+                View view = inflater.inflate(R.layout.dialog_cancel_client,null);
+                buildercancel.setView(view);
+                AlertDialog dialog = buildercancel.create();
+                dialog.setCancelable(false);
+                dialog.setCanceledOnTouchOutside(false);
+                dialog.show();
+                Button btnExit;
+                btnExit = view.findViewById(R.id.btnSalir);
+                btnExit.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        salir();
+                    }
+                });
             }
         });
     }
@@ -74,6 +118,7 @@ public class RegisterAdminCorresponsal extends AppCompatActivity implements Inte
         txtNewCopEmail = findViewById(R.id.txtNewEmailCop);
         txtNewCopPass = findViewById(R.id.txtNewPassCop);
         btnConfirmNewCop = findViewById(R.id.btnConfirmarNewCop);
+        btnCancel = findViewById(R.id.btnCancelCop);
     }
 
 
@@ -86,7 +131,7 @@ public class RegisterAdminCorresponsal extends AppCompatActivity implements Inte
             return true;
         }
     }
-/*    private boolean validarPassword(String Pass){
+    private boolean validarPassword(String Pass){
          Pass = txtNewCopPass.getText().toString();
         if (Pass.equals("")){
             txtNewCopPass.setError("Campo obligatorio");
@@ -106,5 +151,10 @@ public class RegisterAdminCorresponsal extends AppCompatActivity implements Inte
         else {
             return true;
         }
-    }*/
+        return false;
+    }
+    private  void salir(){
+        Intent intent = new Intent(this,Admin_corresponsal.class);
+        startActivity(intent);
+    }
 }

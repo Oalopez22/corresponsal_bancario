@@ -8,11 +8,11 @@ public interface InterfacesDataCop {
         void findElements();
     }
     interface presenter{
-     /*   public Usuario mostrarDataCop(SharedPreferences sp);*/
+     public boolean actualizar_estado(Usuario user, SharedPreferences sp);
 
     }
     interface model{
- /*       public Usuario mostrarDataCop(SharedPreferences sp);*/
+        public boolean actualizar_estado(Usuario user, SharedPreferences sp);
 
     }
 }
