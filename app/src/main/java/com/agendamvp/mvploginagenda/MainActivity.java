@@ -50,7 +50,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String correoAdmin = txtLoginEmail.getText().toString();
         String passwordAdmin = txtLoginPassword.getText().toString();
         if (correoAdmin.equals( "admin@wposs.com") & passwordAdmin.equals("Admin123*")){
-            Intent intent = new Intent(this,Admin_corresponsal.class);
+            Intent intent = new Intent(this,Corresponsal_Start.class);
+            /*Intent intent = new Intent(this,Admin_corresponsal.class);*/
             startActivity(intent);
         }
     }

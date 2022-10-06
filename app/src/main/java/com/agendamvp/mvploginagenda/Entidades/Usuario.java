@@ -1,5 +1,8 @@
 package com.agendamvp.mvploginagenda.Entidades;
 
+import java.time.LocalDate;
+import java.util.Date;
+
 public class Usuario {
                 /* CLIENTE */
     private String nombre;
@@ -7,6 +10,7 @@ public class Usuario {
     private int saldo;
     private int pin;
     private String card_number;
+    private LocalDate fecha_expiracion;
 
             /* CORRESPONSAL*/
     private  String corresponsal_name;
@@ -15,6 +19,12 @@ public class Usuario {
     private String corresponsal_password;
     private int corresponsal_status;
     private int corresponsal_balance;
+    private String fecha_expiracion_client_cop;
+    private  int valor_pay_card_cop;
+    private int valor_pay_cuotes_cop;
+    private String card_number_pay_cop;
+    private String cvv_client_number_cop;
+
 
 
     public String getNombre() {
@@ -106,5 +116,56 @@ public class Usuario {
 
     public void setCorresponsal_balance(int corresponsal_balance) {
         this.corresponsal_balance = corresponsal_balance;
+    }
+
+    public LocalDate getFecha_expiracion() {
+        return fecha_expiracion;
+    }
+
+    public void setFecha_expiracion(LocalDate fecha_expiracion) {
+        this.fecha_expiracion = fecha_expiracion;
+    }
+
+
+    public int getValor_pay_card_cop() {
+        return valor_pay_card_cop;
+    }
+
+    public void setValor_pay_card_cop(int valor_pay_card_cop) {
+        this.valor_pay_card_cop = valor_pay_card_cop;
+    }
+
+
+
+    public String getCard_number_pay_cop() {
+        return card_number_pay_cop;
+    }
+
+    public void setCard_number_pay_cop(String card_number_pay_cop) {
+        this.card_number_pay_cop = card_number_pay_cop;
+    }
+
+    public String getCvv_client_number_cop() {
+        return cvv_client_number_cop;
+    }
+
+    public void setCvv_client_number_cop(String cvv_client_number_cop) {
+        this.cvv_client_number_cop = cvv_client_number_cop;
+    }
+
+    public String getFecha_expiracion_client_cop() {
+        return fecha_expiracion_client_cop;
+    }
+
+    public void setFecha_expiracion_client_cop(String fecha_expiracion_client_cop) {
+        this.fecha_expiracion_client_cop = fecha_expiracion_client_cop;
+    }
+
+    public int getValor_pay_cuotes_cop() {
+        return valor_pay_cuotes_cop;
+    }
+
+    public void setValor_pay_cuotes_cop(int valor_pay_cuotes_cop) {
+        this.valor_pay_cuotes_cop = valor_pay_cuotes_cop;
     }
 }

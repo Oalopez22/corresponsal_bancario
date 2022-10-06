@@ -8,11 +8,12 @@ public interface InterfacesDataCop {
         void findElements();
     }
     interface presenter{
-     public boolean actualizar_estado(Usuario user, SharedPreferences sp);
+        boolean update_status(SharedPreferences sp, int status);
+        /*boolean actualizar_estado(SharedPreferences sp, int status);*/
 
     }
     interface model{
-        public boolean actualizar_estado(Usuario user, SharedPreferences sp);
+        boolean actualizar_estado( SharedPreferences sp,int status);
 
     }
 }

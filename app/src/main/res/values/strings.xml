@@ -70,4 +70,22 @@
     /* ADMIN LIST USERS */
     <string name="txtTitleListUsers">Listado clientes</string>
     <string name="SearchListCcClientes">Cédula cliente</string>
+
+
+    /* CORRESPONSAL PAGO TARJETA */
+    <string name="txtPayCardTitle">Pago con tarjeta</string>
+    <string name="txtPayCardNumber">Número de tarjeta</string>
+    <string name="txtPayCardMM">mm</string>
+    <string name="txtPayCardDia">dd</string>
+    <string name="txtPayCardClientName">NOMBRE DEL CLIENTE</string>
+    <string name="txtPayCardCuotes">Cuotas</string>
+    <string name="txtPayCardValor">Valor a pagar</string>
+    <string name="txtPayCardbtnConfirm">Confirmar</string>
+    <string name="txtPayCardbtnCancel">Cancelar</string>
+    /* CORRESPONSAL RETIRO */
+    <string name="txtRetCopTitle">Retiros</string>
+    <string name="txtRetCopCc">Número de cédula</string>
+    <string name="txtRetCopMonto">Monto a retirar</string>
+    <string name="btnRetConfirm">Confirmar</string>
+    <string name="btnRetCancel">Cancelar</string>
 </resources>

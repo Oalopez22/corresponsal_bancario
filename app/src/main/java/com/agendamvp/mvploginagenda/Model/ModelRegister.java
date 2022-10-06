@@ -1,9 +1,11 @@
 package com.agendamvp.mvploginagenda.Model;
 
 import android.content.Context;
+import android.os.Build;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 
 import com.agendamvp.mvploginagenda.Entidades.Usuario;
 import com.agendamvp.mvploginagenda.Interfaces.InterfacesRegister;
@@ -21,6 +23,7 @@ public class ModelRegister implements InterfacesRegister.Model {
     }
 
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public long  Usuario(Usuario user) {
         long id=0;

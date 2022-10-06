@@ -1,9 +1,11 @@
 package com.agendamvp.mvploginagenda;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +19,7 @@ import com.agendamvp.mvploginagenda.Interfaces.InterfacesRegister;
 import com.agendamvp.mvploginagenda.Presenter.PresenterRegister;
 import com.agendamvp.mvploginagenda.SharedPreferences.SharedPreferences;
 
+import java.time.LocalDate;
 import java.util.Random;
 
 public class PinRegisterClientAdmin extends AppCompatActivity implements  InterfacesRegister.View{
@@ -45,6 +48,7 @@ public class PinRegisterClientAdmin extends AppCompatActivity implements  Interf
                String ccCliente= txtviewConfirmClientCc.getText().toString();
                 int data2 = datosRecibidos.getInt("DATA_CLIENT_BALANCE");
                 int pin2 = datosRecibidos.getInt("DATA_CLIENT_PIN");
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
                 Random cardRandom = new Random();
@@ -63,14 +67,12 @@ public class PinRegisterClientAdmin extends AppCompatActivity implements  Interf
                     CardNumber = numeroCard + ccCliente + String.valueOf(aleatorio);
                 }
                 String numeros  =  CardNumber + pin2;
+
                 user.setNombre(nombreCliente);
                 user.setDocumento(ccCliente);
                 user.setSaldo(data2);
                 user.setCard_number(numeros);
                 user.setPin(pin2);
-
-
-
                 sp.setCcUser(ccCliente);
                 long id = presenter.registrar_Usuario(user);
                 if (id > 0){
@@ -116,10 +118,6 @@ public class PinRegisterClientAdmin extends AppCompatActivity implements  Interf
     }
 
 
-    private void numero_tarjeta_aleatorio(){
-        /*
-                System.out.println(numero);*/
-    }
     private void redireccion(){
         Intent intent = new Intent(this,DataAdminClient.class);
         startActivity(intent);

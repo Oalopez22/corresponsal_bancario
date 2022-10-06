@@ -1,5 +1,6 @@
 package com.agendamvp.mvploginagenda;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,6 +8,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +21,7 @@ import com.agendamvp.mvploginagenda.Entidades.Usuario;
 import com.agendamvp.mvploginagenda.Interfaces.InterfacesRegister;
 import com.agendamvp.mvploginagenda.Presenter.PresenterRegister;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
@@ -214,6 +217,8 @@ public class Register extends AppCompatActivity implements View.OnClickListener,
             }
         });
     }
+
+
 
      public  void redirigir(String nombre, String documento, int balance,int pin,Context context){
         Intent intent = new Intent(context,PinRegisterClientAdmin.class);

@@ -22,7 +22,9 @@ public class ModelDataCop implements InterfacesDataCop.model {
 
 
     @Override
-    public boolean actualizar_estado(Usuario user, SharedPreferences sp) {
-        return false;
+    public boolean actualizar_estado(SharedPreferences sp,int status) {
+        boolean id;
+        id = db.actualizarEstado(sp,status);
+        return id;
     }
 }

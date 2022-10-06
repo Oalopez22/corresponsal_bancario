@@ -17,14 +17,15 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/imageView5"
+                android:id="@+id/imgArrowBackAdmin"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.955"
                 app:layout_constraintStart_toStartOf="parent"
                 app:srcCompat="@drawable/ic_action_arrowback"
-                tools:layout_editor_absoluteY="9dp" />
+                tools:layout_editor_absoluteY="9dp"
+                app:tint="#E64C25"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 

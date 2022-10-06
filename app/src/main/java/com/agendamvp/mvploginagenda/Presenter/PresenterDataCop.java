@@ -15,9 +15,18 @@ public class PresenterDataCop implements InterfacesDataCop.presenter {
         this.model = new ModelDataCop(this,contexto);
     }
 
-
     @Override
-    public boolean actualizar_estado(Usuario user, SharedPreferences sp) {
-        return false;
+    public boolean update_status(SharedPreferences sp, int status) {
+        boolean id = false;
+        id = this.model.actualizar_estado(sp,status);
+        return id;
     }
+
+
+/*    @Override
+    public boolean actualizar_estado(SharedPreferences sp,int status) {
+        boolean id;
+        id = this.model.actualizar_estado(sp, status);
+        return id;
+    }*/
 }
