@@ -7,7 +7,7 @@ public interface InterfacesMainActivity {
         void findElement();
     }
     interface Presenter{
-        boolean ingresar(Usuario user);
+        boolean Ingresar(Usuario user);
     }
     interface Model{
         boolean Igresar(Usuario user);

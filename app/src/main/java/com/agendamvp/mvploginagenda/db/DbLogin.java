@@ -33,16 +33,40 @@ public class DbLogin extends DbHelper{
         sp = new SharedPreferences(context);
     }
 
- /*   public boolean validar_Login(Usuario user){
+    public boolean validar_Login(Usuario user){
         db = getWritableDatabase();
-        Cursor cursor = db.rawQuery(" SELECT * FROM " + TABLE_USER + " WHERE " + COLUMNA_EMAIL + " =?" + " AND " + COLUMNA_PASSWORD + " =?",new String[]{user.getCorreo(), user.getPassword()});
+        Cursor cursor = db.rawQuery(" SELECT * FROM " + TABLE_CORRESPONSAL + " WHERE " + COLUMNA_CORREO_CORRESPONSAL + " =?" + " AND " + COLUMNA_PASSWORD_CORRESPONSAL + " =?",new String[]{user.getCorresponsal_email(), user.getCorresponsal_password()});
         if (cursor.getCount()>0){
             return true;
         }else{
             return false;
         }
     }
-*/
+/*
+    public Usuario validar_datos_cliente_cop(Usuario user){
+
+        db =getWritableDatabase();
+        Cursor cursor = db.rawQuery(" SELECT * FROM " + TABLE_CLIENT + " WHERE card_numero =? AND card_cvv =? AND fecha_expiracion =? ",new String[]{user.getCard_number(),user.getCvv_cliente(),String.valueOf(user.getFecha_expiracion())});
+        if (cursor.getCount()>0){
+            return true;
+        }else {
+            return false;
+        }
+    }*/
+
+    public Usuario infoCop(SharedPreferences sp){
+        Usuario user = null;
+        Cursor cursor = null;
+            cursor = db.rawQuery(" SELECT * FROM " + TABLE_CORRESPONSAL + " WHERE " + COLUMNA_CORREO_CORRESPONSAL + " = '" + sp.getEmailCop() + "'", null);
+            if (cursor.moveToFirst()){
+                user = new Usuario();
+                user.setCorresponsal_name(cursor.getString(1));
+                user.setCorresponsal_balance(cursor.getInt(6));
+            }
+
+        cursor.close();
+        return user;
+    }
 
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -201,18 +225,19 @@ public class DbLogin extends DbHelper{
                                             /*  MODULO DE CORRESPONSAL */
 
     public long Pago_tarjeta_cop(Usuario user){
+
         long id = 0;
         try {
             db = dbhelper.getWritableDatabase();
             ContentValues values = new ContentValues();
             String corresponsal_nombre = user.getNombre();
-            corresponsal_nombre.toUpperCase(Locale.ROOT);
+            corresponsal_nombre.toUpperCase();
             values.put("numero_tarjeta",user.getCard_number_pay_cop());
-            values.put("fecha_expiracion_card",user.getFecha_expiracion_client_cop());
+            //values.put("fecha_expiracion_card",user.getFecha_expiracion_client_cop());
             values.put("nombre_cliente_cop",user.getNombre());
             values.put("valor_pagado",user.getValor_pay_card_cop());
             values.put("valor_cuotas",user.getValor_pay_cuotes_cop());
-            id = db.insert(TABLE_CORRESPONSAL,null,values);
+            id = db.insert(TABLE_PAY_CARD_COP,null,values);
         }catch (Exception ex){
             ex.toString();
         }

@@ -27,4 +27,14 @@ public class SharedPreferences {
     public String getCcUSer(){
         return datos.getString("cc","Dato no encontrado");
     }
+
+
+    public void setEmailCop(String emailcop){
+        editor.putString("email",emailcop);
+        editor.apply();
+    }
+    public String getEmailCop(){
+        return datos.getString("email","Dato no encontrado");
+    }
+
 }

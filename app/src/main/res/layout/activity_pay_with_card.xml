@@ -139,10 +139,10 @@
                 android:layout_weight="1"
                 android:background="#5576CA"
                 android:enabled="true"
+                android:hint="CVV"
                 android:inputType="number"
-                android:text="CVV"
                 android:textAlignment="center"
-                android:textColor="#FBFBFB"
+                android:textColorHint="#FBFBFB"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -169,7 +169,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:hint="@string/txtPayCardMM"
-                    android:inputType="number"
+                    android:inputType="datetime"
                     android:textAlignment="center"
                     android:textSize="24sp"
                     android:textStyle="bold" />
@@ -193,7 +193,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="@drawable/bordes_completo"
                     android:hint="@string/txtPayCardDia"
                     android:inputType="number"
                     android:textAlignment="center"
@@ -214,6 +213,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/txtPayCardClientName"
+                android:textAllCaps="false"
                 android:textSize="24sp" />
 
         </com.google.android.material.textfield.TextInputLayout>

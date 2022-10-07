@@ -52,7 +52,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 COLUMNA_NOMBRE_CORRESPONSAL + " text not null ," + COLUMNA_NIT_CORRESPONSAL + " text not null ," +
                 COLUMNA_PASSWORD_CORRESPONSAL + " text not null," + COLUMNA_ESTADO_CORRESPONSAL + " integer not null default 0,"+ COLUMNA_NCUENTA_CORRESPONSAL + " integer," + COLUMNA_SALDO_CORRESPONSAL + " integer not null default 0" + ")");
 
-        db.execSQL(" CREATE TABLE " + TABLE_PAY_CARD_COP + " (" + COLUMNA_N_TARJETA_COP + " integer primary key ,"+ COLUMNA_FECHA_EXPIRA_COP + " date not null," + COLUMNA_CVV_CARD_COP + " text not null," + COLUMNA_NOMBRE_CLIENTE + " text not null," + COLUMNA_VALOR_PAGO_CARD + " integer not null," + COLUMNA_VALOR_CUOTAS + " integer not null" + ")");
+        db.execSQL(" CREATE TABLE " + TABLE_PAY_CARD_COP + " (" + COLUMNA_N_TARJETA_COP + " integer primary key ,"+ COLUMNA_FECHA_EXPIRA_COP + " date ," + COLUMNA_CVV_CARD_COP + " text not null," + COLUMNA_NOMBRE_CLIENTE + " text not null," + COLUMNA_VALOR_PAGO_CARD + " integer not null," + COLUMNA_VALOR_CUOTAS + " integer not null" + ")");
 
                 /* PAGO CON TARJETA CORRESPONSAL EJEMPLO*/
 

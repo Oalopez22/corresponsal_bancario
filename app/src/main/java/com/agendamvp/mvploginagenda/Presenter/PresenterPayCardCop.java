@@ -15,8 +15,19 @@ public class PresenterPayCardCop implements InterfacesPayCardCop.presenter {
         this.view = view;
         this.model = new ModelPayCop(this,contexto);
     }
+
+    @Override
+    public boolean validar_datos_cliente(Usuario user) {
+        boolean id = false;
+        id = this.model.validar_datos_cliente(user);
+        return id;
+    }
+
     @Override
     public long Pago_tarjeta_cop(Usuario user) {
-        return 0;
+
+        long id = 0;
+        id = this.model.Pago_tarjeta_cop(user);
+        return id;
     }
 }

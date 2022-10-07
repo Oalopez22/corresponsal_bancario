@@ -16,7 +16,7 @@ public class PresenterMainActivity implements InterfacesMainActivity.Presenter{
     }
 
     @Override
-    public boolean ingresar(Usuario user) {
+    public boolean Ingresar(Usuario user) {
         boolean id = false;
         id = this.model.Igresar(user);
         return id;

@@ -16,8 +16,18 @@ public class ModelPayCop implements InterfacesPayCardCop.model {
         this.contexto = contexto;
         db = new DbLogin(contexto);
     }
+
+    @Override
+    public boolean validar_datos_cliente(Usuario user) {
+        boolean id = false;
+/*        id = db.validar_datos_cliente_cop(user);*/
+        return id;
+    }
+
     @Override
     public long Pago_tarjeta_cop(Usuario user) {
-        return 0;
+        long id = 0;
+        id = db.Pago_tarjeta_cop(user);
+        return id;
     }
 }

@@ -21,8 +21,8 @@ public class ModelMainActivity implements InterfacesMainActivity.Model {
 
     @Override
     public boolean Igresar(Usuario user) {
-/*        boolean id = false;
-        id = db.validar_Login(user);*/
-        return false;
+        boolean id;
+        id = db.validar_Login(user);
+        return id;
     }
 }

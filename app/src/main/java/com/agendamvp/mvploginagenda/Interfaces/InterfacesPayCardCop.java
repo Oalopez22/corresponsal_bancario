@@ -7,10 +7,15 @@ public interface InterfacesPayCardCop {
         void findElements();
     }
     interface presenter{
+        boolean validar_datos_cliente(Usuario user);
+
         long Pago_tarjeta_cop(Usuario user);
     }
     interface model{
+        boolean validar_datos_cliente(Usuario user);
+
         long Pago_tarjeta_cop(Usuario user);
+
     }
 
 }

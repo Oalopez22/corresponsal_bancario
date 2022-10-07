@@ -11,6 +11,7 @@ public class Usuario {
     private int pin;
     private String card_number;
     private LocalDate fecha_expiracion;
+    private String cvv_cliente;
 
             /* CORRESPONSAL*/
     private  String corresponsal_name;
@@ -167,5 +168,13 @@ public class Usuario {
 
     public void setValor_pay_cuotes_cop(int valor_pay_cuotes_cop) {
         this.valor_pay_cuotes_cop = valor_pay_cuotes_cop;
+    }
+
+    public String getCvv_cliente() {
+        return cvv_cliente;
+    }
+
+    public void setCvv_cliente(String cvv_cliente) {
+        this.cvv_cliente = cvv_cliente;
     }
 }
