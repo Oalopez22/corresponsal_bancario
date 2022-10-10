@@ -14,6 +14,7 @@ import com.agendamvp.mvploginagenda.SharedPreferences.SharedPreferences;
 
 import java.text.DateFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
@@ -42,17 +43,27 @@ public class DbLogin extends DbHelper{
             return false;
         }
     }
-/*
-    public Usuario validar_datos_cliente_cop(Usuario user){
+    public Usuario validar_datos_cliente_cop(SharedPreferences sp){
+        Usuario datos = null;
 
         db =getWritableDatabase();
-        Cursor cursor = db.rawQuery(" SELECT * FROM " + TABLE_CLIENT + " WHERE card_numero =? AND card_cvv =? AND fecha_expiracion =? ",new String[]{user.getCard_number(),user.getCvv_cliente(),String.valueOf(user.getFecha_expiracion())});
+        Cursor cursor = db.rawQuery(" SELECT * FROM " + TABLE_CLIENT + " WHERE card_numero =? ",new String[]{sp.getCardClient()});
         if (cursor.getCount()>0){
-            return true;
-        }else {
-            return false;
+            if (cursor.moveToFirst()){
+                datos = new Usuario();
+                datos.setNombre(cursor.getString(1));
+                datos.setSaldo(cursor.getInt(2));
+                datos.setCard_number(cursor.getString(4));
+                datos.setCvv_client_number_cop(cursor.getString(5));
+                datos.setFecha_expiracion_client_cop(cursor.getString(6));
+
+            }
         }
-    }*/
+        cursor.close();
+        return datos;
+    }
+
+
 
     public Usuario infoCop(SharedPreferences sp){
         Usuario user = null;
@@ -62,6 +73,7 @@ public class DbLogin extends DbHelper{
                 user = new Usuario();
                 user.setCorresponsal_name(cursor.getString(1));
                 user.setCorresponsal_balance(cursor.getInt(6));
+                user.setCorreponsal_ncuenta(cursor.getString(5));
             }
 
         cursor.close();
@@ -69,13 +81,19 @@ public class DbLogin extends DbHelper{
     }
 
 
+
     @RequiresApi(api = Build.VERSION_CODES.O)
     public long crearUsuario(Usuario user){
-        int cvv = (int) (Math.random()*100);
         long id = 0;
         try {
+            Random cardRandom = new Random();
+            int numeroCard = cardRandom.nextInt(999 - 100 + 1 )+100;
             LocalDate fecha = LocalDate.now();
             fecha = fecha.plusYears(5);
+            String fechaConvertida = fecha.format(DateTimeFormatter.ofPattern("yyyy-MM"));
+            String dos_digitos = fechaConvertida.substring(2,4);
+            String dos_ultimos = fechaConvertida.substring(5,7);
+            String fecha_creacion = dos_digitos + "-" + dos_ultimos;
             db = dbhelper.getWritableDatabase();
             ContentValues values = new ContentValues();
             values.put("documento_cliente",user.getDocumento());
@@ -83,8 +101,8 @@ public class DbLogin extends DbHelper{
             values.put("saldo_cliente",user.getSaldo());
             values.put("pin_cliente",user.getPin());
             values.put("card_numero",user.getCard_number());
-            values.put("card_cvv",cvv);
-            values.put("fecha_expiracion",String.valueOf(fecha));
+            values.put("card_cvv",numeroCard);
+            values.put("fecha_expiracion",fecha_creacion);
             id = db.insert(TABLE_CLIENT,null,values);
         }catch (Exception ex){
             ex.toString();
@@ -94,6 +112,12 @@ public class DbLogin extends DbHelper{
     public long crearCorresponsal(Usuario user){
         long id = 0;
         try {
+            Random cardRandom = new Random();
+            int numeroCard = cardRandom.nextInt( 999999999 - 100000000 + 1 )+100000000;
+            String nit = user.getCorresponsal_nit();
+            String inicial = "240";
+            String extra = nit.substring(0,5);
+            String Ncuenta = inicial + numeroCard + extra;
             db = dbhelper.getWritableDatabase();
             ContentValues values = new ContentValues();
             String corresponsal_mayus = user.getCorresponsal_name();
@@ -101,6 +125,7 @@ public class DbLogin extends DbHelper{
             values.put("correo_corresponsal",user.getCorresponsal_email());
             values.put("nombre_corresponsal",corresponsal_mayus);
             values.put("nit_corresponsal",user.getCorresponsal_nit());
+            values.put("ncuenta_corresponsal",Ncuenta);
             values.put("password_corresponsal",user.getCorresponsal_password());
             id = db.insert(TABLE_CORRESPONSAL,null,values);
         }catch (Exception ex){
@@ -224,20 +249,28 @@ public class DbLogin extends DbHelper{
 
                                             /*  MODULO DE CORRESPONSAL */
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public long Pago_tarjeta_cop(Usuario user){
-
         long id = 0;
         try {
             db = dbhelper.getWritableDatabase();
+
+            LocalDate fecha = LocalDate.now();
+            String fechaCompra = fecha.toString();
             ContentValues values = new ContentValues();
             String corresponsal_nombre = user.getNombre();
             corresponsal_nombre.toUpperCase();
-            values.put("numero_tarjeta",user.getCard_number_pay_cop());
-            //values.put("fecha_expiracion_card",user.getFecha_expiracion_client_cop());
+            values.put("numero_tarjeta",user.getCard_number());
+            values.put("fecha_expiracion_card",user.getFecha_expiracion_client_cop());
+            values.put("cvv_cliente", user.getCvv_cliente());
             values.put("nombre_cliente_cop",user.getNombre());
             values.put("valor_pagado",user.getValor_pay_card_cop());
             values.put("valor_cuotas",user.getValor_pay_cuotes_cop());
+            values.put("cantidad_cuotas",user.getCantidad_cuotas());
+            values.put("fecha_pago_tarjeta",fechaCompra);
             id = db.insert(TABLE_PAY_CARD_COP,null,values);
+
+
         }catch (Exception ex){
             ex.toString();
         }

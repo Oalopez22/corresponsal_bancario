@@ -28,6 +28,14 @@ public class SharedPreferences {
         return datos.getString("cc","Dato no encontrado");
     }
 
+    public void setCardClient(String card){
+        editor.putString("Card",card);
+        editor.apply();
+    }
+    public String getCardClient(){
+        return datos.getString("Card","Dato no encontrado");
+    }
+
 
     public void setEmailCop(String emailcop){
         editor.putString("email",emailcop);

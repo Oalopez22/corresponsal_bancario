@@ -45,6 +45,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="TextView"
+                    android:textAlignment="textStart"
                     android:textColor="#638CF4"
                     android:textSize="24sp"
                     android:textStyle="bold" />
@@ -55,6 +56,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="TextView"
+                    android:textAlignment="textStart"
                     android:textColor="#638CF4"
                     android:textSize="24sp"
                     android:textStyle="bold" />
@@ -92,7 +94,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="528dp"
+        android:layout_height="591dp"
         android:layout_marginHorizontal="20dp"
         android:orientation="vertical">
 
@@ -121,13 +123,14 @@
                 android:background="@drawable/bordes_completo"
                 android:hint="@string/txtPayCardNumber"
                 android:inputType="number"
+                android:text="61232890497229810"
                 android:textSize="24sp" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="87dp"
             android:layout_marginBottom="20dp">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -141,36 +144,39 @@
                 android:enabled="true"
                 android:hint="CVV"
                 android:inputType="number"
+                android:text="240"
                 android:textAlignment="center"
+                android:textColor="#F6F6F6"
                 android:textColorHint="#FBFBFB"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.031" />
+                app:layout_constraintVertical_bias="0.483" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputLayout3"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="80dp"
-                android:layout_height="58dp"
+                android:layout_width="85dp"
+                android:layout_height="59dp"
                 android:layout_marginStart="36dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@+id/txtCvvPayCard"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0">
+                app:layout_constraintVertical_bias="0.428">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/txtMesPayCard"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:hint="@string/txtPayCardMM"
+                    android:hint="@string/txtPayCardYear"
                     android:inputType="datetime"
-                    android:textAlignment="center"
+                    android:text="10"
+                    android:textAlignment="viewStart"
                     android:textSize="24sp"
                     android:textStyle="bold" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -182,19 +188,20 @@
                 android:layout_height="58dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintHorizontal_bias="0.381"
 
                 app:layout_constraintStart_toEndOf="@+id/textInputLayout3"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.048">
+                app:layout_constraintVertical_bias="0.379">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/txtDiaPayCard"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:hint="@string/txtPayCardDia"
+                    android:hint="@string/txtPayCardMonth"
                     android:inputType="number"
+                    android:text="06"
                     android:textAlignment="center"
                     android:textSize="24sp"
                     android:textStyle="bold" />
@@ -213,6 +220,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/txtPayCardClientName"
+                android:text="Omar"
                 android:textAllCaps="false"
                 android:textSize="24sp" />
 
@@ -240,11 +248,11 @@
 
 
         <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:startIconDrawable="@drawable/ic_action_money_icon"
-            app:startIconTint="#4670F1"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+            app:startIconTint="#4670F1">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/txtValuePay"
@@ -253,6 +261,7 @@
                 android:background="@drawable/bordes_completo"
                 android:hint="@string/txtPayCardValor"
                 android:inputType="number"
+                android:text="10000"
                 android:textSize="24sp" />
         </com.google.android.material.textfield.TextInputLayout>
 

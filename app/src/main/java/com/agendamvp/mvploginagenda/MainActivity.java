@@ -1,13 +1,16 @@
 package com.agendamvp.mvploginagenda;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.agendamvp.mvploginagenda.Entidades.Usuario;
 import com.agendamvp.mvploginagenda.Interfaces.InterfacesMainActivity;
@@ -15,6 +18,9 @@ import com.agendamvp.mvploginagenda.Presenter.PresenterMainActivity;
 import com.agendamvp.mvploginagenda.SharedPreferences.SharedPreferences;
 import com.agendamvp.mvploginagenda.db.DbHelper;
 import com.agendamvp.mvploginagenda.db.DbLogin;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, InterfacesMainActivity.View {
     EditText txtLoginEmail,txtLoginPassword;
@@ -24,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Usuario user;
     SharedPreferences sp;
     InterfacesMainActivity.Presenter presenter;
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +39,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         dblogin = new DbLogin(MainActivity.this);
         this.findElement();
         user = new Usuario();
+
+
         sp = new SharedPreferences(MainActivity.this);
         presenter = new PresenterMainActivity(this,MainActivity.this);
         btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -48,7 +57,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     boolean id = presenter.Ingresar(user);
                     if (id){
                         ingreso();
-
+                    }else {
+                        Toast.makeText(MainActivity.this, "No se encontro ningun usuario", Toast.LENGTH_SHORT).show();
                     }
 
                 }else{
@@ -57,6 +67,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
             }
         });
+
+
     }
 
 

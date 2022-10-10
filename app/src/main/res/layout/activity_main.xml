@@ -46,7 +46,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/txtLoginPassword"
             android:inputType="textPassword"
-            android:text="Oslopez123" />
+            android:text="Alopez123*" />
 
     </com.google.android.material.textfield.TextInputLayout>
 

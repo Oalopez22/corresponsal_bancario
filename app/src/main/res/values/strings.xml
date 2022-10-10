@@ -75,17 +75,25 @@
     /* CORRESPONSAL PAGO TARJETA */
     <string name="txtPayCardTitle">Pago con tarjeta</string>
     <string name="txtPayCardNumber">Número de tarjeta</string>
-    <string name="txtPayCardMM">mm</string>
-    <string name="txtPayCardDia">dd</string>
+    <string name="txtPayCardYear">YYYY</string>
+    <string name="txtPayCardMonth">mm</string>
     <string name="txtPayCardClientName">NOMBRE DEL CLIENTE</string>
     <string name="txtPayCardCuotes">Cuotas</string>
     <string name="txtPayCardValor">Valor a pagar</string>
     <string name="txtPayCardbtnConfirm">Confirmar</string>
     <string name="txtPayCardbtnCancel">Cancelar</string>
-    /* CORRESPONSAL RETIRO */
+    /* CORRESPONSAL RETIRO TARJETA*/
     <string name="txtRetCopTitle">Retiros</string>
     <string name="txtRetCopCc">Número de cédula</string>
     <string name="txtRetCopMonto">Monto a retirar</string>
     <string name="btnRetConfirm">Confirmar</string>
     <string name="btnRetCancel">Cancelar</string>
+
+
+    <string name="txtConfirmPayTittle">Confirmación</string>
+    <string name="txtConfirmPayName">Estimado :</string>
+    <string name="txtConfirmPayValue">Desea realizar el pago a WPOSS por un valor de  :</string>
+    <string name="txtConfirmPaycuotes">A #</string>
+    <string name="txtConfirmPayNcard">Número de tarjeta</string>
+
 </resources>

@@ -20,12 +20,13 @@ public class Usuario {
     private String corresponsal_password;
     private int corresponsal_status;
     private int corresponsal_balance;
+    private String correponsal_ncuenta;
     private String fecha_expiracion_client_cop;
     private  int valor_pay_card_cop;
     private int valor_pay_cuotes_cop;
     private String card_number_pay_cop;
     private String cvv_client_number_cop;
-
+    private int cantidad_cuotas;
 
 
     public String getNombre() {
@@ -176,5 +177,21 @@ public class Usuario {
 
     public void setCvv_cliente(String cvv_cliente) {
         this.cvv_cliente = cvv_cliente;
+    }
+
+    public int getCantidad_cuotas() {
+        return cantidad_cuotas;
+    }
+
+    public void setCantidad_cuotas(int cantidad_cuotas) {
+        this.cantidad_cuotas = cantidad_cuotas;
+    }
+
+    public String getCorreponsal_ncuenta() {
+        return correponsal_ncuenta;
+    }
+
+    public void setCorreponsal_ncuenta(String correponsal_ncuenta) {
+        this.correponsal_ncuenta = correponsal_ncuenta;
     }
 }
