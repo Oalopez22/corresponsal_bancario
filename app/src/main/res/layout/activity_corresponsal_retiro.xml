@@ -35,7 +35,7 @@
                     android:layout_weight="1"
                     android:text="TextView"
                     android:textAlignment="textStart"
-                    android:textColor="#638CF4"
+                    android:textColor="  #39F"
                     android:textSize="24sp"
                     android:textStyle="bold" />
 
@@ -45,7 +45,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="TextView"
-                    android:textColor="#638CF4"
+                    android:textColor="  #39F"
                     android:textSize="24sp"
                     android:textStyle="bold" />
 
@@ -55,7 +55,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="TextView"
-                    android:textColor="#638CF4"
+                    android:textColor="  #39F"
                     android:textSize="24sp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -68,7 +68,7 @@
             android:layout_marginStart="4dp"
             android:layout_marginBottom="4dp"
             android:background="@drawable/circulo"
-            android:backgroundTint="#4670F1"
+            android:backgroundTint="  #39F"
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/linearLayout">
@@ -85,7 +85,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/pngfind_com_photography_vector_png_3229312"
+            app:srcCompat="@drawable/ic_action_arrowback"
             app:tint="@color/white" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -113,12 +113,13 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtRetiroCc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/bordes_completo"
                 android:hint="@string/txtRetCopCc"
                 android:textAlignment="center"
                 android:textColor="#0C0C0C"
-                android:background="@drawable/bordes_completo"
                 android:textSize="24sp" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -126,17 +127,19 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:startIconTint="#4670F1"
+            app:startIconTint="  #39F"
             app:startIconDrawable="@drawable/ic_action_money_icon"
             android:layout_marginBottom="50dp">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtRetiroBalance"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/bordes_completo"
                 android:hint="@string/txtRetCopMonto"
+                android:inputType="number"
                 android:textAlignment="center"
                 android:textColor="#040303"
-                android:background="@drawable/bordes_completo"
                 android:textSize="24sp"
                 android:textStyle="bold" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -149,7 +152,7 @@
                 android:id="@+id/btnRetConfirm"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:backgroundTint="#4670F1"
+                android:backgroundTint="  #39F"
                 android:text="@string/txtPayCardbtnConfirm"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/btnRetCancel"
@@ -165,12 +168,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="52dp"
                 android:text="@string/txtPayCardbtnCancel"
-                android:textColor="#4670F1"
+                android:textColor="  #39F"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.515"
-                app:strokeColor="#4670F1" />
+                app:strokeColor="  #39F" />
         </androidx.constraintlayout.widget.ConstraintLayout>
+
     </LinearLayout>
 </LinearLayout>

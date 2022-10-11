@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,7 +30,8 @@ import java.util.Locale;
 
 public class PayWithCard extends AppCompatActivity implements InterfacesPayCardCop.view {
     EditText txtNtarjeta,txtCvv,txtMes,txtDia,txtNombreCliente,txtValorPagado;
-    TextView txtCopName,txtCopBalance;
+    TextView txtCopName,txtCopBalance,txtCopNcuenta;
+    ImageView imgArrowBack;
     Button btnConfirmPayCard,btnCancelPayCard;
     Spinner spinner;
     InterfacesPayCardCop.presenter presenter;
@@ -45,7 +47,7 @@ public class PayWithCard extends AppCompatActivity implements InterfacesPayCardC
         db = new DbLogin(PayWithCard.this);
         sp = new SharedPreferences(PayWithCard.this);
         presenter = new PresenterPayCardCop(this,PayWithCard.this);
-        String [] datos = {"Seleccione...","0","1","2","3","4","5","6","7","8","9","10","11","12"};
+        String [] datos = {"0","1","2","3","4","5","6","7","8","9","10","11","12"};
         ArrayAdapter <String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item,datos);
         spinner.setAdapter(adapter);
         user = presenter.data(sp);
@@ -53,6 +55,7 @@ public class PayWithCard extends AppCompatActivity implements InterfacesPayCardC
         if (presenter != null){
             txtCopName.setText(user.getCorresponsal_name());
             txtCopBalance.setText(String.valueOf(user.getCorresponsal_balance()));
+            txtCopNcuenta.setText(String.valueOf(user.getCorreponsal_ncuenta()));
         }
        btnConfirmPayCard.setOnClickListener(new View.OnClickListener() {
            @Override
@@ -63,25 +66,34 @@ public class PayWithCard extends AppCompatActivity implements InterfacesPayCardC
                String month = txtDia.getText().toString();
                String nombreCliente = txtNombreCliente.getText().toString();
                String cuota = spinner.getSelectedItem().toString();
-
+               int copBalance = user.getCorresponsal_balance();
                String valor_pagado = txtValorPagado.getText().toString();
-                        if (validarCard() && validarCvv() && validarMes() && validarDia() && validarNombre() && validarvalor()) {
-                            int data = Integer.parseInt(valor_pagado);
-                            if (data < 10000){
-                                txtValorPagado.setError("El valor pagado debe ser mayor de 10000");
-                                    }else if(data > 1000000){
-                                    txtValorPagado.setError("El valor pagado debe ser menor de 1000000");
-                                    }
-                            else{
-                                int spinner = Integer.parseInt(cuota);
-                                int valor = (int) data * spinner;
-                                sp.setCardClient(numeroCard);
-                                confirmacion(numeroCard, cvv, year, month, nombreCliente,spinner, data, valor);
-                            }
-
+               if (cuota.equals("0")) {
+                   Toast.makeText(PayWithCard.this, "El valor de la cuota no debe ser de 0", Toast.LENGTH_SHORT).show();
+               } else {
+                   if (validarCard() && validarCvv() && validarMes() && validarDia() && validarNombre() && validarvalor()) {
+                       int data = Integer.parseInt(valor_pagado);
+                       if (data < 10000) {
+                           txtValorPagado.setError("El valor pagado debe ser mayor de 10000");
+                       } else if (data > 1000000) {
+                           txtValorPagado.setError("El valor pagado debe ser menor de 1000000");
+                       } else {
+                           int spinner = Integer.parseInt(cuota);
+                           int valor = (int) data * spinner;
+                           sp.setCardClient(numeroCard);
+                           confirmacion(numeroCard, cvv, year, month, nombreCliente, spinner, data, valor, copBalance);
                        }
+
+                   }
+               }
            }
        });
+        imgArrowBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     @Override
@@ -95,6 +107,8 @@ public class PayWithCard extends AppCompatActivity implements InterfacesPayCardC
         txtValorPagado = findViewById(R.id.txtValuePay);
         txtCopName = findViewById(R.id.txtCopName);
         txtCopBalance = findViewById(R.id.txtCopBalance);
+        txtCopNcuenta = findViewById(R.id.txtCopAcount);
+        imgArrowBack = findViewById(R.id.imgArrowBack);
         btnConfirmPayCard = findViewById(R.id.btnPayCardConfirm);
         btnCancelPayCard = findViewById(R.id.btnPayCardCancel);
     }
@@ -153,7 +167,7 @@ public class PayWithCard extends AppCompatActivity implements InterfacesPayCardC
             return true;
         }
     }
-    public void confirmacion(String tarjeta ,String cvv,String year,String month,String nombre, int cuotas,int valor_pagado, int valor_total ){
+    public void confirmacion(String tarjeta ,String cvv,String year,String month,String nombre, int cuotas,int valor_pagado, int valor_total, int copBalance ){
         Intent intent = new Intent(PayWithCard.this, ConfirmPayWithCard.class);
         intent.putExtra("DATA_CLIENT_CARD",tarjeta);
         intent.putExtra("DATA_CLIENT_CVV",cvv);
@@ -162,7 +176,8 @@ public class PayWithCard extends AppCompatActivity implements InterfacesPayCardC
         intent.putExtra("DATA_CLIENT_NAME",nombre);
         intent.putExtra("DATA_CLIENT_CUOTES",String.valueOf(cuotas));
         intent.putExtra("DATA_CLIENT_BALANCE",String.valueOf(valor_pagado));
-        intent.putExtra("DATA_CLIENT_TOTAL_BALANCE",String.valueOf(valor_total));
+        intent.putExtra("DATA_CLIENT_TOTAL_BALANCE",valor_total);
+        intent.putExtra("DATA_COP_BALANCE",copBalance);
         startActivity(intent);
     }
 }

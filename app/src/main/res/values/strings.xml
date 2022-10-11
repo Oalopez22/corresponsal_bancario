@@ -82,6 +82,12 @@
     <string name="txtPayCardValor">Valor a pagar</string>
     <string name="txtPayCardbtnConfirm">Confirmar</string>
     <string name="txtPayCardbtnCancel">Cancelar</string>
+    <string name="txtConfirmPayTittle">Confirmación</string>
+    <string name="txtConfirmPayName">Estimado :</string>
+    <string name="txtConfirmPayValue">Desea realizar el pago a WPOSS por un valor de  :</string>
+    <string name="txtConfirmPaycuotes">A #</string>
+    <string name="txtConfirmPayNcard">Número de tarjeta</string>
+
     /* CORRESPONSAL RETIRO TARJETA*/
     <string name="txtRetCopTitle">Retiros</string>
     <string name="txtRetCopCc">Número de cédula</string>
@@ -89,11 +95,5 @@
     <string name="btnRetConfirm">Confirmar</string>
     <string name="btnRetCancel">Cancelar</string>
 
-
-    <string name="txtConfirmPayTittle">Confirmación</string>
-    <string name="txtConfirmPayName">Estimado :</string>
-    <string name="txtConfirmPayValue">Desea realizar el pago a WPOSS por un valor de  :</string>
-    <string name="txtConfirmPaycuotes">A #</string>
-    <string name="txtConfirmPayNcard">Número de tarjeta</string>
 
 </resources>

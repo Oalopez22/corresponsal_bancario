@@ -49,22 +49,26 @@ public class ConfirmPayWithCard extends AppCompatActivity implements InterfacesP
         String nombre = datos.getString("DATA_CLIENT_NAME");
 
 
-
         String cuotas = datos.getString("DATA_CLIENT_CUOTES");
         String valor_normal = datos.getString("DATA_CLIENT_BALANCE");
-        String valor_total = datos.getString("DATA_CLIENT_TOTAL_BALANCE");
+        int valor_total = datos.getInt("DATA_CLIENT_TOTAL_BALANCE");
 
 
-
+        String cvv = datos.getString("DATA_CLIENT_CVV");
+        String year = datos.getString("DATA_CLIENT_YEAR");
+        String month = datos.getString("DATA_CLIENT_MONTH");
+        String cuotes = datos.getString("DATA_CLIENT_CUOTES");
+        int cop = datos.getInt("DATA_COP_BALANCE");
+/*        int copBalance = Integer.parseInt(valorCop);*/
         user = presenter.validar_datos_cliente(sp);
 
         String cvvCliente = user.getCvv_client_number_cop();
 
         String fecha_recibida = user.getFecha_expiracion_client_cop();
-
+        String pinDevuelto = String.valueOf(user.getPin());
 
         tvClientNAme.setText(nombre);
-        tvClientValue.setText(valor_total);
+        tvClientValue.setText(String.valueOf(valor_total));
         tvClientCuotes.setText("A # " + cuotas + " Cuotas");
         tvCardNumber.setText(card);
         char caracter = card.charAt(0);
@@ -94,6 +98,14 @@ public class ConfirmPayWithCard extends AppCompatActivity implements InterfacesP
         btnConfirmPay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String fecha_ingresada = year + "-" + month;
+                LocalDate fecha_actual = LocalDate.now();
+                String fechaInicial = fecha_actual.toString();
+                String datos_fecha1 = fechaInicial.substring(2, 4);
+                String datos2_fecha1 = fechaInicial.substring(5, 7);
+                String fechaIniciaCompleta = datos_fecha1+"-" + datos2_fecha1;
+
+
                 AlertDialog.Builder builderpin = new AlertDialog.Builder(ConfirmPayWithCard.this);
                 LayoutInflater inflater = getLayoutInflater();
                 View view = inflater.inflate(R.layout.dialog_pin_pay_card,null);
@@ -104,40 +116,53 @@ public class ConfirmPayWithCard extends AppCompatActivity implements InterfacesP
                 dialog.show();
                 EditText txtCardPin;
                 txtCardPin = view.findViewById(R.id.txtClientCardPin);
+
                 Button btnAceptar;
                 btnAceptar = view.findViewById(R.id.btnAceptCardPin);
                 btnAceptar.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                            /*                String card = datos.getString("DATA_CLIENT_CARD");
-                    String nombre = datos.getString("DATA_CLIENT_NAME");*/
-                            String cvv = datos.getString("DATA_CLIENT_CVV");
-                            String year = datos.getString("DATA_CLIENT_YEAR");
-                            String month = datos.getString("DATA_CLIENT_MONTH");
-                            String cuotes = datos.getString("DATA_CLIENT_CUOTES");
-                            String fecha_ingresada = year + "-" + month;
-                            LocalDate fecha_actual = LocalDate.now();
-                            String fechaInicial = fecha_actual.toString();
-                            String datos_fecha1 = fechaInicial.substring(2,4);
-                            String datos2_fecha1 = fechaInicial.substring(5,7);
-                            String fechaIniciaCompleta = datos_fecha1 + datos2_fecha1;
-                                        if (fecha_ingresada.equals(fecha_recibida) && fechaIniciaCompleta.compareTo(fecha_recibida)<0)
-                                            if (cvv.equals(cvvCliente)){
-                                                user.setCard_number(card);
-                                                user.setFecha_expiracion_client_cop(fecha_ingresada);
-                                                user.setNombre(nombre);
-                                                user.setCvv_cliente(cvv);
-                                                user.setValor_pay_card_cop(Integer.parseInt(valor_normal));
-                                                user.setValor_pay_cuotes_cop(Integer.parseInt(valor_total));
-                                                user.setCantidad_cuotas(Integer.parseInt(cuotes));
-                                                long id =    presenter.Pago_tarjeta_cop(user);
-                                                if (id > 0){
-                                                    Toast.makeText(ConfirmPayWithCard.this, "Pago realizado", Toast.LENGTH_SHORT).show();
-                                                }
-                                            }
-                                            }
+                            /*                String card = datos.getString("DATA_CLIENT_CARD");*/
+                        int saldoCliente = user.getSaldo();
+                        String pinIngresado = txtCardPin.getText().toString();
+                        if (cvvCliente.equals(cvv)) {
+                            if (fecha_recibida.equals(fecha_ingresada) && fecha_recibida.compareTo(fechaIniciaCompleta)>0) {
+                                if (pinDevuelto.equals(pinIngresado)) {
+                                    if (valor_total > saldoCliente){
+                                        Toast.makeText(ConfirmPayWithCard.this, "Saldo insuficiente".toUpperCase(Locale.ROOT), Toast.LENGTH_SHORT).show();
+                                    }else{
+                                        user.setCard_number(card);
+                                        user.setFecha_expiracion_client_cop(fecha_ingresada);
+                                        user.setNombre(nombre);
+
+                                        user.setCvv_cliente(cvv);
+                                        user.setValor_pay_card_cop(Integer.parseInt(valor_normal));
+                                        user.setValor_pay_cuotes_cop(valor_total);
+                                        user.setCantidad_cuotas(Integer.parseInt(cuotes));
+                                        user.setCorresponsal_balance(cop);
+                                        long id = presenter.Pago_tarjeta_cop(user);
+                                        if (id > 0) {
+                                            Toast.makeText(ConfirmPayWithCard.this, "Pago realizado", Toast.LENGTH_LONG).show();
+                                        }else {
+                                            Toast.makeText(ConfirmPayWithCard.this, "Error al realizar el pago", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+
+
+                                }else {
+                                    Toast.makeText(ConfirmPayWithCard.this, "El pin no coincide", Toast.LENGTH_SHORT).show();
+                                }
+                            }else{
+                                Toast.makeText(ConfirmPayWithCard.this, "Las fechas no coinciden", Toast.LENGTH_SHORT).show();
+                            }
+
+                        }else {
+                            Toast.makeText(ConfirmPayWithCard.this, "El cvv no coincide", Toast.LENGTH_SHORT).show();
+                        }
+                    }
 
                 });
+
             }
         });
     }

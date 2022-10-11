@@ -53,10 +53,10 @@ public class DbLogin extends DbHelper{
                 datos = new Usuario();
                 datos.setNombre(cursor.getString(1));
                 datos.setSaldo(cursor.getInt(2));
+                datos.setPin(cursor.getInt(3));
                 datos.setCard_number(cursor.getString(4));
                 datos.setCvv_client_number_cop(cursor.getString(5));
                 datos.setFecha_expiracion_client_cop(cursor.getString(6));
-
             }
         }
         cursor.close();
@@ -251,6 +251,7 @@ public class DbLogin extends DbHelper{
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public long Pago_tarjeta_cop(Usuario user){
+        int contador = 0;
         long id = 0;
         try {
             db = dbhelper.getWritableDatabase();
@@ -269,11 +270,49 @@ public class DbLogin extends DbHelper{
             values.put("cantidad_cuotas",user.getCantidad_cuotas());
             values.put("fecha_pago_tarjeta",fechaCompra);
             id = db.insert(TABLE_PAY_CARD_COP,null,values);
-
+            int valorCop = user.getCorresponsal_balance();
+            contador = valorCop + user.getValor_pay_card_cop();
+            db.execSQL(" UPDATE " + TABLE_CORRESPONSAL + " SET saldo_corresponsal = " + contador + " WHERE " + COLUMNA_CORREO_CORRESPONSAL + " = '" + sp.getEmailCop() + "'");
 
         }catch (Exception ex){
             ex.toString();
         }
         return id;
     }
+
+
+    /*          RETIRO POR PARTE DEL CLIENTE EN EL CORRESPONSAL */
+    public Usuario datos_cliente_cop(SharedPreferences sp){
+        Usuario datos = null;
+        db =getWritableDatabase();
+        Cursor cursor = db.rawQuery(" SELECT * FROM " + TABLE_CLIENT + " WHERE card_numero =? ",new String[]{sp.getCcUSer()});
+        if (cursor.getCount()>0){
+            if (cursor.moveToFirst()){
+                datos = new Usuario();
+                datos.setSaldo(cursor.getInt(2));
+                datos.setPin(cursor.getInt(3));
+                datos.setCard_number(cursor.getString(4));
+            }
+        }
+        cursor.close();
+        return datos;
+    }
+    public  boolean retiro_cliente(Usuario user){
+        int montoCop = 2000;
+        int saldoCliente = user.getSaldo();
+        int saldoTotal = saldoCliente - montoCop;
+        boolean correcto;
+        try{
+            db.execSQL(" UPDATE " + TABLE_CLIENT + " SET saldo_cliente =" + saldoTotal + " WHERE nit_corresponsal " +"= '"+sp.getCcUSer()+"'");
+            mostrarDataCop(sp);
+            correcto = true;
+        }catch (Exception ex){
+            ex.toString();
+            correcto = false;
+        }finally {
+            db.close();
+        }
+        return correcto;
+    }
+
 }

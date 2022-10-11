@@ -18,7 +18,7 @@
             android:layout_marginStart="256dp"
             android:layout_marginBottom="4dp"
             android:background="@drawable/circulo"
-            android:backgroundTint="#4670F1"
+            android:backgroundTint="#39F"
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent">
@@ -144,7 +144,7 @@
                 android:id="@+id/btnConfirmPay"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:backgroundTint="#4670F1"
+                android:backgroundTint="#39F"
                 android:text="@string/txtPayCardbtnConfirm"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -162,13 +162,13 @@
                 android:layout_marginEnd="52dp"
                 android:text="@string/txtPayCardbtnCancel"
 
-                android:textColor="#4670F1"
+                android:textColor="#39F"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.472"
-                app:strokeColor="#4670F1" />
+                app:strokeColor="#39F" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

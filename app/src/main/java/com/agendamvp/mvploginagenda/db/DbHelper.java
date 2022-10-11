@@ -40,6 +40,11 @@ public class DbHelper extends SQLiteOpenHelper {
     public static final String COLUMNA_FECHA_PAGO = "fecha_pago_tarjeta";
     public static final String COLUMNA_CANTIDAD_CUOTAS = "cantidad_cuotas";
 
+    /* TABLA RETIRO DINERO CLIENTE */
+    public static final String TABLE_RETIRO = "retiro_cliente_cop";
+
+
+
     public DbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }

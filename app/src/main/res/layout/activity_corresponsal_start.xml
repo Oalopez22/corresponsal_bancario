@@ -34,7 +34,7 @@
                     android:layout_weight="1"
                     android:text="TextView"
                     android:textAlignment="textStart"
-                    android:textColor="#638CF4"
+                    android:textColor="#39F"
                     android:textSize="24sp"
                     android:textStyle="bold" />
 
@@ -44,7 +44,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="TextView"
-                    android:textColor="#638CF4"
+                    android:textColor="#39F"
                     android:textSize="24sp"
                     android:textStyle="bold" />
 
@@ -54,7 +54,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="TextView"
-                    android:textColor="#638CF4"
+                    android:textColor="#39F"
                     android:textSize="24sp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -67,7 +67,7 @@
             android:layout_marginStart="4dp"
             android:layout_marginBottom="4dp"
             android:background="@drawable/circulo"
-            android:backgroundTint="#4670F1"
+            android:backgroundTint="#39F"
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/linearLayout">
@@ -100,7 +100,7 @@
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:backgroundTint="#638CF4"
+            android:backgroundTint="#77B7F7"
             app:cardCornerRadius="10dp"
             app:cardElevation="8dp"
             app:layout_column="0"
@@ -120,7 +120,8 @@
 
                     android:layout_width="140dp"
                     android:layout_height="120dp"
-                    android:layout_gravity="center" />
+                    android:layout_gravity="center"
+                    app:srcCompat="@drawable/retiro_de_dinero" />
 
                 <TextView
 
@@ -141,7 +142,7 @@
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:backgroundTint="#638CF4"
+            android:backgroundTint="#77B7F7"
             app:cardCornerRadius="10dp"
             app:cardElevation="8dp"
             app:layout_column="1"
@@ -161,13 +162,14 @@
 
                     android:layout_width="140dp"
                     android:layout_height="120dp"
-                    android:layout_gravity="center" />
+                    android:layout_gravity="center"
+                    app:srcCompat="@drawable/tarjeta__1_" />
 
                 <TextView
 
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Pago con tarjeta"
+                    android:text="Retiros"
                     android:textAlignment="center"
                     android:textColor="#F1EFEF"
                     android:textSize="20sp"
@@ -181,7 +183,7 @@
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:backgroundTint="#638CF4"
+            android:backgroundTint="#77B7F7"
             app:cardCornerRadius="10dp"
             app:cardElevation="8dp"
             app:layout_column="0"
@@ -201,13 +203,14 @@
 
                     android:layout_width="140dp"
                     android:layout_height="120dp"
-                    android:layout_gravity="center" />
+                    android:layout_gravity="center"
+                    app:srcCompat="@drawable/depositar" />
 
                 <TextView
 
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Pago con tarjeta"
+                    android:text="Depositos"
                     android:textAlignment="center"
                     android:textColor="#F1EFEF"
                     android:textSize="20sp"
@@ -221,7 +224,7 @@
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:backgroundTint="#638CF4"
+            android:backgroundTint="#77B7F7"
             app:cardCornerRadius="10dp"
             app:cardElevation="8dp"
             app:layout_column="1"
@@ -242,13 +245,14 @@
 
                     android:layout_width="140dp"
                     android:layout_height="120dp"
-                    android:layout_gravity="center" />
+                    android:layout_gravity="center"
+                    app:srcCompat="@drawable/transferencia_de_dinero" />
 
                 <TextView
 
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Pago con tarjeta"
+                    android:text="Transferencias"
                     android:textAlignment="center"
                     android:textColor="#F1EFEF"
                     android:textSize="20sp"
@@ -260,7 +264,7 @@
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:backgroundTint="#638CF4"
+            android:backgroundTint="#77B7F7"
             app:cardCornerRadius="10dp"
             app:cardElevation="8dp"
             app:layout_column="0"
@@ -280,13 +284,14 @@
 
                     android:layout_width="140dp"
                     android:layout_height="120dp"
-                    android:layout_gravity="center" />
+                    android:layout_gravity="center"
+                    app:srcCompat="@drawable/expediente" />
 
                 <TextView
 
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Pago con tarjeta"
+                    android:text="Historial transaccional"
                     android:textAlignment="center"
                     android:textColor="#F1EFEF"
                     android:textSize="20sp"
@@ -300,7 +305,7 @@
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:backgroundTint="#638CF4"
+            android:backgroundTint="#77B7F7"
             app:cardCornerRadius="10dp"
             app:cardElevation="8dp"
             app:layout_column="1"
@@ -321,13 +326,14 @@
 
                     android:layout_width="140dp"
                     android:layout_height="120dp"
-                    android:layout_gravity="center" />
+                    android:layout_gravity="center"
+                    app:srcCompat="@drawable/search_document" />
 
                 <TextView
 
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Pago con tarjeta"
+                    android:text="Consulta de saldo"
                     android:textAlignment="center"
                     android:textColor="#F1EFEF"
                     android:textSize="20sp"
