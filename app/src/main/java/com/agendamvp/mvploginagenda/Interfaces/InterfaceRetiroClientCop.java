@@ -9,10 +9,12 @@ public interface InterfaceRetiroClientCop {
     }
     interface  presenter{
         boolean retiro_cliente(Usuario user);
+        Usuario data_cop(SharedPreferences sp);
         Usuario datos_cliente(SharedPreferences sp);
     }
     interface model{
         boolean retiro_cliente(Usuario user);
+        Usuario data_cop(SharedPreferences sp);
         Usuario datos_cliente(SharedPreferences sp);
     }
 }

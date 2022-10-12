@@ -29,9 +29,16 @@ public class ModelRetiroClientCop implements InterfaceRetiroClientCop.model {
     }
 
     @Override
+    public Usuario data_cop(SharedPreferences sp) {
+        Usuario data = null;
+        data = db.infoCop(sp);
+        return data;
+    }
+
+    @Override
     public Usuario datos_cliente(SharedPreferences sp) {
             Usuario data = null;
-            data = db.validar_datos_cliente_cop(sp);
+            data = db.datos_cliente_cop(sp);
             return data;
     }
 }

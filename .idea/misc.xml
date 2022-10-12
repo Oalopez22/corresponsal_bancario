@@ -7,9 +7,10 @@
         <entry key="..\:/Users/cloud/Desktop/PRUEBAS-OMAR/MVPLOGIN/app/src/main/res/drawable/bordes_completo.xml" value="0.3635" />
         <entry key="..\:/Users/cloud/Desktop/PRUEBAS-OMAR/MVPLOGIN/app/src/main/res/drawable/card_view_cancel_client.xml" value="0.264" />
         <entry key="..\:/Users/cloud/Desktop/PRUEBAS-OMAR/MVPLOGIN/app/src/main/res/drawable/circulo.xml" value="0.3635" />
+        <entry key="..\:/Users/cloud/Desktop/PRUEBAS-OMAR/MVPLOGIN/app/src/main/res/drawable/rounded_dialog.xml" value="0.278" />
         <entry key="..\:/Users/cloud/Desktop/PRUEBAS-OMAR/MVPLOGIN/app/src/main/res/layout/activity_admin_corresponsal.xml" value="0.264" />
         <entry key="..\:/Users/cloud/Desktop/PRUEBAS-OMAR/MVPLOGIN/app/src/main/res/layout/activity_confirm_pay_with_card.xml" value="0.3625" />
-        <entry key="..\:/Users/cloud/Desktop/PRUEBAS-OMAR/MVPLOGIN/app/src/main/res/layout/activity_confirm_retiro.xml" value="0.2860196665241556" />
+        <entry key="..\:/Users/cloud/Desktop/PRUEBAS-OMAR/MVPLOGIN/app/src/main/res/layout/activity_confirm_retiro.xml" value="0.29473684210526313" />
         <entry key="..\:/Users/cloud/Desktop/PRUEBAS-OMAR/MVPLOGIN/app/src/main/res/layout/activity_corresponsal_retiro.xml" value="0.3625" />
         <entry key="..\:/Users/cloud/Desktop/PRUEBAS-OMAR/MVPLOGIN/app/src/main/res/layout/activity_corresponsal_start.xml" value="0.23273657289002558" />
         <entry key="..\:/Users/cloud/Desktop/PRUEBAS-OMAR/MVPLOGIN/app/src/main/res/layout/activity_data_admin_client.xml" value="0.3625" />
@@ -31,6 +32,7 @@
         <entry key="..\:/Users/cloud/Desktop/PRUEBAS-OMAR/MVPLOGIN/app/src/main/res/layout/dialog_perzonalizado.xml" value="0.3625" />
         <entry key="..\:/Users/cloud/Desktop/PRUEBAS-OMAR/MVPLOGIN/app/src/main/res/layout/dialog_pin.xml" value="0.3625" />
         <entry key="..\:/Users/cloud/Desktop/PRUEBAS-OMAR/MVPLOGIN/app/src/main/res/layout/dialog_pin_Pay_card.xml" value="0.2975630611372381" />
+        <entry key="..\:/Users/cloud/Desktop/PRUEBAS-OMAR/MVPLOGIN/app/src/main/res/layout/dialog_pin_confirm_retiro.xml" value="0.22916666666666666" />
         <entry key="..\:/Users/cloud/Desktop/PRUEBAS-OMAR/MVPLOGIN/app/src/main/res/layout/dialog_pin_pay_card.xml" value="0.30526315789473685" />
         <entry key="..\:/Users/cloud/Desktop/PRUEBAS-OMAR/MVPLOGIN/app/src/main/res/layout/dialog_success_client.xml" value="0.3625" />
         <entry key="..\:/Users/cloud/Desktop/PRUEBAS-OMAR/MVPLOGIN/app/src/main/res/layout/drop_down_item.xml" value="0.2078125" />

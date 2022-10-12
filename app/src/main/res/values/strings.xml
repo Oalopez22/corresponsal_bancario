@@ -94,6 +94,11 @@
     <string name="txtRetCopMonto">Monto a retirar</string>
     <string name="btnRetConfirm">Confirmar</string>
     <string name="btnRetCancel">Cancelar</string>
+    <string name="txtRetConfirmPin">Confirmar pin</string>
 
 
+    <string name="ConfirmRetTitle">Confirmación</string>
+    <string name="ConfirmRetName">Estimado :</string>
+    <string name="ConfirmRetNcuenta">Se realizará un retiro al número de cuenta</string>
+    <string name="ConfirmRetValue">Por un valor de</string>
 </resources>

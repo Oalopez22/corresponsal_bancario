@@ -68,7 +68,7 @@
             android:layout_marginStart="4dp"
             android:layout_marginBottom="4dp"
             android:background="@drawable/circulo"
-            android:backgroundTint="  #39F"
+            android:backgroundTint="#39F"
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/linearLayout">
@@ -76,7 +76,7 @@
         </LinearLayout>
 
         <ImageView
-            android:id="@+id/imgMenuAdmin"
+            android:id="@+id/imgArrowbackRet"
             android:layout_width="54dp"
             android:layout_height="54dp"
             android:layout_marginStart="290dp"

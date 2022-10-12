@@ -285,10 +285,11 @@ public class DbLogin extends DbHelper{
     public Usuario datos_cliente_cop(SharedPreferences sp){
         Usuario datos = null;
         db =getWritableDatabase();
-        Cursor cursor = db.rawQuery(" SELECT * FROM " + TABLE_CLIENT + " WHERE card_numero =? ",new String[]{sp.getCcUSer()});
+        Cursor cursor = db.rawQuery(" SELECT * FROM " + TABLE_CLIENT + " WHERE documento_cliente =? ",new String[]{sp.getCcUSer()});
         if (cursor.getCount()>0){
             if (cursor.moveToFirst()){
                 datos = new Usuario();
+                datos.setNombre(cursor.getString(1));
                 datos.setSaldo(cursor.getInt(2));
                 datos.setPin(cursor.getInt(3));
                 datos.setCard_number(cursor.getString(4));

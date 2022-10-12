@@ -18,7 +18,7 @@
             android:id="@+id/textView6"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/txtTitlePin"
+            android:text="@string/txtRetConfirmPin"
             android:textAlignment="center"
             android:textColor="#000000"
             android:textSize="34sp"
@@ -31,13 +31,14 @@
             android:layout_marginTop="100dp">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/txtClientCardPin"
+                android:id="@+id/txtConfirmPinRet"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="61dp"
                 android:hint="@string/txtAddAdminPin"
                 android:inputType="number|textPassword"
                 android:textAlignment="center"
                 android:textColor="#000000"
+                android:textSize="24sp"
                 android:textStyle="bold" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -47,7 +48,7 @@
             android:layout_marginTop="120dp">
 
             <Button
-                android:id="@+id/btnAceptCardPin"
+                android:id="@+id/btnAceptConfirmPin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="44dp"
@@ -59,7 +60,7 @@
                 app:layout_constraintVertical_bias="0.0" />
 
             <Button
-                android:id="@+id/btnCancelCardPin"
+                android:id="@+id/btnCancelConfirmPin"
                 style="?attr/materialButtonOutlinedStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -68,7 +69,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.369"
-                app:layout_constraintStart_toEndOf="@+id/btnAceptCardPin"
+                app:layout_constraintStart_toEndOf="@+id/btnAceptConfirmPin"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.0"
                 app:strokeColor="#4670F1" />

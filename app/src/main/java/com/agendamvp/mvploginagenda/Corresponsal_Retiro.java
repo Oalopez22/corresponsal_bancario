@@ -10,20 +10,39 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.agendamvp.mvploginagenda.Entidades.Usuario;
 import com.agendamvp.mvploginagenda.Interfaces.InterfaceRetiroClientCop;
+import com.agendamvp.mvploginagenda.Interfaces.InterfacesCopStart;
+import com.agendamvp.mvploginagenda.Interfaces.InterfacesPayCardCop;
+import com.agendamvp.mvploginagenda.Presenter.PresenterCopStart;
 import com.agendamvp.mvploginagenda.Presenter.PresenterRetiroClient;
+import com.agendamvp.mvploginagenda.SharedPreferences.SharedPreferences;
 
 public class Corresponsal_Retiro extends AppCompatActivity implements InterfaceRetiroClientCop.view {
     EditText txtCc,txtBalance;
+    TextView txtCopName,txtCopBalance,txtCopNcuenta;
+    ImageView imgArrowback;
     Button btnConfirm,btnCancel;
+    SharedPreferences sp;
+    InterfaceRetiroClientCop.presenter presenter;
+    Usuario user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_corresponsal_retiro);
+        sp = new SharedPreferences(Corresponsal_Retiro.this);
         findElements();
+        presenter = new PresenterRetiroClient(this,Corresponsal_Retiro.this);
+        user = presenter.data_cop(sp);
+        if (presenter != null){
+            txtCopName.setText(user.getCorresponsal_name());
+            txtCopBalance.setText(String.valueOf(user.getCorresponsal_balance()));
+            txtCopNcuenta.setText(String.valueOf(user.getCorreponsal_ncuenta()));
+        }
         btnConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -32,6 +51,7 @@ public class Corresponsal_Retiro extends AppCompatActivity implements InterfaceR
             if (cedula.equals("") && monto.equals("")){
                 Toast.makeText(Corresponsal_Retiro.this, "Todos los campos son obligatorios", Toast.LENGTH_LONG).show();
             }else{
+
                 int valor = Integer.parseInt(monto);
                 AlertDialog.Builder builderpin = new AlertDialog.Builder(Corresponsal_Retiro.this);
                 LayoutInflater inflater = getLayoutInflater();
@@ -39,21 +59,59 @@ public class Corresponsal_Retiro extends AppCompatActivity implements InterfaceR
                 builderpin.setView(view);
                 AlertDialog dialog = builderpin.create();
                 dialog.setCancelable(false);
+
                 dialog.setCanceledOnTouchOutside(false);
                 dialog.show();
-                EditText txtCardPin;
-                txtCardPin = view.findViewById(R.id.txtClientCardPin);
+                EditText txtRetPin;
+                txtRetPin = view.findViewById(R.id.txtClientCardPin);
 
                 Button btnAceptar;
                 btnAceptar = view.findViewById(R.id.btnAceptCardPin);
                 btnAceptar.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        /*redireccion(cedula,valor,pin);*/
+                        String datopin = txtRetPin.getText().toString();
+
+                        int pin = Integer.parseInt(datopin);
+                       AlertDialog.Builder builderpin = new AlertDialog.Builder(Corresponsal_Retiro.this);
+                        LayoutInflater inflater = getLayoutInflater();
+                        View view = inflater.inflate(R.layout.dialog_pin_confirm_retiro,null);
+                        builderpin.setView(view);
+                        AlertDialog dialog = builderpin.create();
+                        dialog.setCancelable(false);
+
+                        dialog.setCanceledOnTouchOutside(false);
+                        dialog.show();
+                        EditText txtConfirmPin;
+                        txtConfirmPin = view.findViewById(R.id.txtConfirmPinRet);
+
+                        Button btnAceptar;
+                        btnAceptar = view.findViewById(R.id.btnAceptConfirmPin);
+                        btnAceptar.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                String ConfirmPins = txtConfirmPin.getText().toString();
+                                    int ConfirmPin = Integer.parseInt(ConfirmPins);
+                                if (ConfirmPin != pin ){
+                                    Toast.makeText(Corresponsal_Retiro.this, "El pin coincide, intente nuevamente", Toast.LENGTH_LONG).show();
+                                }else{
+                                    redireccion(cedula,valor,ConfirmPin);
+
+                                }
+
+                            }
+                        });
                     }
                 });
 
             }
+            }
+        });
+
+        imgArrowback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
     }
@@ -62,6 +120,10 @@ public class Corresponsal_Retiro extends AppCompatActivity implements InterfaceR
     public void findElements() {
         txtCc = findViewById(R.id.txtRetiroCc);
         txtBalance = findViewById(R.id.txtRetiroBalance);
+        txtCopName = findViewById(R.id.txtCopName);
+        txtCopBalance = findViewById(R.id.txtCopBalance);
+        txtCopNcuenta = findViewById(R.id.txtCopAcount);
+        imgArrowback = findViewById(R.id.imgArrowbackRet);
         btnConfirm = findViewById(R.id.btnRetConfirm);
         btnCancel = findViewById(R.id.btnRetCancel);
 
@@ -69,11 +131,13 @@ public class Corresponsal_Retiro extends AppCompatActivity implements InterfaceR
     }
 
 
-    public void  redireccion(String cc, int valor, String pin){
+    public void  redireccion(String cc, int valor, int pin){
+        sp.setCcUser(cc);
         Intent intent = new Intent(this,ConfirmRetiro.class);
         intent.putExtra("DATA_CLIENT_CC",cc);
         intent.putExtra("DATA_CLIENT_VALUE",valor);
         intent.putExtra("DATA_CLIENT_PIN",pin);
         startActivity(intent);
     }
+
 }

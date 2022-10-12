@@ -42,6 +42,8 @@ public class DbHelper extends SQLiteOpenHelper {
 
     /* TABLA RETIRO DINERO CLIENTE */
     public static final String TABLE_RETIRO = "retiro_cliente_cop";
+    public static final String COLUMNA_ID_RETIRO = "id_retiro";
+    public static final String COLUMNA_NTARJETA_RETIRO = "ntarjeta_cliente";
 
 
 

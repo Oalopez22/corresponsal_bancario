@@ -22,6 +22,13 @@ public class PresenterRetiroClient implements InterfaceRetiroClientCop.presenter
     }
 
     @Override
+    public Usuario data_cop(SharedPreferences sp) {
+        Usuario data = null;
+        data = this.model.data_cop(sp);
+        return data;
+    }
+
+    @Override
     public Usuario datos_cliente(SharedPreferences sp) {
         Usuario data = null;
         data = this.model.datos_cliente(sp);
