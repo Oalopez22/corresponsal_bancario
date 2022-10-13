@@ -38,6 +38,7 @@ public class Corresponsal_Retiro extends AppCompatActivity implements InterfaceR
         findElements();
         presenter = new PresenterRetiroClient(this,Corresponsal_Retiro.this);
         user = presenter.data_cop(sp);
+        int saldoCliente = user.getSaldo();
         if (presenter != null){
             txtCopName.setText(user.getCorresponsal_name());
             txtCopBalance.setText(String.valueOf(user.getCorresponsal_balance()));
@@ -95,7 +96,9 @@ public class Corresponsal_Retiro extends AppCompatActivity implements InterfaceR
                                 if (ConfirmPin != pin ){
                                     Toast.makeText(Corresponsal_Retiro.this, "El pin coincide, intente nuevamente", Toast.LENGTH_LONG).show();
                                 }else{
-                                    redireccion(cedula,valor,ConfirmPin);
+
+                                        redireccion(cedula,valor,ConfirmPin,saldoCliente);
+
 
                                 }
 
@@ -131,12 +134,16 @@ public class Corresponsal_Retiro extends AppCompatActivity implements InterfaceR
     }
 
 
-    public void  redireccion(String cc, int valor, int pin){
+    public void  redireccion(String cc, int valor,int saldo, int pin){
         sp.setCcUser(cc);
+
         Intent intent = new Intent(this,ConfirmRetiro.class);
+        int balanceCop = user.getCorresponsal_balance();
         intent.putExtra("DATA_CLIENT_CC",cc);
         intent.putExtra("DATA_CLIENT_VALUE",valor);
+        intent.putExtra("DATA_CLIENT_BALANCE",saldo);
         intent.putExtra("DATA_CLIENT_PIN",pin);
+        intent.putExtra("DATA_COP_BALANCE",balanceCop);
         startActivity(intent);
     }
 

@@ -13,7 +13,10 @@ import com.agendamvp.mvploginagenda.Entidades.Usuario;
 import com.agendamvp.mvploginagenda.SharedPreferences.SharedPreferences;
 
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -74,6 +77,7 @@ public class DbLogin extends DbHelper{
                 user.setCorresponsal_name(cursor.getString(1));
                 user.setCorresponsal_balance(cursor.getInt(6));
                 user.setCorreponsal_ncuenta(cursor.getString(5));
+                user.setCorresponsal_email(cursor.getString(0));
             }
 
         cursor.close();
@@ -256,23 +260,30 @@ public class DbLogin extends DbHelper{
         try {
             db = dbhelper.getWritableDatabase();
 
-            LocalDate fecha = LocalDate.now();
-            String fechaCompra = fecha.toString();
+            Calendar calendario = Calendar.getInstance();
+            int year = calendario.get(Calendar.YEAR);
+            int mes = calendario.get(Calendar.MONTH)+1;
+            int dia = calendario.get(Calendar.DATE);
+            int hora = calendario.get(Calendar.HOUR);
+            int minutos = calendario.get(Calendar.MINUTE);
+
+            String fechaCompleta = year +"-"+mes+"-"+dia+" "+hora+":"+minutos;
             ContentValues values = new ContentValues();
-            String corresponsal_nombre = user.getNombre();
-            corresponsal_nombre.toUpperCase();
-            values.put("numero_tarjeta",user.getCard_number());
-            values.put("fecha_expiracion_card",user.getFecha_expiracion_client_cop());
-            values.put("cvv_cliente", user.getCvv_cliente());
-            values.put("nombre_cliente_cop",user.getNombre());
-            values.put("valor_pagado",user.getValor_pay_card_cop());
-            values.put("valor_cuotas",user.getValor_pay_cuotes_cop());
-            values.put("cantidad_cuotas",user.getCantidad_cuotas());
-            values.put("fecha_pago_tarjeta",fechaCompra);
-            id = db.insert(TABLE_PAY_CARD_COP,null,values);
             int valorCop = user.getCorresponsal_balance();
             contador = valorCop + user.getValor_pay_card_cop();
+            String corresponsal_nombre = user.getNombre();
+
+            String operacion = "Pago con tarjeta";
+            corresponsal_nombre.toUpperCase();
+            values.put("dato_relacion",sp.getCardClient());
+            values.put("tipo_operacion",operacion.toUpperCase(Locale.ROOT));
+            values.put("monto",user.getValor_pay_cuotes_cop());
+            values.put("corresponsal_email",user.getCorresponsal_email());
+            values.put("fecha_realizado",fechaCompleta);
+            id = db.insert(TABLE_HISTORICO_COP,null,values);
+
             db.execSQL(" UPDATE " + TABLE_CORRESPONSAL + " SET saldo_corresponsal = " + contador + " WHERE " + COLUMNA_CORREO_CORRESPONSAL + " = '" + sp.getEmailCop() + "'");
+            mostrarDataCop(sp);
 
         }catch (Exception ex){
             ex.toString();
@@ -298,15 +309,34 @@ public class DbLogin extends DbHelper{
         cursor.close();
         return datos;
     }
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public  boolean retiro_cliente(Usuario user){
         int montoCop = 2000;
         int saldoCliente = user.getSaldo();
         int saldoTotal = saldoCliente - montoCop;
+        int corresponsalBalance = user.getCorresponsal_balance();
+        int nuevosaldocop = corresponsalBalance+montoCop;
+        String tipo_op = "RETIRO";
         boolean correcto;
+        Calendar calendario = Calendar.getInstance();
+        int year = calendario.get(Calendar.YEAR);
+        int mes = calendario.get(Calendar.MONTH)+1;
+        int dia = calendario.get(Calendar.DATE);
+        int hora = calendario.get(Calendar.HOUR);
+        int minutos = calendario.get(Calendar.MINUTE);
+        String fechaCompleta = year +"-"+mes+"-"+dia+" "+hora+":"+minutos;
         try{
-            db.execSQL(" UPDATE " + TABLE_CLIENT + " SET saldo_cliente =" + saldoTotal + " WHERE nit_corresponsal " +"= '"+sp.getCcUSer()+"'");
-            mostrarDataCop(sp);
+            ContentValues values = new ContentValues();
+            db.execSQL(" UPDATE " + TABLE_CLIENT + " SET saldo_cliente =" + saldoTotal + " WHERE documento_cliente " +"= '"+sp.getCcUSer()+"'");
+            values.put("dato_relacion",sp.getCcUSer());
+            values.put("corresponsal_email", sp.getEmailCop());
+            values.put("fecha_realizado",fechaCompleta);
+            values.put("monto",user.getValor_pay_cuotes_cop());
+            values.put("tipo_operacion",tipo_op);
+            db.insert(TABLE_HISTORICO_COP,null,values);
+            db.execSQL(" UPDATE " + TABLE_CORRESPONSAL + " SET saldo_corresponsal = " + nuevosaldocop + " WHERE " + COLUMNA_CORREO_CORRESPONSAL + " = '" + sp.getEmailCop() + "'");
             correcto = true;
+            mostrarDataCop(sp);
         }catch (Exception ex){
             ex.toString();
             correcto = false;
@@ -315,5 +345,6 @@ public class DbLogin extends DbHelper{
         }
         return correcto;
     }
+
 
 }

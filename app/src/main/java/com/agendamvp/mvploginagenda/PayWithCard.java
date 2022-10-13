@@ -169,6 +169,7 @@ public class PayWithCard extends AppCompatActivity implements InterfacesPayCardC
     }
     public void confirmacion(String tarjeta ,String cvv,String year,String month,String nombre, int cuotas,int valor_pagado, int valor_total, int copBalance ){
         Intent intent = new Intent(PayWithCard.this, ConfirmPayWithCard.class);
+        String emailCop = user.getCorresponsal_email();
         intent.putExtra("DATA_CLIENT_CARD",tarjeta);
         intent.putExtra("DATA_CLIENT_CVV",cvv);
         intent.putExtra("DATA_CLIENT_YEAR",year);
@@ -177,6 +178,7 @@ public class PayWithCard extends AppCompatActivity implements InterfacesPayCardC
         intent.putExtra("DATA_CLIENT_CUOTES",String.valueOf(cuotas));
         intent.putExtra("DATA_CLIENT_BALANCE",String.valueOf(valor_pagado));
         intent.putExtra("DATA_CLIENT_TOTAL_BALANCE",valor_total);
+        intent.putExtra("DATA_COP_EMAIL",emailCop);
         intent.putExtra("DATA_COP_BALANCE",copBalance);
         startActivity(intent);
     }

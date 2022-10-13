@@ -33,7 +33,6 @@ public class PresenterPayCardCop implements InterfacesPayCardCop.presenter {
 
     @Override
     public long Pago_tarjeta_cop(Usuario user) {
-
         long id = 0;
         id = this.model.Pago_tarjeta_cop(user);
         return id;

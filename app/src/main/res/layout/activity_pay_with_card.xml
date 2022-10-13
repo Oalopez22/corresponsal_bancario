@@ -175,7 +175,7 @@
                     android:layout_weight="1"
                     android:hint="@string/txtPayCardYear"
                     android:inputType="datetime"
-                    android:text="27"
+                    android:text="10"
                     android:textAlignment="viewStart"
                     android:textSize="24sp"
                     android:textStyle="bold" />

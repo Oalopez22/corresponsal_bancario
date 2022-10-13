@@ -5,6 +5,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -47,10 +48,10 @@ public class ConfirmPayWithCard extends AppCompatActivity implements InterfacesP
         Bundle datos = getIntent().getExtras();
         String card = datos.getString("DATA_CLIENT_CARD");
         String nombre = datos.getString("DATA_CLIENT_NAME");
-
+        String corresponsal_email = datos.getString(("DATA_COP_EMAIL"));
 
         String cuotas = datos.getString("DATA_CLIENT_CUOTES");
-        String valor_normal = datos.getString("DATA_CLIENT_BALANCE");
+        String balance_cliente = datos.getString("DATA_CLIENT_BALANCE");
         int valor_total = datos.getInt("DATA_CLIENT_TOTAL_BALANCE");
 
 
@@ -66,7 +67,7 @@ public class ConfirmPayWithCard extends AppCompatActivity implements InterfacesP
 
         String fecha_recibida = user.getFecha_expiracion_client_cop();
         String pinDevuelto = String.valueOf(user.getPin());
-
+        int saldoCliente = user.getSaldo();
         tvClientNAme.setText(nombre);
         tvClientValue.setText(String.valueOf(valor_total));
         tvClientCuotes.setText("A # " + cuotas + " Cuotas");
@@ -126,28 +127,24 @@ public class ConfirmPayWithCard extends AppCompatActivity implements InterfacesP
                         int saldoCliente = user.getSaldo();
                         String pinIngresado = txtCardPin.getText().toString();
                         if (cvvCliente.equals(cvv)) {
-                            if (fecha_recibida.equals(fecha_ingresada) && fecha_recibida.compareTo(fechaIniciaCompleta)>0) {
+                            if (fecha_recibida.equals(fecha_ingresada) /*&& fecha_recibida.compareTo(fechaIniciaCompleta)>0*/) {
                                 if (pinDevuelto.equals(pinIngresado)) {
                                     if (valor_total > saldoCliente){
                                         Toast.makeText(ConfirmPayWithCard.this, "Saldo insuficiente".toUpperCase(Locale.ROOT), Toast.LENGTH_SHORT).show();
                                     }else{
                                         user.setCard_number(card);
-                                        user.setFecha_expiracion_client_cop(fecha_ingresada);
-                                        user.setNombre(nombre);
-
-                                        user.setCvv_cliente(cvv);
-                                        user.setValor_pay_card_cop(Integer.parseInt(valor_normal));
+                                        user.setSaldo(saldoCliente);
+                                        user.setCorresponsal_email(corresponsal_email);
                                         user.setValor_pay_cuotes_cop(valor_total);
-                                        user.setCantidad_cuotas(Integer.parseInt(cuotes));
                                         user.setCorresponsal_balance(cop);
                                         long id = presenter.Pago_tarjeta_cop(user);
                                         if (id > 0) {
+                                            redirigir();
                                             Toast.makeText(ConfirmPayWithCard.this, "Pago realizado", Toast.LENGTH_LONG).show();
                                         }else {
                                             Toast.makeText(ConfirmPayWithCard.this, "Error al realizar el pago", Toast.LENGTH_SHORT).show();
                                         }
                                     }
-
 
                                 }else {
                                     Toast.makeText(ConfirmPayWithCard.this, "El pin no coincide", Toast.LENGTH_SHORT).show();
@@ -177,6 +174,10 @@ public class ConfirmPayWithCard extends AppCompatActivity implements InterfacesP
         btnConfirmPay = findViewById(R.id.btnConfirmPay);
         btnCancelPay = findViewById(R.id.btnCancelPay);
 
+    }
+    public void redirigir(){
+        Intent intent = new Intent(this, Corresponsal_Start.class);
+        startActivity(intent);
     }
 
 }
