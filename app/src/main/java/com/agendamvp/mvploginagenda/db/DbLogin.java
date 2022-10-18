@@ -334,6 +334,7 @@ public class DbLogin extends DbHelper{
             values.put("monto",user.getValor_pay_cuotes_cop());
             values.put("tipo_operacion",tipo_op);
             db.insert(TABLE_HISTORICO_COP,null,values);
+
             db.execSQL(" UPDATE " + TABLE_CORRESPONSAL + " SET saldo_corresponsal = " + nuevosaldocop + " WHERE " + COLUMNA_CORREO_CORRESPONSAL + " = '" + sp.getEmailCop() + "'");
             correcto = true;
             mostrarDataCop(sp);
@@ -345,6 +346,47 @@ public class DbLogin extends DbHelper{
         }
         return correcto;
     }
+                    /*  DEPOSITO CLIENTE*/
+                    public Usuario datos_cliente_deposit_cop(SharedPreferences sp){
+                        Usuario datos = null;
+                        db =getWritableDatabase();
+                        Cursor cursor = db.rawQuery(" SELECT * FROM " + TABLE_CLIENT + " WHERE documento_cliente =? ",new String[]{sp.getDeposit()});
+                        if (cursor.getCount()>0){
+                            if (cursor.moveToFirst()){
+                                datos = new Usuario();
+                                datos.setNombre(cursor.getString(1));
+                                datos.setSaldo(cursor.getInt(2));
+                                datos.setPin(cursor.getInt(3));
+                                datos.setCard_number(cursor.getString(4));
+                            }
+                        }
+                        cursor.close();
+                        return datos;
+                    }
+    public boolean deposito(Usuario user){
+        int montoCop = 1000;
+        boolean correcto;
+        try{
 
+            db.execSQL( "");
+/*            ContentValues values = new ContentValues();
+            values.put("dato_relacion",sp.getCcUSer());
+            values.put("corresponsal_email", sp.getEmailCop());
+            values.put("fecha_realizado",fechaCompleta);
+            values.put("monto",user.getValor_pay_cuotes_cop());
+            values.put("tipo_operacion",tipo_op);*/
+
+/*
+            db.execSQL(" UPDATE " + TABLE_CORRESPONSAL + " SET saldo_corresponsal = " + nuevosaldocop + " WHERE " + COLUMNA_CORREO_CORRESPONSAL + " = '" + sp.getEmailCop() + "'");*/
+
+            correcto = true;
+        }catch (Exception ex){
+            ex.toString();
+            correcto = false;
+        }finally {
+            db.close();
+        }
+        return correcto;
+    }
 
 }

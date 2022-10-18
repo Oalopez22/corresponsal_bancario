@@ -31,11 +31,11 @@ public class ConfirmRetiro extends AppCompatActivity implements InterfaceRetiroC
         presenter = new PresenterRetiroClient(this,ConfirmRetiro.this);
         findElements();
         user = presenter.datos_cliente(sp);
+        int balanceCliente = user.getSaldo();
 
     if (user != null){
         String nombre = user.getNombre();
         String nCuenta = user.getCard_number();
-
         txtClientName.setText("Estimado :"+ nombre);
         txtNcuenta.setText(nCuenta);
     }
@@ -43,12 +43,11 @@ public class ConfirmRetiro extends AppCompatActivity implements InterfaceRetiroC
         String cc = datos.getString("DATA_CLIENT_CC");
         int value = datos.getInt("DATA_CLIENT_VALUE");
         int corresponsalBalance = datos.getInt("DATA_COP_BALANCE");
-        int balance = datos.getInt("DATA_CLIENT_BALANCE");
         txtbalance.setText(String.valueOf(value));
             btnConfirmRet.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    user.setSaldo(balance);
+                    user.setSaldo(balanceCliente);
                     user.setValor_pay_cuotes_cop(value);
                     user.setCorresponsal_balance(corresponsalBalance);
                     boolean pago = presenter.retiro_cliente(user);

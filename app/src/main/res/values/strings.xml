@@ -101,4 +101,21 @@
     <string name="ConfirmRetName">Estimado :</string>
     <string name="ConfirmRetNcuenta">Se realizará un retiro al número de cuenta</string>
     <string name="ConfirmRetValue">Por un valor de</string>
+
+
+    /* CORRESPONSAL TRANSFERENCIA */
+    <string name="txtDepositCopTitle">Deposito</string>
+    <string name="txtDepositCc">Número de cédula a depositar</string>
+    <string name="txtDepositCopCc">Número de cédula que deposita</string>
+    <string name="txtDepositMonto">Monto a depositar</string>
+    <string name="btnDepositConfirm">Confirmar</string>
+    <string name="btnDepositCancel">Cancelar</string>
+
+    /*CONFIRMAR TRANSFERENCIA */
+    <string name="ConfirmDepoTittle">Confirmación</string>
+    <string name="ConfirmDepoCc">Estimado :</string>
+    <string name="ConfirmDepoCcTarjet">Desea realizar el deposito a</string>
+    <string name="ConfirmDepoValue">Por un valor de :</string>
+    <string name="btnConfirmDepo">Confirmar</string>
+    <string name="btnCancelConfirmDepo">Cancelar</string>
 </resources>

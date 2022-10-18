@@ -28,6 +28,15 @@ public class SharedPreferences {
         return datos.getString("cc","Dato no encontrado");
     }
 
+    public void setCcDeposit(String deposit){
+        editor.putString("deposi",deposit);
+        editor.apply();
+    }
+    public String getDeposit(){
+        return datos.getString("deposit","Dato no encontrado");
+    }
+
+
     public void setCardClient(String card){
         editor.putString("Card",card);
         editor.apply();
