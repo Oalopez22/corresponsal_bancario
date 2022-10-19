@@ -2,38 +2,65 @@ package com.agendamvp.mvploginagenda;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.agendamvp.mvploginagenda.Entidades.Usuario;
 import com.agendamvp.mvploginagenda.Interfaces.InterfacesDepoClient;
+import com.agendamvp.mvploginagenda.Presenter.PresenterDepoClient;
+import com.agendamvp.mvploginagenda.SharedPreferences.SharedPreferences;
 
 public class Corresponsal_deposit extends AppCompatActivity implements InterfacesDepoClient.view {
     TextView tvCopName,tvCopBalance,tvCopNAcout;
     ImageView imgArrowBack;
     EditText txtCcClient,txtCcTarjet,txtValueTarjet;
     Button btnConfirmDepo,btnCancelDepo;
+    SharedPreferences sp;
+    Usuario user;
     InterfacesDepoClient.presenter presenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_corresponsal_deposit);
         findElements();
-
+        sp = new SharedPreferences(this);
+        user = new Usuario();
+        presenter = new PresenterDepoClient(this,Corresponsal_deposit.this);
         imgArrowBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
+        user = presenter.data_cop(sp);
 
+        if (user != null){
+            tvCopName.setText(user.getCorresponsal_name());
+            tvCopBalance.setText(String.valueOf(user.getCorresponsal_balance()));
+            tvCopNAcout.setText(user.getCorreponsal_ncuenta());
+        }
         btnConfirmDepo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String ccCliente = txtCcClient.getText().toString();
+                String ccClienteToDepo = txtCcTarjet.getText().toString();
+                String monto = txtValueTarjet.getText().toString();
+                int saldo = user.getCorresponsal_balance();
+                if (!ccCliente.equals("") && !ccClienteToDepo.equals("") && !monto.equals("")){
+                    int balance = Integer.parseInt(monto);
 
+                    redireccion(ccCliente,ccClienteToDepo,balance,saldo);
+                }else {
+                    txtCcClient.setError("Campo obligatorio");
+                    txtCcTarjet.setError("Campo obligatorio");
+                    txtValueTarjet.setError("Campo obligatorio");
+                }
             }
         });
 
@@ -57,5 +84,15 @@ public class Corresponsal_deposit extends AppCompatActivity implements Interface
         txtValueTarjet = findViewById(R.id.txtValueTarjet);
         btnConfirmDepo = findViewById(R.id.btnDepositConfirm);
         btnCancelDepo = findViewById(R.id.btnDepositCancel);
+    }
+    private void redireccion(String cc, String ccTarjet,int value,int saldoCop){
+        sp.setCcUser(cc);
+        sp.setCcDeposit(ccTarjet);
+        Intent intent = new Intent(Corresponsal_deposit.this,ConfirmDeposit.class);
+        intent.putExtra("DATA_CLIENT_CC",cc);
+        intent.putExtra("DATA_CLIENT_TARGET",ccTarjet);
+        intent.putExtra("DATA_CLIENT_VALUE",value);
+        intent.putExtra("DATA_COP_VALUE",saldoCop);
+        startActivity(intent);
     }
 }

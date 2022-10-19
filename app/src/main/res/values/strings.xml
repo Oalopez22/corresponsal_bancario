@@ -103,7 +103,7 @@
     <string name="ConfirmRetValue">Por un valor de</string>
 
 
-    /* CORRESPONSAL TRANSFERENCIA */
+    /* CORRESPONSAL DEPOSITO */
     <string name="txtDepositCopTitle">Deposito</string>
     <string name="txtDepositCc">Número de cédula a depositar</string>
     <string name="txtDepositCopCc">Número de cédula que deposita</string>
@@ -111,11 +111,23 @@
     <string name="btnDepositConfirm">Confirmar</string>
     <string name="btnDepositCancel">Cancelar</string>
 
-    /*CONFIRMAR TRANSFERENCIA */
+    /*CONFIRMAR DEPOSITO */
     <string name="ConfirmDepoTittle">Confirmación</string>
     <string name="ConfirmDepoCc">Estimado :</string>
     <string name="ConfirmDepoCcTarjet">Desea realizar el deposito a</string>
     <string name="ConfirmDepoValue">Por un valor de :</string>
     <string name="btnConfirmDepo">Confirmar</string>
     <string name="btnCancelConfirmDepo">Cancelar</string>
+
+
+
+    /* CORRESPONSAL TRANSFERENCIA */
+    <string name="TransferTittle">Transferencia</string>
+    <string name="txtTransferCc">Número de cédula a transferir</string>
+    <string name="txtTransferCcclient">Número de cédula que transfiere</string>
+    <string name="txtTransferValue">Monto a transferir</string>
+    <string name="btnConfirmTransfer">Confirmar</string>
+    <string name="btnCancelTransfer">Cancelar</string>
+
+
 </resources>

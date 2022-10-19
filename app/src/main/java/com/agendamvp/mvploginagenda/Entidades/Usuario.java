@@ -12,7 +12,11 @@ public class Usuario {
     private String card_number;
     private LocalDate fecha_expiracion;
     private String cvv_cliente;
-
+                /* Deposito cliente */
+                private String nombre_cliente_deposito;
+                private String documento_cliente_deposito;
+                private int saldo_cliente_deposito;
+                private int pin_cliente_deposito;
             /* CORRESPONSAL*/
     private  String corresponsal_name;
     private String corresponsal_nit;
@@ -193,5 +197,37 @@ public class Usuario {
 
     public void setCorreponsal_ncuenta(String correponsal_ncuenta) {
         this.correponsal_ncuenta = correponsal_ncuenta;
+    }
+
+    public int getSaldo_cliente_deposito() {
+        return saldo_cliente_deposito;
+    }
+
+    public void setSaldo_cliente_deposito(int saldo_cliente_deposito) {
+        this.saldo_cliente_deposito = saldo_cliente_deposito;
+    }
+
+    public String getNombre_cliente_deposito() {
+        return nombre_cliente_deposito;
+    }
+
+    public void setNombre_cliente_deposito(String nombre_cliente_deposito) {
+        this.nombre_cliente_deposito = nombre_cliente_deposito;
+    }
+
+    public String getDocumento_cliente_deposito() {
+        return documento_cliente_deposito;
+    }
+
+    public void setDocumento_cliente_deposito(String documento_cliente_deposito) {
+        this.documento_cliente_deposito = documento_cliente_deposito;
+    }
+
+    public int getPin_cliente_deposito() {
+        return pin_cliente_deposito;
+    }
+
+    public void setPin_cliente_deposito(int pin_cliente_deposito) {
+        this.pin_cliente_deposito = pin_cliente_deposito;
     }
 }

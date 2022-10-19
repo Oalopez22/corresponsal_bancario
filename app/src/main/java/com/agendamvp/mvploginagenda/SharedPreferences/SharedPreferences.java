@@ -29,7 +29,7 @@ public class SharedPreferences {
     }
 
     public void setCcDeposit(String deposit){
-        editor.putString("deposi",deposit);
+        editor.putString("deposit",deposit);
         editor.apply();
     }
     public String getDeposit(){

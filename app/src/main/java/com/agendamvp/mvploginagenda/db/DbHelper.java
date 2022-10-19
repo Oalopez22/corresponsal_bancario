@@ -71,7 +71,8 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE " + TABLE_CLIENT + "(" + COLUMNA_DOCUMENTO + " text primary key," + COLUMNA_NOMBRE + " text not null ," + COLUMNA_SALDO + " text not null," +
                 COLUMNA_PIN + " integer not null ," + COLUMNA_CARD + " text not null," + COLUMNA_CVV + " text not null," + COLUMNA_EXPIRACION + " date not null " + ")");
 
-        db.execSQL(" INSERT INTO " + TABLE_CLIENT + "(documento_cliente,nombre_cliente,saldo_cliente,pin_cliente,card_numero,card_cvv,fecha_expiracion) VALUES ('1232890497','Fabian',60000,9810,'61232890497229810','240','10-06')");
+        db.execSQL(" INSERT INTO " + TABLE_CLIENT + "(documento_cliente,nombre_cliente,saldo_cliente,pin_cliente,card_numero,card_cvv,fecha_expiracion) VALUES ('1232890497','Fabian',60000,9810,'61232890497229810','240','27-06')");
+        db.execSQL(" INSERT INTO " + TABLE_CLIENT + "(documento_cliente,nombre_cliente,saldo_cliente,pin_cliente,card_numero,card_cvv,fecha_expiracion) VALUES ('1095944947','Andres',120000,1232,'61095944947221232','315','27-11')");
 
                     /* TABLA CORRESPONSAL */
         db.execSQL("CREATE TABLE " + TABLE_CORRESPONSAL + "(" + COLUMNA_CORREO_CORRESPONSAL + " text primary key ," +
@@ -79,13 +80,8 @@ public class DbHelper extends SQLiteOpenHelper {
                 COLUMNA_PASSWORD_CORRESPONSAL + " text not null," + COLUMNA_ESTADO_CORRESPONSAL + " integer not null default 0," + COLUMNA_NCUENTA_CORRESPONSAL + " integer," + COLUMNA_SALDO_CORRESPONSAL + " integer not null default 0" + ")");
 
 
-                    /* TABLA PAGO CON TARJETA */
-/*
-        db.execSQL(" CREATE TABLE " + TABLE_PAY_CARD_COP + " (" + COLUMNA_ID_PAGO + " integer primary key autoincrement ," + COLUMNA_N_TARJETA_COP + " text not null  ," + COLUMNA_FECHA_EXPIRA_COP + " date ," + COLUMNA_CVV_CARD_COP + " text not null," + COLUMNA_NOMBRE_CLIENTE + " text not null," + COLUMNA_VALOR_PAGO_CARD + " integer not null," + COLUMNA_VALOR_CUOTAS + " integer not null," + COLUMNA_CANTIDAD_CUOTAS + " int not null," + COLUMNA_FECHA_PAGO + " date not null" + ")");
+        db.execSQL(" INSERT INTO " + TABLE_CORRESPONSAL + "(correo_corresponsal,nombre_corresponsal,nit_corresponsal,password_corresponsal,estado_corresponsal,ncuenta_corresponsal,saldo_corresponsal) VALUES ('bga@wposs.com','BGACOP','1232890497','Alopez123',0,'24022388887912328',4000)");
 
-*/
-
-        /*  TABLA RETIRO */
 
         db.execSQL(" CREATE TABLE " + TABLE_HISTORICO_COP + " (" + COLUMNA_ID_HISTORICO + " integer primary key autoincrement ," + COLUMNA_DATA_HISTORICO + " text not null ," + COLUMNA_EMAIL_HISTORICO + " text not null, " + COLUMNA_FECHA_HISTORICO + " date not null ," + COLUMNA_TIPO_HISTORICO + " text not null ," + COLUMNA_MONTO_HISTORICO + " integer not null" + " )" );
     }

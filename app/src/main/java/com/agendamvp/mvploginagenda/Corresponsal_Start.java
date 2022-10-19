@@ -23,7 +23,7 @@ import java.util.ArrayList;
 
 public class Corresponsal_Start extends AppCompatActivity  implements InterfacesCopStart.view {
     TextView txtCopName,txtCopBalance,txtCopAcount;
-    CardView cvPayCard,cvRet;
+    CardView cvPayCard,cvRet,cvDepo,cvTransfer,cvHistory,cvClientBalance;
     DbLogin db;
     Usuario user;
    SharedPreferences sp;
@@ -60,7 +60,30 @@ public class Corresponsal_Start extends AppCompatActivity  implements Interfaces
                 retiros();
             }
         });
+        cvDepo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                depositos();
+            }
+        });
+        cvTransfer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                transferencias();
+            }
+        });
+        cvHistory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+            }
+        });
+        cvClientBalance.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
     }
 
@@ -68,6 +91,10 @@ public class Corresponsal_Start extends AppCompatActivity  implements Interfaces
     public void findElements() {
         cvPayCard = findViewById(R.id.cvPayCard);
         cvRet = findViewById(R.id.cvRetiro);
+        cvDepo = findViewById(R.id.cvDeposit);
+        cvTransfer = findViewById(R.id.cvTransfer);
+        cvHistory = findViewById(R.id.cvHistory);
+        cvClientBalance = findViewById(R.id.cvClienBalance);
         txtCopName = findViewById(R.id.txtCopName);
         txtCopBalance = findViewById(R.id.txtCopBalance);
         txtCopAcount = findViewById(R.id.txtCopAcount);
@@ -81,6 +108,13 @@ public class Corresponsal_Start extends AppCompatActivity  implements Interfaces
         Intent intent = new Intent(Corresponsal_Start.this, Corresponsal_Retiro.class);
         startActivity(intent);
     }
-
+    public void depositos(){
+        Intent intent = new Intent(Corresponsal_Start.this,Corresponsal_deposit.class);
+        startActivity(intent);
+    }
+    public void transferencias(){
+        Intent intent = new Intent(Corresponsal_Start.this, Corresponsal_Transfer.class);
+        startActivity(intent);
+    }
 
 }
