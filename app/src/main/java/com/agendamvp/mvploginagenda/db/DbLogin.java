@@ -363,18 +363,21 @@ public class DbLogin extends DbHelper{
                         cursor.close();
                         return datos;
                     }
+
+
     public boolean deposito(Usuario user){
         int montoCop = 1000;
+        String operacion = "Deposito";
         boolean correcto;
         try{
 
-            db.execSQL( "");
+            //db.execSQL( "UPDATE " + TABLE_CLIENT + " SET saldo_cliente = " + user.getSaldo() + " WHERE " + COLUMNA_DOCUMENTO + " ='" + sp.getDeposit() + "'");
 /*            ContentValues values = new ContentValues();
             values.put("dato_relacion",sp.getCcUSer());
             values.put("corresponsal_email", sp.getEmailCop());
             values.put("fecha_realizado",fechaCompleta);
             values.put("monto",user.getValor_pay_cuotes_cop());
-            values.put("tipo_operacion",tipo_op);*/
+            values.put("tipo_operacion",operacion);*/
 
 /*
             db.execSQL(" UPDATE " + TABLE_CORRESPONSAL + " SET saldo_corresponsal = " + nuevosaldocop + " WHERE " + COLUMNA_CORREO_CORRESPONSAL + " = '" + sp.getEmailCop() + "'");*/
