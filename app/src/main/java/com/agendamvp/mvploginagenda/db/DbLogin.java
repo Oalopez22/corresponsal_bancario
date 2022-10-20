@@ -391,16 +391,20 @@ public class DbLogin extends DbHelper{
         int balanceCop = user.getCorresponsal_balance() + montoCop;
         String operacion = "Transferencia";
         boolean correcto;
-        int saldo = user.getSaldo();
-        int valor = user.getSaldo_cliente_deposito();
-        int monto = saldo - valor;
+        int saldoCliente = user.getSaldo();         //Saldo del cliente que transfiere
+        int SclienteTransferido = user.getSaldo_cliente_deposito();         // saldo del cliente que recibe la transferencia
+        int TransferValue = user.getValor_pay_card_cop();           //valor a transferir
+        int transferencia = TransferValue + SclienteTransferido;        //nuevo valor del cliente que recibe la transferencia
+        int descuentoCliete = saldoCliente - TransferValue - montoCop;         // saldo que se le descuenta al cliente que transfiere
         try{
-            db.execSQL( "UPDATE " + TABLE_CLIENT + " SET saldo_cliente = " + monto + " WHERE " + COLUMNA_DOCUMENTO + " ='" + sp.getDeposit() + "'");
+            db.execSQL( "UPDATE " + TABLE_CLIENT + " SET saldo_cliente = " + descuentoCliete + " WHERE " + COLUMNA_DOCUMENTO + " ='" + sp.getCcUSer() + "'");           // descuento al cliente que transfiere
+
+            db.execSQL( "UPDATE " + TABLE_CLIENT + " SET saldo_cliente = " + transferencia + " WHERE " + COLUMNA_DOCUMENTO + " ='" + sp.getDeposit() + "'");        // nuevo monto del cliente que recibe la transferencia
             ContentValues values = new ContentValues();
             values.put("dato_relacion",sp.getCcUSer());
             values.put("corresponsal_email", sp.getEmailCop());
             values.put("fecha_realizado",fechaCompleta);
-            values.put("monto",valor);
+            values.put("monto",TransferValue);
             values.put("tipo_operacion",operacion.toUpperCase());
             db.insert(TABLE_HISTORICO_COP,null,values);
             db.execSQL(" UPDATE " + TABLE_CORRESPONSAL + " SET saldo_corresponsal = " + balanceCop + " WHERE " + COLUMNA_CORREO_CORRESPONSAL + " = '" + sp.getEmailCop() + "'");
@@ -413,6 +417,41 @@ public class DbLogin extends DbHelper{
             db.close();
         }
         return correcto;
+    }
+    public ArrayList<Usuario> historial(SharedPreferences sp){
+        ArrayList<Usuario> historico = new ArrayList<>();
+        Usuario user = null;
+        Cursor cursorhistorial = null;
+        cursorhistorial = db.rawQuery(" SELECT * FROM " + TABLE_HISTORICO_COP+ " WHERE " + COLUMNA_EMAIL_HISTORICO + " = '" + sp.getEmailCop() + "'",null);
+        if (cursorhistorial.moveToFirst()){
+            do{
+                user = new Usuario();
+                user.setCorresponsal_transaccion_fecha(cursorhistorial.getString(3));
+                user.setCorresponsa_transaccion_type(cursorhistorial.getString(4));
+                user.setCorresponsal_transaccion_value(cursorhistorial.getString(5));
+                user.setCorresponsal_transaccion_ref(cursorhistorial.getString(1));
+                user.setCorresponsal_transaccion_id(cursorhistorial.getString(0));
+                historico.add(user);
+            }while (cursorhistorial.moveToNext());
+        }
+        cursorhistorial.close();
+        return historico;
+    }
+
+    public Usuario consultar_saldo(SharedPreferences sp){
+        Usuario datos = null;
+        /* Consultar datos del cliente */
+        db =getWritableDatabase();
+        Cursor cursor = db.rawQuery(" SELECT * FROM " + TABLE_CLIENT + " WHERE documento_cliente =? ",new String[]{sp.getCcUSer()});
+            if (cursor.moveToFirst()){
+                datos = new Usuario();
+                datos.setNombre(cursor.getString(1));
+                datos.setSaldo(cursor.getInt(2));
+                datos.setPin(cursor.getInt(3));
+                datos.setCard_number(cursor.getString(4));
+            }
+        cursor.close();
+        return datos;
     }
 
 }

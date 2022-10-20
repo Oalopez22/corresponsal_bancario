@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.Date;
 
 public class Usuario {
-                /* CLIENTE */
+    /* CLIENTE */
     private String nombre;
     private String documento;
     private int saldo;
@@ -12,21 +12,26 @@ public class Usuario {
     private String card_number;
     private LocalDate fecha_expiracion;
     private String cvv_cliente;
-                /* Deposito cliente */
-                private String nombre_cliente_deposito;
-                private String documento_cliente_deposito;
-                private int saldo_cliente_deposito;
-                private int pin_cliente_deposito;
-            /* CORRESPONSAL*/
-    private  String corresponsal_name;
+    /* Deposito cliente */
+    private String nombre_cliente_deposito;
+    private String documento_cliente_deposito;
+    private int saldo_cliente_deposito;
+    private int pin_cliente_deposito;
+    /* CORRESPONSAL*/
+    private String corresponsal_name;
     private String corresponsal_nit;
     private String corresponsal_email;
     private String corresponsal_password;
     private int corresponsal_status;
     private int corresponsal_balance;
     private String correponsal_ncuenta;
+    private String corresponsal_transaccion_fecha;
+    private String corresponsa_transaccion_type;
+    private String corresponsal_transaccion_value;
+    private String corresponsal_transaccion_ref;
+    private String corresponsal_transaccion_id;
     private String fecha_expiracion_client_cop;
-    private  int valor_pay_card_cop;
+    private int valor_pay_card_cop;
     private int valor_pay_cuotes_cop;
     private String card_number_pay_cop;
     private String cvv_client_number_cop;
@@ -91,7 +96,6 @@ public class Usuario {
     }
 
 
-
     public int getPin() {
         return pin;
     }
@@ -140,7 +144,6 @@ public class Usuario {
     public void setValor_pay_card_cop(int valor_pay_card_cop) {
         this.valor_pay_card_cop = valor_pay_card_cop;
     }
-
 
 
     public String getCard_number_pay_cop() {
@@ -229,5 +232,47 @@ public class Usuario {
 
     public void setPin_cliente_deposito(int pin_cliente_deposito) {
         this.pin_cliente_deposito = pin_cliente_deposito;
+    }
+
+    public String getCorresponsal_transaccion_fecha() {
+        return corresponsal_transaccion_fecha;
+    }
+
+    public void setCorresponsal_transaccion_fecha(String corresponsal_transaccion_fecha) {
+        this.corresponsal_transaccion_fecha = corresponsal_transaccion_fecha;
+    }
+
+
+    public String getCorresponsal_transaccion_value() {
+        return corresponsal_transaccion_value;
+    }
+
+    public void setCorresponsal_transaccion_value(String corresponsal_transaccion_value) {
+        this.corresponsal_transaccion_value = corresponsal_transaccion_value;
+    }
+
+    public String getCorresponsal_transaccion_ref() {
+        return corresponsal_transaccion_ref;
+    }
+
+    public void setCorresponsal_transaccion_ref(String corresponsal_transaccion_ref) {
+        this.corresponsal_transaccion_ref = corresponsal_transaccion_ref;
+    }
+
+
+    public String getCorresponsa_transaccion_type() {
+        return corresponsa_transaccion_type;
+    }
+
+    public void setCorresponsa_transaccion_type(String corresponsa_transaccion_type) {
+        this.corresponsa_transaccion_type = corresponsa_transaccion_type;
+    }
+
+    public String getCorresponsal_transaccion_id() {
+        return corresponsal_transaccion_id;
+    }
+
+    public void setCorresponsal_transaccion_id(String corresponsal_transaccion_id) {
+        this.corresponsal_transaccion_id = corresponsal_transaccion_id;
     }
 }

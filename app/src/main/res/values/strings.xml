@@ -120,7 +120,6 @@
     <string name="btnCancelConfirmDepo">Cancelar</string>
 
 
-
     /* CORRESPONSAL TRANSFERENCIA */
     <string name="TransferTittle">Transferencia</string>
     <string name="txtTransferCc">Número de cédula a transferir</string>
@@ -130,4 +129,12 @@
     <string name="btnCancelTransfer">Cancelar</string>
 
 
+    /* CORRESPONSAL HISTORIAL */
+    <string name="txtHistoryTitle">Historial de transacciones</string>
+    <string name="txtHistorySearch">Dato de referencia</string>
+    /* CORRESPONSAL SALDO */
+    <string name="txtBalanceTitle">Consulta de saldo</string>
+    <string name="txtBalanceCc">Numero de cédula a consultar</string>
+    <string name="btnConfimBalance">Confirmar</string>
+    <string name="btnCancelBalance">Cancelar</string>
 </resources>

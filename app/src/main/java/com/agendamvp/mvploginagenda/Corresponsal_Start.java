@@ -9,17 +9,12 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.agendamvp.mvploginagenda.Entidades.Usuario;
 import com.agendamvp.mvploginagenda.Interfaces.InterfacesCopStart;
 import com.agendamvp.mvploginagenda.Presenter.PresenterCopStart;
 import com.agendamvp.mvploginagenda.SharedPreferences.SharedPreferences;
 import com.agendamvp.mvploginagenda.db.DbLogin;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 
 public class Corresponsal_Start extends AppCompatActivity  implements InterfacesCopStart.view {
     TextView txtCopName,txtCopBalance,txtCopAcount;
@@ -75,13 +70,13 @@ public class Corresponsal_Start extends AppCompatActivity  implements Interfaces
         cvHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                historal();
             }
         });
         cvClientBalance.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                saldo();
             }
         });
 
@@ -114,6 +109,14 @@ public class Corresponsal_Start extends AppCompatActivity  implements Interfaces
     }
     public void transferencias(){
         Intent intent = new Intent(Corresponsal_Start.this, Corresponsal_Transfer.class);
+        startActivity(intent);
+    }
+    public void historal(){
+        Intent intent = new Intent(Corresponsal_Start.this, Corresponsal_History.class);
+        startActivity(intent);
+    }
+    public void saldo(){
+        Intent intent = new Intent(Corresponsal_Start.this, Corresponsal_Client_Balance.class);
         startActivity(intent);
     }
 
