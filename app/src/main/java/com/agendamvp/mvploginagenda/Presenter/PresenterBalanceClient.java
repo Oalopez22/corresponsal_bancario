@@ -17,12 +17,25 @@ public class PresenterBalanceClient implements InterfacesBalanceClient.presenter
     }
 
 
+    @Override
+    public Usuario datosCorresponsal(SharedPreferences sp) {
+        Usuario data = null;
+        data = this.model.datosCorresponsal(sp);
+        return data;
+    }
 
     @Override
     public Usuario datosDevueltos(SharedPreferences sp) {
         Usuario data = null;
         data = this.model.datosDevueltos(sp);
         return data;
+    }
+
+    @Override
+    public boolean consultarsaldo(Usuario user) {
+        boolean id;
+        id = this.model.consultarsaldo(user);
+        return id;
     }
 
 

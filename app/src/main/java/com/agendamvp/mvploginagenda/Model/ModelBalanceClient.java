@@ -19,12 +19,25 @@ public class ModelBalanceClient implements InterfacesBalanceClient.model {
     }
 
 
+    @Override
+    public Usuario datosCorresponsal(SharedPreferences sp) {
+        Usuario data = null;
+        data = db.infoCop(sp);
+        return data;
+    }
 
     @Override
     public Usuario datosDevueltos(SharedPreferences sp) {
         Usuario data = null;
         data = db.consultar_saldo(sp);
         return data;
+    }
+
+    @Override
+    public boolean consultarsaldo(Usuario user) {
+        boolean id;
+        id = db.saldo(user);
+        return id;
     }
 
 

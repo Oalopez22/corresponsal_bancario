@@ -7,8 +7,12 @@ import androidx.cardview.widget.CardView;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.agendamvp.mvploginagenda.Entidades.Usuario;
 import com.agendamvp.mvploginagenda.Interfaces.InterfacesCopStart;
@@ -22,6 +26,7 @@ public class Corresponsal_Start extends AppCompatActivity  implements Interfaces
     DbLogin db;
     Usuario user;
    SharedPreferences sp;
+   ImageView imgMenuCop;
     InterfacesCopStart.presenter presenter;
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -42,6 +47,12 @@ public class Corresponsal_Start extends AppCompatActivity  implements Interfaces
             txtCopAcount.setText(user.getCorreponsal_ncuenta());
         }
 
+        imgMenuCop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                menuCorresponsal();
+            }
+        });
         cvPayCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -93,6 +104,7 @@ public class Corresponsal_Start extends AppCompatActivity  implements Interfaces
         txtCopName = findViewById(R.id.txtCopName);
         txtCopBalance = findViewById(R.id.txtCopBalance);
         txtCopAcount = findViewById(R.id.txtCopAcount);
+        imgMenuCop = findViewById(R.id.imgMenuCop);
     }
 
     public void pagotarjeta(){
@@ -118,6 +130,30 @@ public class Corresponsal_Start extends AppCompatActivity  implements Interfaces
     public void saldo(){
         Intent intent = new Intent(Corresponsal_Start.this, Corresponsal_Client_Balance.class);
         startActivity(intent);
+    }
+
+    public void menuCorresponsal(){
+        PopupMenu pm = new PopupMenu(this,imgMenuCop);
+        pm.getMenuInflater()
+                .inflate(R.menu.menucorresponsal, pm.getMenu());
+        pm.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()){
+                    case  R.id.menuUpdateDataCop:
+                        Toast.makeText(Corresponsal_Start.this, "Boton actualizar presionado", Toast.LENGTH_LONG).show();
+                        return true;
+                    case R.id.menuCreateClientCop:
+                        Toast.makeText(Corresponsal_Start.this, "Boton crear presionado", Toast.LENGTH_LONG).show();
+                        return true;
+                    case R.id.menuExitCop:
+                        finish();
+                        return true;
+                }
+                return false;
+            }
+        });
+        pm.show();
     }
 
 }

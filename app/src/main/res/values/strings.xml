@@ -71,6 +71,12 @@
     <string name="txtTitleListUsers">Listado clientes</string>
     <string name="SearchListCcClientes">Cédula cliente</string>
 
+    /* CORRESPONSAL MENU*/
+
+    <string name="menuUpdateDataCop">Atualizar datos</string>
+    <string name="menuCreateClientCop">Crear cliente</string>
+    <string name="menuCloseSessionCop">Cerrar sesión</string>
+
 
     /* CORRESPONSAL PAGO TARJETA */
     <string name="txtPayCardTitle">Pago con tarjeta</string>

@@ -6,14 +6,15 @@ import com.agendamvp.mvploginagenda.SharedPreferences.SharedPreferences;
 public interface InterfacesBalanceClient {
     interface view{
         void FindElements();
-        Usuario DatosDevueltos(SharedPreferences sp);
     }
     interface presenter{
+        Usuario datosCorresponsal(SharedPreferences sp);
         Usuario datosDevueltos(SharedPreferences sp);
+        boolean consultarsaldo(Usuario user);
     }
     interface model{
-
+        Usuario datosCorresponsal(SharedPreferences sp);
         Usuario datosDevueltos(SharedPreferences sp);
-
+        boolean consultarsaldo(Usuario user);
     }
 }

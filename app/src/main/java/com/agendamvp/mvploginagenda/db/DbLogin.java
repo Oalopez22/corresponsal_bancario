@@ -447,11 +447,38 @@ public class DbLogin extends DbHelper{
                 datos = new Usuario();
                 datos.setNombre(cursor.getString(1));
                 datos.setSaldo(cursor.getInt(2));
+                datos.setDocumento(cursor.getString(0));
                 datos.setPin(cursor.getInt(3));
                 datos.setCard_number(cursor.getString(4));
             }
         cursor.close();
         return datos;
+    }
+    public boolean saldo(Usuario user){
+        int montoCop = 1000;
+        int balanceCop = user.getCorresponsal_balance() + montoCop;
+        String operacion = "Consulta de saldo";
+        boolean correcto;
+        int saldo = user.getSaldo();
+        int monto = saldo - montoCop;
+        try{
+            db.execSQL( "UPDATE " + TABLE_CLIENT + " SET saldo_cliente = " + monto + " WHERE " + COLUMNA_DOCUMENTO + " ='" + sp.getCcUSer() + "'");
+            ContentValues values = new ContentValues();
+            values.put("dato_relacion",sp.getCcUSer());
+            values.put("corresponsal_email", sp.getEmailCop());
+            values.put("fecha_realizado",fechaCompleta);
+            values.put("monto",montoCop);
+            values.put("tipo_operacion",operacion.toUpperCase());
+            db.insert(TABLE_HISTORICO_COP,null,values);
+            db.execSQL(" UPDATE " + TABLE_CORRESPONSAL + " SET saldo_corresponsal = " + balanceCop + " WHERE " + COLUMNA_CORREO_CORRESPONSAL + " = '" + sp.getEmailCop() + "'");
+            correcto = true;
+        }catch (Exception ex){
+            ex.toString();
+            correcto = false;
+        }finally {
+            db.close();
+        }
+        return correcto;
     }
 
 }

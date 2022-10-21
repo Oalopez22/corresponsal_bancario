@@ -6,7 +6,40 @@
     android:layout_height="match_parent"
     tools:context=".Register"
     android:orientation="vertical">
-        <TextView
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="115dp">
+
+        <LinearLayout
+            android:layout_width="164dp"
+            android:layout_height="158dp"
+            android:layout_marginStart="262dp"
+            android:layout_marginBottom="4dp"
+            android:background="@drawable/circulo"
+            android:backgroundTint="#FF5F58"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/imgArrowBackAdmin"
+            android:layout_width="54dp"
+            android:layout_height="54dp"
+            android:layout_marginStart="290dp"
+            android:layout_marginBottom="25dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_action_arrowback"
+            app:tint="@color/white" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -76,32 +109,31 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="80dp">
 
-            <Button
-                android:id="@+id/btnConfirmarNewCliente"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="44dp"
-                android:backgroundTint="#E64C25"
-                android:text="@string/txtAddAdminbtnConfirmar"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0" />
+        <Button
+            android:id="@+id/btnConfirmarNewCliente"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="44dp"
+            android:backgroundTint="#FF5F58"
+            android:text="@string/txtAddAdminbtnConfirmar"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
 
-            <Button
-                android:id="@+id/btnCancelClient"
-                style="?attr/materialButtonOutlinedStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/txtAddAdminbtnCancelar"
-                android:textColor="#E64C25"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.369"
-                app:layout_constraintStart_toEndOf="@+id/btnConfirmarNewCliente"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0"
-                />
+        <Button
+            android:id="@+id/btnCancelClient"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/txtAddAdminbtnCancelar"
+            android:textColor="#FF5F58"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.369"
+            app:layout_constraintStart_toEndOf="@+id/btnConfirmarNewCliente"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -118,7 +118,7 @@ public class Admin_corresponsal extends AppCompatActivity implements InterfacesR
                         Toast.makeText(Admin_corresponsal.this, "Boton Cliente Presionado", Toast.LENGTH_SHORT).show();
                         return true;
                     case R.id.MenuCloseSession:
-                        Toast.makeText(Admin_corresponsal.this, "Boton Cerrar Sesion presionado", Toast.LENGTH_SHORT).show();
+                        finish();
                         return true;
                 }
                 return false;

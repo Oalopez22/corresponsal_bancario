@@ -3,6 +3,7 @@ package com.agendamvp.mvploginagenda;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -24,6 +25,8 @@ public class Corresponsal_Client_Balance extends AppCompatActivity implements In
     Button btnConfirmBalance,btnCancelBalance;
     InterfacesBalanceClient.presenter presenter;
     Usuario user;
+    Usuario consulta;
+    Usuario corresponsal;
     SharedPreferences sp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +34,8 @@ public class Corresponsal_Client_Balance extends AppCompatActivity implements In
         setContentView(R.layout.activity_corresponsal_client_balance);
         FindElements();
         user = new Usuario();
+        consulta = new Usuario();
+        corresponsal = new Usuario();
         sp = new SharedPreferences(this);
 
         presenter = new PresenterBalanceClient(this,Corresponsal_Client_Balance.this);
@@ -62,7 +67,8 @@ public class Corresponsal_Client_Balance extends AppCompatActivity implements In
                         @Override
                         public void onClick(View v) {
                             user = presenter.datosDevueltos(sp);
-                            int pin = user.getPin();
+                            int pinDevuelto = user.getPin();
+                            int saldoCliente = user.getSaldo();
                             if (user==null){
 
                                 Toast.makeText(Corresponsal_Client_Balance.this, "El usuario no existe", Toast.LENGTH_LONG).show();
@@ -83,6 +89,7 @@ public class Corresponsal_Client_Balance extends AppCompatActivity implements In
                                     public void onClick(View v) {
                                         String pin = txtPin.getText().toString();
                                         if (!pin.equals("")){
+                                            int pinuser = Integer.parseInt(pin);
                                             LayoutInflater inflater = getLayoutInflater();
                                             View view = inflater.inflate(R.layout.dialog_pin_confirm_retiro,null);
                                             AlertDialog.Builder builder = new AlertDialog.Builder(Corresponsal_Client_Balance.this,R.style.MyDialogAnimation);
@@ -90,6 +97,40 @@ public class Corresponsal_Client_Balance extends AppCompatActivity implements In
                                             dialog.setCancelable(false);
                                             dialog.setCanceledOnTouchOutside(false);
                                             dialog = builder.show();
+                                            EditText confirmpin = view.findViewById(R.id.txtConfirmPinRet);
+                                            Button btnconfirmPin, btnCancelPin;
+                                            btnconfirmPin = view.findViewById(R.id.btnAceptConfirmPin);
+                                            btnconfirmPin.setOnClickListener(new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View v) {
+                                                    String datoConfirm = confirmpin.getText().toString();
+                                                    if (!datoConfirm.equals("")){
+                                                        int newpin = Integer.parseInt(datoConfirm);
+                                                        if (newpin == pinuser && newpin == pinDevuelto){
+                                                            corresponsal = presenter.datosCorresponsal(sp);
+                                                            int copbalance = corresponsal.getCorresponsal_balance();
+                                                            consulta.setSaldo(saldoCliente);
+                                                            consulta.setCorresponsal_balance(copbalance);
+                                                            boolean consultarSaldo = presenter.consultarsaldo(consulta);
+                                                            if (consultarSaldo){
+                                                                redireccion();
+                                                            }else{
+                                                                Toast.makeText(Corresponsal_Client_Balance.this, "No se pudo hacer la consulta", Toast.LENGTH_LONG).show();
+                                                            }
+                                                        }else{
+                                                            Toast.makeText(Corresponsal_Client_Balance.this, "El pin no coincide", Toast.LENGTH_LONG).show();
+                                                        }
+                                                    }
+                                                }
+                                            });
+
+                                            btnCancelPin = view.findViewById(R.id.btnCancelConfirmPin);
+                                            btnCancelPin.setOnClickListener(new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View v) {
+
+                                                }
+                                            });
 
                                         }else{
                                             txtPin.setError("Campo obligatorio");
@@ -131,6 +172,11 @@ public class Corresponsal_Client_Balance extends AppCompatActivity implements In
         });
     }
 
+    public void redireccion(){
+        Intent intent = new Intent(Corresponsal_Client_Balance.this,Corresponsal_Data_Client.class);
+        startActivity(intent);
+    }
+
     @Override
     public void FindElements() {
         imgArrowBack = findViewById(R.id.imgArrowbackDeposit);
@@ -139,8 +185,5 @@ public class Corresponsal_Client_Balance extends AppCompatActivity implements In
         btnCancelBalance = findViewById(R.id.btnCancelBalance);
     }
 
-    @Override
-    public Usuario DatosDevueltos(SharedPreferences sp) {
-        return null;
-    }
+
 }

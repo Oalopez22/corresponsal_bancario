@@ -49,22 +49,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 String email = txtLoginEmail.getText().toString();
                 String password = txtLoginPassword.getText().toString();
-                ingresoAdmin(email,password);
-                if (!email.equals("") && !password.equals("")){
-                    user.setCorresponsal_email(email);
-                    user.setCorresponsal_password(password);
-                    sp.setEmailCop(email);
-                    boolean id = presenter.Ingresar(user);
-                    if (id){
-                        ingreso();
-                    }else {
-                        Toast.makeText(MainActivity.this, "No se encontro ningun usuario", Toast.LENGTH_SHORT).show();
-                    }
-
+                if (email.equals( "admin@wposs.com") & password.equals("Admin123*")){
+                    ingresoAdmin();
                 }else{
-                    txtLoginEmail.setError("Campo Email obligatorio");
-                    txtLoginPassword.setError("Campo Contraseña obligatorio");
+                    if (!email.equals("") && !password.equals("")){
+                        user.setCorresponsal_email(email);
+                        user.setCorresponsal_password(password);
+                        sp.setEmailCop(email);
+                        boolean id = presenter.Ingresar(user);
+                        if (id){
+                            ingreso();
+                        }else {
+                            Toast.makeText(MainActivity.this, "No se encontro ningun usuario", Toast.LENGTH_SHORT).show();
+                        }
+
+                    }else{
+                        txtLoginEmail.setError("Campo Email obligatorio");
+                        txtLoginPassword.setError("Campo Contraseña obligatorio");
+                    }
                 }
+
             }
         });
 
@@ -83,13 +87,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnLogin = findViewById(R.id.btnLoginIngresar);
     }
 
-    private void ingresoAdmin(String email, String password){
-        email = txtLoginEmail.getText().toString();
-       password = txtLoginPassword.getText().toString();
-        if (email.equals( "admin@wposs.com") & password.equals("Admin123*")){
+    private void ingresoAdmin(){
+
             Intent intent = new Intent(this,Admin_corresponsal.class);
             startActivity(intent);
-        }
     }
     private void  ingreso(){
         Intent intent = new Intent(this,Corresponsal_Start.class);
