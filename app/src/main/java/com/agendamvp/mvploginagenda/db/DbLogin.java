@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
@@ -95,10 +96,39 @@ public class DbLogin extends DbHelper{
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public long crearUsuario(Usuario user){
+        int aleatorio = 0;
+        String tarjeta = "";
+        String cc = user.getDocumento();
+        int pin = user.getPin();
+        Random card = new Random();
+        int Ntarjeta = card.nextInt(6-3+1)+3;
+        int casoCc = cc.length();
+        switch (casoCc){
+            case 10:
+                aleatorio = card.nextInt(9999 - 1000 + 1)+1000;
+                tarjeta = Ntarjeta + cc + String.valueOf(aleatorio);
+            break;
+            case 8:
+                aleatorio = card.nextInt(999 - 100 + 1)+100;
+                tarjeta = Ntarjeta + cc + String.valueOf(aleatorio);
+            break;
+            case 11:
+                aleatorio = card.nextInt(99 - 10 + 1)+10;
+                tarjeta = Ntarjeta + cc + String.valueOf(aleatorio);
+            break;
+            case 12:
+                aleatorio = card.nextInt(9 - 10 + 1)+1;
+                tarjeta = Ntarjeta + cc + String.valueOf(aleatorio);
+            break;
+            default:
+                Toast.makeText(context, "Numero de caracteres superado", Toast.LENGTH_LONG).show();
+        }
+
+        String numeros  =  tarjeta + pin;
         long id = 0;
         try {
             Random cardRandom = new Random();
-            int numeroCard = cardRandom.nextInt(999 - 100 + 1 )+100;
+            int numeroCvv = cardRandom.nextInt(999 - 100 + 1 )+100;
             LocalDate fecha = LocalDate.now();
             fecha = fecha.plusYears(5);
             String fechaConvertida = fecha.format(DateTimeFormatter.ofPattern("yyyy-MM"));
@@ -110,9 +140,9 @@ public class DbLogin extends DbHelper{
             values.put("documento_cliente",user.getDocumento());
             values.put("nombre_cliente",user.getNombre());
             values.put("saldo_cliente",user.getSaldo());
-            values.put("pin_cliente",user.getPin());
-            values.put("card_numero",user.getCard_number());
-            values.put("card_cvv",numeroCard);
+            values.put("pin_cliente",pin);
+            values.put("card_numero",numeros);
+            values.put("card_cvv",numeroCvv);
             values.put("fecha_expiracion",fecha_creacion);
             id = db.insert(TABLE_CLIENT,null,values);
         }catch (Exception ex){
@@ -120,6 +150,7 @@ public class DbLogin extends DbHelper{
         }
         return id;
     }
+
     public long crearCorresponsal(Usuario user){
         long id = 0;
         try {
@@ -479,6 +510,79 @@ public class DbLogin extends DbHelper{
             db.close();
         }
         return correcto;
+    }
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public long crearClienteCop(Usuario user){
+        int aleatorio = 0;
+        String tarjeta = "";
+        String cc = user.getDocumento();
+        int saldoCop = user.getCorresponsal_balance();
+        int pin = user.getPin();
+        int montoCop = 10000;
+        String EmailCop = user.getCorresponsal_email();
+        Random card = new Random();
+        int Ntarjeta = card.nextInt(6-3+1)+3;
+        int casoCc = cc.length();
+        switch (casoCc){
+            case 10:
+                aleatorio = card.nextInt(9999 - 1000 + 1)+1000;
+                tarjeta = Ntarjeta + cc + String.valueOf(aleatorio);
+                break;
+            case 8:
+                aleatorio = card.nextInt(999 - 100 + 1)+100;
+                tarjeta = Ntarjeta + cc + String.valueOf(aleatorio);
+                break;
+            case 11:
+                aleatorio = card.nextInt(99 - 10 + 1)+10;
+                tarjeta = Ntarjeta + cc + String.valueOf(aleatorio);
+                break;
+            case 12:
+                aleatorio = card.nextInt(9 - 10 + 1)+1;
+                tarjeta = Ntarjeta + cc + String.valueOf(aleatorio);
+                break;
+            default:
+                Toast.makeText(context, "Numero de caracteres superado", Toast.LENGTH_LONG).show();
+        }
+
+        String numeros  =  tarjeta + pin;
+        long id = 0;
+        try {
+            Random cardRandom = new Random();
+            int numeroCvv = cardRandom.nextInt(999 - 100 + 1 )+100;
+            LocalDate fecha = LocalDate.now();
+            fecha = fecha.plusYears(5);
+            String fechaConvertida = fecha.format(DateTimeFormatter.ofPattern("yyyy-MM"));
+            String dos_digitos = fechaConvertida.substring(2,4);
+            String dos_ultimos = fechaConvertida.substring(5,7);
+            String fecha_creacion = dos_digitos + "-" + dos_ultimos;
+            db = dbhelper.getWritableDatabase();
+            ContentValues values = new ContentValues();
+            values.put("documento_cliente",cc);
+            values.put("nombre_cliente",user.getNombre());
+            values.put("saldo_cliente",user.getSaldo());
+            values.put("pin_cliente",pin);
+            values.put("card_numero",numeros);
+            values.put("card_cvv",numeroCvv);
+            values.put("fecha_expiracion",fecha_creacion);
+            id = db.insert(TABLE_CLIENT,null,values);
+
+            /* Actualizacion del nuevo monto del corresponsal */
+            int valorcop = montoCop + saldoCop;
+            db.execSQL(" UPDATE " + TABLE_CORRESPONSAL + " SET saldo_corresponsal = " + valorcop + " WHERE " + COLUMNA_CORREO_CORRESPONSAL + " = '" + sp.getEmailCop() + "'");
+            ContentValues valuesCliente = new ContentValues();
+            /*INSERSION A LA TABLA HISTORICO */
+            int monto = 0;
+            String operacion = "Usuario nuevo";
+            valuesCliente.put("dato_relacion",cc);
+            valuesCliente.put("corresponsal_email", EmailCop);
+            valuesCliente.put("fecha_realizado",fechaCompleta);
+            valuesCliente.put("monto",monto);
+            valuesCliente.put("tipo_operacion",operacion.toUpperCase());
+            db.insert(TABLE_HISTORICO_COP,null,values);
+        }catch (Exception ex){
+            ex.toString();
+        }
+        return id;
     }
 
 }

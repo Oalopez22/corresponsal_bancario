@@ -1,9 +1,12 @@
 package com.agendamvp.mvploginagenda;
 
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -94,6 +97,12 @@ public class PayWithCard extends AppCompatActivity implements InterfacesPayCardC
                 finish();
             }
         });
+        btnCancelPayCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertPerzonalizado(R.layout.negative_dialog);
+            }
+        });
     }
 
     @Override
@@ -167,6 +176,25 @@ public class PayWithCard extends AppCompatActivity implements InterfacesPayCardC
             return true;
         }
     }
+    public void AlertPerzonalizado(int layout){
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(PayWithCard.this);
+        View layoutview = getLayoutInflater().inflate(layout,null);
+        Button btnExit = layoutview.findViewById(R.id.btnDialog);
+        dialogBuilder.setView(layoutview);
+        AlertDialog alert = dialogBuilder.create();
+        alert.show();
+        alert.setCancelable(false);
+        alert.setCanceledOnTouchOutside(false);
+        alert.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        alert.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        btnExit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                redireccion();
+            }
+        });
+    }
     public void confirmacion(String tarjeta ,String cvv,String year,String month,String nombre, int cuotas,int valor_pagado, int valor_total, int copBalance ){
         Intent intent = new Intent(PayWithCard.this, ConfirmPayWithCard.class);
         String emailCop = user.getCorresponsal_email();
@@ -180,6 +208,10 @@ public class PayWithCard extends AppCompatActivity implements InterfacesPayCardC
         intent.putExtra("DATA_CLIENT_TOTAL_BALANCE",valor_total);
         intent.putExtra("DATA_COP_EMAIL",emailCop);
         intent.putExtra("DATA_COP_BALANCE",copBalance);
+        startActivity(intent);
+    }
+    public void redireccion(){
+        Intent intent = new Intent(PayWithCard.this, Corresponsal_Start.class);
         startActivity(intent);
     }
 }

@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -126,40 +128,35 @@ public class ConfirmPayWithCard extends AppCompatActivity implements InterfacesP
                             /*                String card = datos.getString("DATA_CLIENT_CARD");*/
                         int saldoCliente = user.getSaldo();
                         String pinIngresado = txtCardPin.getText().toString();
-                        if (cvvCliente.equals(cvv)) {
-                            if (fecha_recibida.equals(fecha_ingresada) /*&& fecha_recibida.compareTo(fechaIniciaCompleta)>0*/) {
-                                if (pinDevuelto.equals(pinIngresado)) {
-                                    if (valor_total > saldoCliente){
-                                        Toast.makeText(ConfirmPayWithCard.this, "Saldo insuficiente".toUpperCase(Locale.ROOT), Toast.LENGTH_SHORT).show();
-                                    }else{
-                                        user.setCard_number(card);
-                                        user.setSaldo(saldoCliente);
-                                        user.setCorresponsal_email(corresponsal_email);
-                                        user.setValor_pay_cuotes_cop(valor_total);
-                                        user.setCorresponsal_balance(cop);
-                                        long id = presenter.Pago_tarjeta_cop(user);
-                                        if (id > 0) {
-                                            redirigir();
-                                            Toast.makeText(ConfirmPayWithCard.this, "Pago realizado", Toast.LENGTH_LONG).show();
-                                        }else {
-                                            Toast.makeText(ConfirmPayWithCard.this, "Error al realizar el pago", Toast.LENGTH_SHORT).show();
-                                        }
-                                    }
-
-                                }else {
-                                    Toast.makeText(ConfirmPayWithCard.this, "El pin no coincide", Toast.LENGTH_SHORT).show();
-                                }
-                            }else{
-                                Toast.makeText(ConfirmPayWithCard.this, "Las fechas no coinciden", Toast.LENGTH_SHORT).show();
-                            }
-
+                        if (pinIngresado != pinDevuelto){
+                            Toast.makeText(ConfirmPayWithCard.this, "El pin no coincide", Toast.LENGTH_LONG).show();
                         }else {
-                            Toast.makeText(ConfirmPayWithCard.this, "El cvv no coincide", Toast.LENGTH_SHORT).show();
+                                if (valor_total > saldoCliente){
+                                    Toast.makeText(ConfirmPayWithCard.this, "Saldo insuficiente".toUpperCase(Locale.ROOT), Toast.LENGTH_SHORT).show();
+                                }else{
+                                    user.setCard_number(card);
+                                    user.setSaldo(saldoCliente);
+                                    user.setCorresponsal_email(corresponsal_email);
+                                    user.setValor_pay_cuotes_cop(valor_total);
+                                    user.setCorresponsal_balance(cop);
+                                    long id = presenter.Pago_tarjeta_cop(user);
+                                    if (id > 0) {
+                                        alertPerzonalizado(R.layout.positive_dialog);
+                                    }else {
+                                        Toast.makeText(ConfirmPayWithCard.this, "Error al realizar el pago", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
                         }
                     }
 
                 });
 
+            }
+        });
+        btnCancelPay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertPerzonalizado(R.layout.negative_dialog);
             }
         });
     }
@@ -174,6 +171,25 @@ public class ConfirmPayWithCard extends AppCompatActivity implements InterfacesP
         btnConfirmPay = findViewById(R.id.btnConfirmPay);
         btnCancelPay = findViewById(R.id.btnCancelPay);
 
+    }
+    public void alertPerzonalizado(int layout){
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(ConfirmPayWithCard.this);
+        View layoutview = getLayoutInflater().inflate(layout,null);
+        Button btnExit = layoutview.findViewById(R.id.btnDialog);
+        dialogBuilder.setView(layoutview);
+        AlertDialog alert = dialogBuilder.create();
+        alert.show();
+        alert.setCancelable(false);
+        alert.setCanceledOnTouchOutside(false);
+        alert.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        alert.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        btnExit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                redirigir();
+            }
+        });
     }
     public void redirigir(){
         Intent intent = new Intent(this, Corresponsal_Start.class);

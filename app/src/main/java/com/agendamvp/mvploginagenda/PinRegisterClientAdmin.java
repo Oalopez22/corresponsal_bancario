@@ -51,29 +51,11 @@ public class PinRegisterClientAdmin extends AppCompatActivity implements  Interf
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
-                Random cardRandom = new Random();
-                int numeroCard = cardRandom.nextInt(6 - 3 + 1 )+3;
-                String CardNumber = "";
-                if (ccCliente.length() <= 8){
-                    int aleatorio = 0;
-                    aleatorio = (int) (Math.random()*1000);
-
-                    CardNumber = numeroCard + ccCliente + String.valueOf(aleatorio);
-                }
-                if (ccCliente.length() <= 10){
-                    int aleatorio = 0;
-                    aleatorio = (int) (Math.random()*100);
-
-                    CardNumber = numeroCard + ccCliente + String.valueOf(aleatorio);
-                }
-                String numeros  =  CardNumber + pin2;
-
                 user.setNombre(nombreCliente);
                 user.setDocumento(ccCliente);
                 user.setSaldo(data2);
-                user.setCard_number(numeros);
                 user.setPin(pin2);
-                sp.setCcUser(ccCliente);
+    /*            sp.setCcUser(ccCliente);*/
                 long id = presenter.registrar_Usuario(user);
                 if (id > 0){
                     Toast.makeText(PinRegisterClientAdmin.this, "Cliente creado", Toast.LENGTH_LONG).show();

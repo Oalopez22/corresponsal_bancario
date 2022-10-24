@@ -11,6 +11,7 @@ public class DbHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "loginmvp.db";
     /* TABLA CLIENTE*/
     public static final String TABLE_CLIENT = "cliente";
+    public static final String COLUMNA_ID_CLIENTE = "id_cliente";
     public static final String COLUMNA_DOCUMENTO = "documento_cliente";
     public static final String COLUMNA_NOMBRE = "nombre_cliente";
     public static final String COLUMNA_SALDO = "saldo_cliente";
@@ -21,6 +22,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
     /* TABLA CORRESPONSAL*/
     public static final String TABLE_CORRESPONSAL = "corresponsal";
+    public static final String COLUMNA_ID_CORRESPONSAL = "id_corresponsal";
     public static final String COLUMNA_NOMBRE_CORRESPONSAL = "nombre_corresponsal";
     public static final String COLUMNA_NIT_CORRESPONSAL = "nit_corresponsal";
     public static final String COLUMNA_CORREO_CORRESPONSAL = "correo_corresponsal";
@@ -68,14 +70,14 @@ public class DbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE " + TABLE_CLIENT + "(" + COLUMNA_DOCUMENTO + " text primary key," + COLUMNA_NOMBRE + " text not null ," + COLUMNA_SALDO + " text not null," +
+        db.execSQL("CREATE TABLE " + TABLE_CLIENT + "(" + COLUMNA_ID_CLIENTE + "  integer primary key autoincrement ," + COLUMNA_DOCUMENTO + " text," + COLUMNA_NOMBRE + " text not null ," + COLUMNA_SALDO + " text not null," +
                 COLUMNA_PIN + " integer not null ," + COLUMNA_CARD + " text not null," + COLUMNA_CVV + " text not null," + COLUMNA_EXPIRACION + " date not null " + ")");
 
         db.execSQL(" INSERT INTO " + TABLE_CLIENT + "(documento_cliente,nombre_cliente,saldo_cliente,pin_cliente,card_numero,card_cvv,fecha_expiracion) VALUES ('1232890497','Fabian',60000,9810,'61232890497229810','240','27-06')");
         db.execSQL(" INSERT INTO " + TABLE_CLIENT + "(documento_cliente,nombre_cliente,saldo_cliente,pin_cliente,card_numero,card_cvv,fecha_expiracion) VALUES ('1095944947','Andres',120000,1232,'61095944947221232','315','27-11')");
 
                     /* TABLA CORRESPONSAL */
-        db.execSQL("CREATE TABLE " + TABLE_CORRESPONSAL + "(" + COLUMNA_CORREO_CORRESPONSAL + " text primary key ," +
+        db.execSQL("CREATE TABLE " + TABLE_CORRESPONSAL + "(" + COLUMNA_ID_CORRESPONSAL + "  integer primary key autoincrement ," +COLUMNA_CORREO_CORRESPONSAL + " text," +
                 COLUMNA_NOMBRE_CORRESPONSAL + " text not null ," + COLUMNA_NIT_CORRESPONSAL + " text not null ," +
                 COLUMNA_PASSWORD_CORRESPONSAL + " text not null," + COLUMNA_ESTADO_CORRESPONSAL + " integer not null default 0," + COLUMNA_NCUENTA_CORRESPONSAL + " integer," + COLUMNA_SALDO_CORRESPONSAL + " integer not null default 0" + ")");
 

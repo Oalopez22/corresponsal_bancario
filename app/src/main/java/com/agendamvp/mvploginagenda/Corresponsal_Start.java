@@ -106,6 +106,30 @@ public class Corresponsal_Start extends AppCompatActivity  implements Interfaces
         txtCopAcount = findViewById(R.id.txtCopAcount);
         imgMenuCop = findViewById(R.id.imgMenuCop);
     }
+    public void menuCorresponsal(){
+        PopupMenu pm = new PopupMenu(this,imgMenuCop);
+        pm.getMenuInflater()
+                .inflate(R.menu.menucorresponsal, pm.getMenu());
+        pm.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()){
+                    case  R.id.menuUpdateDataCop:
+                        Toast.makeText(Corresponsal_Start.this, "Boton actualizar presionado", Toast.LENGTH_LONG).show();
+                        return true;
+                    case R.id.menuCreateClientCop:
+                        crear_cliente();
+                        return true;
+                    case R.id.menuExitCop:
+                        finish();
+                        return true;
+                }
+                return false;
+            }
+        });
+        pm.show();
+    }
+
 
     public void pagotarjeta(){
         Intent intent = new Intent(Corresponsal_Start.this,PayWithCard.class);
@@ -131,29 +155,10 @@ public class Corresponsal_Start extends AppCompatActivity  implements Interfaces
         Intent intent = new Intent(Corresponsal_Start.this, Corresponsal_Client_Balance.class);
         startActivity(intent);
     }
-
-    public void menuCorresponsal(){
-        PopupMenu pm = new PopupMenu(this,imgMenuCop);
-        pm.getMenuInflater()
-                .inflate(R.menu.menucorresponsal, pm.getMenu());
-        pm.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId()){
-                    case  R.id.menuUpdateDataCop:
-                        Toast.makeText(Corresponsal_Start.this, "Boton actualizar presionado", Toast.LENGTH_LONG).show();
-                        return true;
-                    case R.id.menuCreateClientCop:
-                        Toast.makeText(Corresponsal_Start.this, "Boton crear presionado", Toast.LENGTH_LONG).show();
-                        return true;
-                    case R.id.menuExitCop:
-                        finish();
-                        return true;
-                }
-                return false;
-            }
-        });
-        pm.show();
+    public void crear_cliente(){
+        Intent intent = new Intent(Corresponsal_Start.this,Corresponsal_Register_Client.class);
+        startActivity(intent);
     }
+
 
 }
