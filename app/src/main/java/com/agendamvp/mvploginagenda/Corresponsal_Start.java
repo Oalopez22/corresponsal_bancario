@@ -115,7 +115,7 @@ public class Corresponsal_Start extends AppCompatActivity  implements Interfaces
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()){
                     case  R.id.menuUpdateDataCop:
-                        Toast.makeText(Corresponsal_Start.this, "Boton actualizar presionado", Toast.LENGTH_LONG).show();
+                        actualizar_password();
                         return true;
                     case R.id.menuCreateClientCop:
                         crear_cliente();
@@ -160,5 +160,9 @@ public class Corresponsal_Start extends AppCompatActivity  implements Interfaces
         startActivity(intent);
     }
 
+    public void actualizar_password(){
+        Intent intent = new Intent(Corresponsal_Start.this, Corresponsal_Update_Password.class);
+        startActivity(intent);
+    }
 
 }

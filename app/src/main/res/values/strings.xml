@@ -143,4 +143,11 @@
     <string name="txtBalanceCc">Numero de cédula a consultar</string>
     <string name="btnConfimBalance">Confirmar</string>
     <string name="btnCancelBalance">Cancelar</string>
+    /* ACTUALIZAR DATOS CORRESPONSAL */
+    <string name="txtUpdateCopTitle">Actualizar corresponsal</string>
+    <string name="txtUpdateCopPass">Contraseña actual</string>
+    <string name="txtUpdateCopNewPass">Contraseña nueva</string>
+    <string name="txtUpdateCopConfirmPass">Confirmar contraseña</string>
+    <string name="btnConfirmUpdateCop">Confirmar</string>
+    <string name="btnCancelUpdateCop">Cancelar</string>
 </resources>

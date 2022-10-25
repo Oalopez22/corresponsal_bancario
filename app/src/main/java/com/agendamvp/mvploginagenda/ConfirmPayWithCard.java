@@ -126,11 +126,15 @@ public class ConfirmPayWithCard extends AppCompatActivity implements InterfacesP
                     @Override
                     public void onClick(View v) {
                             /*                String card = datos.getString("DATA_CLIENT_CARD");*/
+
                         int saldoCliente = user.getSaldo();
                         String pinIngresado = txtCardPin.getText().toString();
-                        if (pinIngresado != pinDevuelto){
-                            Toast.makeText(ConfirmPayWithCard.this, "El pin no coincide", Toast.LENGTH_LONG).show();
-                        }else {
+                        if (!fecha_ingresada.equals(fecha_recibida)){
+                            Toast.makeText(ConfirmPayWithCard.this, "Las fechas no coinciden", Toast.LENGTH_LONG).show();
+                        }else{
+                            if (!pinIngresado.equals(pinDevuelto)){
+                                Toast.makeText(ConfirmPayWithCard.this, "El pin no coincide", Toast.LENGTH_LONG).show();
+                            }else {
                                 if (valor_total > saldoCliente){
                                     Toast.makeText(ConfirmPayWithCard.this, "Saldo insuficiente".toUpperCase(Locale.ROOT), Toast.LENGTH_SHORT).show();
                                 }else{
@@ -141,12 +145,15 @@ public class ConfirmPayWithCard extends AppCompatActivity implements InterfacesP
                                     user.setCorresponsal_balance(cop);
                                     long id = presenter.Pago_tarjeta_cop(user);
                                     if (id > 0) {
-                                        alertPerzonalizado(R.layout.positive_dialog);
+                                        String pago = "Pago realizado";
+                                        alertPerzonalizado(R.layout.positive_dialog,pago);
                                     }else {
                                         Toast.makeText(ConfirmPayWithCard.this, "Error al realizar el pago", Toast.LENGTH_SHORT).show();
                                     }
                                 }
+                            }
                         }
+
                     }
 
                 });
@@ -155,8 +162,10 @@ public class ConfirmPayWithCard extends AppCompatActivity implements InterfacesP
         });
         btnCancelPay.setOnClickListener(new View.OnClickListener() {
             @Override
+
             public void onClick(View v) {
-                alertPerzonalizado(R.layout.negative_dialog);
+                String cancel = "Pago cancelado";
+                alertPerzonalizado(R.layout.negative_dialog,cancel);
             }
         });
     }
@@ -172,10 +181,12 @@ public class ConfirmPayWithCard extends AppCompatActivity implements InterfacesP
         btnCancelPay = findViewById(R.id.btnCancelPay);
 
     }
-    public void alertPerzonalizado(int layout){
+    public void alertPerzonalizado(int layout,String mensaje){
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(ConfirmPayWithCard.this);
         View layoutview = getLayoutInflater().inflate(layout,null);
         Button btnExit = layoutview.findViewById(R.id.btnDialog);
+        TextView txtmensaje = layoutview.findViewById(R.id.txtmensaje);
+        txtmensaje.setText(mensaje.toUpperCase());
         dialogBuilder.setView(layoutview);
         AlertDialog alert = dialogBuilder.create();
         alert.show();

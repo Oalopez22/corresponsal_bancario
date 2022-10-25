@@ -4,6 +4,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -146,12 +148,20 @@ public class Corresponsal_Transfer extends AppCompatActivity implements Interfac
                             btnCancelConfirmPin.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-
+                                    String mensaje = "Transferencia cancelada";
+                                    alertPerzonalizado(R.layout.negative_dialog,mensaje);
                                 }
                             });
                         }
                     });
                     btnCancelPinTransfer = view.findViewById(R.id.btnCancelCardPin);
+                    btnCancelPinTransfer.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            String mensaje = "Transferencia cancelada";
+                           alertPerzonalizado(R.layout.negative_dialog,mensaje);
+                        }
+                    });
 
                 }else {
                     txtCcToTransfer.setError("Campo obligatorio");
@@ -163,7 +173,8 @@ public class Corresponsal_Transfer extends AppCompatActivity implements Interfac
         btnCancelTransfer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                String mensaje = "Transferencia cancelada";
+                alertPerzonalizado(R.layout.negative_dialog,mensaje);
             }
         });
     }
@@ -183,5 +194,30 @@ public class Corresponsal_Transfer extends AppCompatActivity implements Interfac
         btnConfirmTransfer = findViewById(R.id.btnConfirmTransfer);
         btnCancelTransfer = findViewById(R.id.btnCancelTransfer);
 
+    }
+    public void alertPerzonalizado(int layout,String mensaje){
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(Corresponsal_Transfer.this);
+        View layoutview = getLayoutInflater().inflate(layout,null);
+        Button btnExit = layoutview.findViewById(R.id.btnDialog);
+        TextView txtmensaje = layoutview.findViewById(R.id.txtmensaje);
+        txtmensaje.setText(mensaje.toUpperCase());
+        dialogBuilder.setView(layoutview);
+        AlertDialog alert = dialogBuilder.create();
+        alert.show();
+        alert.setCancelable(false);
+        alert.setCanceledOnTouchOutside(false);
+        alert.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        alert.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        btnExit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                redirigir();
+            }
+        });
+    }
+    public void redirigir(){
+        Intent intent = new Intent(Corresponsal_Transfer.this, Corresponsal_Start.class);
+        startActivity(intent);
     }
 }

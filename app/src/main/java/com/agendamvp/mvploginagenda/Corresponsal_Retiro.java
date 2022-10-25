@@ -4,6 +4,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
@@ -65,7 +67,7 @@ public class Corresponsal_Retiro extends AppCompatActivity implements InterfaceR
                 EditText txtRetPin;
                 txtRetPin = view.findViewById(R.id.txtClientCardPin);
 
-                Button btnAceptar;
+                Button btnAceptar, btncancelar;
                 btnAceptar = view.findViewById(R.id.btnAceptCardPin);
                 btnAceptar.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -95,14 +97,20 @@ public class Corresponsal_Retiro extends AppCompatActivity implements InterfaceR
                                 if (ConfirmPin != pin ){
                                     Toast.makeText(Corresponsal_Retiro.this, "El pin coincide, intente nuevamente", Toast.LENGTH_LONG).show();
                                 }else{
-
                                         redireccion(cedula,valor,ConfirmPin);
-
-
                                 }
 
                             }
                         });
+                    }
+                });
+
+                btncancelar = view.findViewById(R.id.btnCancelCardPin);
+                btncancelar.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String mensaje = " Retiro cancelado";
+                        alertPerzonalizado(R.layout.negative_dialog,mensaje);
                     }
                 });
 
@@ -114,6 +122,13 @@ public class Corresponsal_Retiro extends AppCompatActivity implements InterfaceR
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String mensaje = "Deposito cancelado";
+                alertPerzonalizado(R.layout.negative_dialog,mensaje);
             }
         });
     }
@@ -142,6 +157,31 @@ public class Corresponsal_Retiro extends AppCompatActivity implements InterfaceR
         intent.putExtra("DATA_CLIENT_VALUE",valor);
         intent.putExtra("DATA_CLIENT_PIN",pin);
         intent.putExtra("DATA_COP_BALANCE",balanceCop);
+        startActivity(intent);
+    }
+    public void alertPerzonalizado(int layout,String mensaje){
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(Corresponsal_Retiro.this);
+        View layoutview = getLayoutInflater().inflate(layout,null);
+        Button btnExit = layoutview.findViewById(R.id.btnDialog);
+        TextView txtmensaje = layoutview.findViewById(R.id.txtmensaje);
+        txtmensaje.setText(mensaje.toUpperCase());
+        dialogBuilder.setView(layoutview);
+        AlertDialog alert = dialogBuilder.create();
+        alert.show();
+        alert.setCancelable(false);
+        alert.setCanceledOnTouchOutside(false);
+        alert.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        alert.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        btnExit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                redirigir();
+            }
+        });
+    }
+    public void redirigir(){
+        Intent intent = new Intent(Corresponsal_Retiro.this, Corresponsal_Start.class);
         startActivity(intent);
     }
 

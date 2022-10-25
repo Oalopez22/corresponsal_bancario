@@ -1,8 +1,11 @@
 package com.agendamvp.mvploginagenda;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -67,7 +70,8 @@ public class Corresponsal_deposit extends AppCompatActivity implements Interface
         btnCancelDepo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                String mensaje = "Deposito cancelado";
+            AlertPerzonalizado(R.layout.negative_dialog,mensaje);
             }
         });
 
@@ -85,6 +89,28 @@ public class Corresponsal_deposit extends AppCompatActivity implements Interface
         btnConfirmDepo = findViewById(R.id.btnDepositConfirm);
         btnCancelDepo = findViewById(R.id.btnDepositCancel);
     }
+
+    public void AlertPerzonalizado(int layout, String mensaje){
+       AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(Corresponsal_deposit.this);
+        View layoutview = getLayoutInflater().inflate(layout,null);
+        Button btnExit = layoutview.findViewById(R.id.btnDialog);
+        TextView txtmensaje = layoutview.findViewById(R.id.txtmensaje);
+        txtmensaje.setText(mensaje.toUpperCase());
+        dialogBuilder.setView(layoutview);
+        AlertDialog alert = dialogBuilder.create();
+        alert.show();
+        alert.setCancelable(false);
+        alert.setCanceledOnTouchOutside(false);
+        alert.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        alert.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        btnExit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                redireccion();
+            }
+        });
+    }
     private void redireccion(String cc, String ccTarjet,int value,int saldoCop){
         sp.setCcUser(cc);
         sp.setCcDeposit(ccTarjet);
@@ -93,6 +119,11 @@ public class Corresponsal_deposit extends AppCompatActivity implements Interface
         intent.putExtra("DATA_CLIENT_TARGET",ccTarjet);
         intent.putExtra("DATA_CLIENT_VALUE",value);
         intent.putExtra("DATA_COP_VALUE",saldoCop);
+        startActivity(intent);
+    }
+
+    public void redireccion(){
+        Intent intent = new Intent(Corresponsal_deposit.this, Corresponsal_Start.class);
         startActivity(intent);
     }
 }

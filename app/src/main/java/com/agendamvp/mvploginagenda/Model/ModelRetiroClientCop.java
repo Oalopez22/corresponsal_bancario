@@ -1,6 +1,9 @@
 package com.agendamvp.mvploginagenda.Model;
 
 import android.content.Context;
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
 
 import com.agendamvp.mvploginagenda.Entidades.Usuario;
 import com.agendamvp.mvploginagenda.Interfaces.InterfaceRetiroClientCop;
@@ -21,6 +24,7 @@ public class ModelRetiroClientCop implements InterfaceRetiroClientCop.model {
     }
 
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public boolean retiro_cliente(Usuario user) {
         boolean id;

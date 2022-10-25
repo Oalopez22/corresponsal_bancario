@@ -1,8 +1,11 @@
 package com.agendamvp.mvploginagenda;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -61,11 +64,18 @@ public class ConfirmDeposit extends AppCompatActivity implements InterfacesDepoC
                 user.setCorresponsal_balance(balancecop);
                 boolean depositar = presenter.deposito(user);
                 if (depositar){
-                    redirigir();
-                    Toast.makeText(ConfirmDeposit.this, "Deposito exitoso", Toast.LENGTH_LONG).show();
+                    String mensaje = "Deposito exitoso";
+                    AlertPerzonalizado(R.layout.positive_dialog,mensaje);
                 }else {
                     Toast.makeText(ConfirmDeposit.this, "Error al hacer el deposito", Toast.LENGTH_LONG).show();
                 }
+            }
+        });
+        btnCancelDepo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String mensaje = "Deposito cancelado";
+                AlertPerzonalizado(R.layout.negative_dialog,mensaje);
             }
         });
     }
@@ -76,9 +86,31 @@ public class ConfirmDeposit extends AppCompatActivity implements InterfacesDepoC
         tvclientToDepositData = findViewById(R.id.tvClientDataTarjet);
         tvValueDeposit = findViewById(R.id.tvDepoValue);
         btnConfirmDepo = findViewById(R.id.btnConfirmDepoClient);
+        btnCancelDepo = findViewById(R.id.btnCancelDepoClient);
     }
     public void redirigir(){
         Intent intent = new Intent(this,Corresponsal_Start.class);
         startActivity(intent);
+    }
+
+    public void AlertPerzonalizado(int layout, String mensaje){
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(ConfirmDeposit.this);
+        View layoutview = getLayoutInflater().inflate(layout,null);
+        Button btnExit = layoutview.findViewById(R.id.btnDialog);
+        TextView txtmensaje = layoutview.findViewById(R.id.txtmensaje);
+        txtmensaje.setText(mensaje.toUpperCase());
+        dialogBuilder.setView(layoutview);
+        AlertDialog alert = dialogBuilder.create();
+        alert.show();
+        alert.setCancelable(false);
+        alert.setCanceledOnTouchOutside(false);
+        alert.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        alert.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        btnExit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {redirigir();
+            }
+        });
     }
 }

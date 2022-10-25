@@ -62,12 +62,12 @@ public class DbLogin extends DbHelper{
         if (cursor.getCount()>0){
             if (cursor.moveToFirst()){
                 datos = new Usuario();
-                datos.setNombre(cursor.getString(1));
-                datos.setSaldo(cursor.getInt(2));
-                datos.setPin(cursor.getInt(3));
-                datos.setCard_number(cursor.getString(4));
-                datos.setCvv_client_number_cop(cursor.getString(5));
-                datos.setFecha_expiracion_client_cop(cursor.getString(6));
+                datos.setNombre(cursor.getString(2));
+                datos.setSaldo(cursor.getInt(3));
+                datos.setPin(cursor.getInt(4));
+                datos.setCard_number(cursor.getString(5));
+                datos.setCvv_client_number_cop(cursor.getString(6));
+                datos.setFecha_expiracion_client_cop(cursor.getString(7));
             }
         }
         cursor.close();
@@ -82,10 +82,11 @@ public class DbLogin extends DbHelper{
             cursor = db.rawQuery(" SELECT * FROM " + TABLE_CORRESPONSAL + " WHERE " + COLUMNA_CORREO_CORRESPONSAL + " = '" + sp.getEmailCop() + "'", null);
             if (cursor.moveToFirst()){
                 user = new Usuario();
-                user.setCorresponsal_name(cursor.getString(1));
-                user.setCorresponsal_balance(cursor.getInt(6));
-                user.setCorreponsal_ncuenta(cursor.getString(5));
-                user.setCorresponsal_email(cursor.getString(0));
+                user.setCorresponsal_name(cursor.getString(2));
+                user.setCorresponsal_balance(cursor.getInt(7));
+                user.setCorreponsal_ncuenta(cursor.getString(6));
+                user.setCorresponsal_email(cursor.getString(1));
+                user.setCorresponsal_password(cursor.getString(4));
             }
 
         cursor.close();
@@ -202,10 +203,10 @@ public class DbLogin extends DbHelper{
 
         if (cursor.moveToNext()){
             data = new Usuario();
-            data.setCorresponsal_email(cursor.getString(0));
-            data.setCorresponsal_name(cursor.getString(1));
-            data.setCorresponsal_nit(cursor.getString(2));
-            data.setCorresponsal_status(cursor.getInt(4));
+            data.setCorresponsal_email(cursor.getString(1));
+            data.setCorresponsal_name(cursor.getString(2));
+            data.setCorresponsal_nit(cursor.getString(3));
+            data.setCorresponsal_status(cursor.getInt(5));
             dataUser.add(data);
         }
         cursor.close();
@@ -239,10 +240,10 @@ public class DbLogin extends DbHelper{
         Cursor cursor = null;
         cursor = db.rawQuery(" SELECT * FROM " + TABLE_CLIENT+ " WHERE " + COLUMNA_DOCUMENTO + " = " + sp.getCcUSer(),null);
         if (cursor.moveToNext()){
-            data.setDocumento(cursor.getString(0));
-            data.setNombre(cursor.getString(1));
-            data.setSaldo(cursor.getInt(2));
-            data.setCard_number(cursor.getString(4));
+            data.setDocumento(cursor.getString(1));
+            data.setNombre(cursor.getString(2));
+            data.setSaldo(cursor.getInt(3));
+            data.setCard_number(cursor.getString(5));
         }
         cursor.close();
         return data;
@@ -258,10 +259,10 @@ public class DbLogin extends DbHelper{
         if (cursorlistaclientes.moveToFirst()) {
             do {
                 data = new Usuario();
-                data.setDocumento(cursorlistaclientes.getString(0));
-                data.setNombre(cursorlistaclientes.getString(1));
-                data.setSaldo(cursorlistaclientes.getInt(2));
-                data.setPin(cursorlistaclientes.getInt(3));
+                data.setDocumento(cursorlistaclientes.getString(1));
+                data.setNombre(cursorlistaclientes.getString(2));
+                data.setSaldo(cursorlistaclientes.getInt(3));
+                data.setPin(cursorlistaclientes.getInt(4));
                 listaClientes.add(data);
             } while (cursorlistaclientes.moveToNext());
             }
@@ -276,11 +277,11 @@ public class DbLogin extends DbHelper{
         if (cursorlistacops.moveToFirst()) {
             do {
                 data = new Usuario();
-                data.setCorresponsal_email(cursorlistacops.getString(0));
-                data.setCorresponsal_name(cursorlistacops.getString(1));
-                data.setCorresponsal_nit(cursorlistacops.getString(2));
-                data.setCorresponsal_status(cursorlistacops.getInt(4));
-                data.setCorresponsal_balance(cursorlistacops.getInt(6));
+                data.setCorresponsal_email(cursorlistacops.getString(1));
+                data.setCorresponsal_name(cursorlistacops.getString(2));
+                data.setCorresponsal_nit(cursorlistacops.getString(3));
+                data.setCorresponsal_status(cursorlistacops.getInt(5));
+                data.setCorresponsal_balance(cursorlistacops.getInt(7));
                 listaCop.add(data);
             } while (cursorlistacops.moveToNext());
         }
@@ -330,10 +331,10 @@ public class DbLogin extends DbHelper{
         if (cursor.getCount()>0){
             if (cursor.moveToFirst()){
                 datos = new Usuario();
-                datos.setNombre(cursor.getString(1));
-                datos.setSaldo(cursor.getInt(2));
-                datos.setPin(cursor.getInt(3));
-                datos.setCard_number(cursor.getString(4));
+                datos.setNombre(cursor.getString(2));
+                datos.setSaldo(cursor.getInt(3));
+                datos.setPin(cursor.getInt(4));
+                datos.setCard_number(cursor.getString(5));
             }
         }
         cursor.close();
@@ -360,7 +361,6 @@ public class DbLogin extends DbHelper{
 
                 db.execSQL(" UPDATE " + TABLE_CORRESPONSAL + " SET saldo_corresponsal = " + nuevosaldocop + " WHERE " + COLUMNA_CORREO_CORRESPONSAL + " = '" + sp.getEmailCop() + "'");
                 correcto = true;
-                mostrarDataCop(sp);
             }catch (Exception ex){
                 ex.toString();
                 correcto = false;
@@ -377,9 +377,9 @@ public class DbLogin extends DbHelper{
                         if (cursor.getCount()>0){
                             if (cursor.moveToFirst()){
                                 datos = new Usuario();
-                                datos.setNombre_cliente_deposito(cursor.getString(1));
-                                datos.setSaldo_cliente_deposito(cursor.getInt(2));
-                                datos.setPin_cliente_deposito(cursor.getInt(3));
+                                datos.setNombre_cliente_deposito(cursor.getString(2));
+                                datos.setSaldo_cliente_deposito(cursor.getInt(3));
+                                datos.setPin_cliente_deposito(cursor.getInt(4));
                             }
                         }
                         cursor.close();
@@ -476,11 +476,11 @@ public class DbLogin extends DbHelper{
         Cursor cursor = db.rawQuery(" SELECT * FROM " + TABLE_CLIENT + " WHERE documento_cliente =? ",new String[]{sp.getCcUSer()});
             if (cursor.moveToFirst()){
                 datos = new Usuario();
-                datos.setNombre(cursor.getString(1));
-                datos.setSaldo(cursor.getInt(2));
-                datos.setDocumento(cursor.getString(0));
-                datos.setPin(cursor.getInt(3));
-                datos.setCard_number(cursor.getString(4));
+                datos.setNombre(cursor.getString(2));
+                datos.setSaldo(cursor.getInt(3));
+                datos.setDocumento(cursor.getString(1));
+                datos.setPin(cursor.getInt(4));
+                datos.setCard_number(cursor.getString(5));
             }
         cursor.close();
         return datos;
@@ -585,4 +585,19 @@ public class DbLogin extends DbHelper{
         return id;
     }
 
+    public boolean actualizar_password_cop(Usuario user){
+        String pass = user.getCorresponsal_password();
+        boolean correcto = false;
+        try{
+            //db.execSQL(" UPDATE " + TABLE_CORRESPONSAL + " SET password_corresponsal = " + pass + " WHERE " + COLUMNA_CORREO_CORRESPONSAL + " = '" + sp.getEmailCop() + "'");
+            db.execSQL("UPDATE " + TABLE_CORRESPONSAL + " SET password_corresponsal" + "='" + pass + "' WHERE " + COLUMNA_CORREO_CORRESPONSAL + " = '" + sp.getEmailCop() + "'");
+            correcto = true;
+        }catch (Exception ex){
+            ex.toString();
+            correcto = false;
+        }finally {
+            db.close();
+        }
+        return correcto;
+    }
 }

@@ -14,6 +14,9 @@
         android:theme="@style/Theme.MvpLoginAgenda"
         tools:targetApi="31">
         <activity
+            android:name=".Corresponsal_Update_Password"
+            android:exported="false" />
+        <activity
             android:name=".Corresponsal_confirm_New_Client"
             android:exported="false" />
         <activity

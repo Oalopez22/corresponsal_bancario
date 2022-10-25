@@ -72,7 +72,7 @@ public class PayWithCard extends AppCompatActivity implements InterfacesPayCardC
                int copBalance = user.getCorresponsal_balance();
                String valor_pagado = txtValorPagado.getText().toString();
                if (cuota.equals("0")) {
-                   Toast.makeText(PayWithCard.this, "El valor de la cuota no debe ser de 0", Toast.LENGTH_SHORT).show();
+                   Toast.makeText(PayWithCard.this, "El valor de la cuota no debe ser de 0", Toast.LENGTH_LONG).show();
                } else {
                    if (validarCard() && validarCvv() && validarMes() && validarDia() && validarNombre() && validarvalor()) {
                        int data = Integer.parseInt(valor_pagado);
@@ -82,7 +82,7 @@ public class PayWithCard extends AppCompatActivity implements InterfacesPayCardC
                            txtValorPagado.setError("El valor pagado debe ser menor de 1000000");
                        } else {
                            int spinner = Integer.parseInt(cuota);
-                           int valor = (int) data * spinner;
+                           int valor = (int) data / spinner;
                            sp.setCardClient(numeroCard);
                            confirmacion(numeroCard, cvv, year, month, nombreCliente, spinner, data, valor, copBalance);
                        }

@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.agendamvp.mvploginagenda.Entidades.Usuario;
@@ -167,11 +168,39 @@ public class Corresponsal_Client_Balance extends AppCompatActivity implements In
         btnCancelBalance.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                String mensaje = "Consulta cancelada";
+                alertPerzonalizado(R.layout.negative_dialog,mensaje);
             }
         });
     }
 
+
+
+    public void alertPerzonalizado(int layout,String mensaje){
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(Corresponsal_Client_Balance.this);
+        View layoutview = getLayoutInflater().inflate(layout,null);
+        Button btnExit = layoutview.findViewById(R.id.btnDialog);
+        TextView txtmensaje = layoutview.findViewById(R.id.txtmensaje);
+        txtmensaje.setText(mensaje.toUpperCase());
+        dialogBuilder.setView(layoutview);
+        AlertDialog alert = dialogBuilder.create();
+        alert.show();
+        alert.setCancelable(false);
+        alert.setCanceledOnTouchOutside(false);
+        alert.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        alert.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        btnExit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                redireccion();
+            }
+        });
+    }
+    public void inicio(){
+        Intent intent = new Intent(Corresponsal_Client_Balance.this, Corresponsal_Start.class);
+        startActivity(intent);
+    }
     public void redireccion(){
         Intent intent = new Intent(Corresponsal_Client_Balance.this,Corresponsal_Data_Client.class);
         startActivity(intent);
@@ -182,7 +211,7 @@ public class Corresponsal_Client_Balance extends AppCompatActivity implements In
         imgArrowBack = findViewById(R.id.imgArrowbackDeposit);
         txtCcCliente = findViewById(R.id.txtccBalance);
         btnConfirmBalance = findViewById(R.id.btnConfirmBalance);
-        btnCancelBalance = findViewById(R.id.btnCancelBalance);
+        btnCancelBalance = findViewById(R.id.btnCamcelBalance);
     }
 
 

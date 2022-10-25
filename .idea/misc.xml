@@ -29,6 +29,7 @@
         <entry key="..\:/Users/cloud/Desktop/PRUEBAS-OMAR/MVPLOGIN/app/src/main/res/layout/activity_corresponsal_retiro.xml" value="0.3625" />
         <entry key="..\:/Users/cloud/Desktop/PRUEBAS-OMAR/MVPLOGIN/app/src/main/res/layout/activity_corresponsal_start.xml" value="0.23273657289002558" />
         <entry key="..\:/Users/cloud/Desktop/PRUEBAS-OMAR/MVPLOGIN/app/src/main/res/layout/activity_corresponsal_transfer.xml" value="0.30526315789473685" />
+        <entry key="..\:/Users/cloud/Desktop/PRUEBAS-OMAR/MVPLOGIN/app/src/main/res/layout/activity_corresponsal_update_password.xml" value="0.30526315789473685" />
         <entry key="..\:/Users/cloud/Desktop/PRUEBAS-OMAR/MVPLOGIN/app/src/main/res/layout/activity_data_admin_client.xml" value="0.3625" />
         <entry key="..\:/Users/cloud/Desktop/PRUEBAS-OMAR/MVPLOGIN/app/src/main/res/layout/activity_data_admin_cop.xml" value="0.3484375" />
         <entry key="..\:/Users/cloud/Desktop/PRUEBAS-OMAR/MVPLOGIN/app/src/main/res/layout/activity_list_admin_clientes.xml" value="0.3625" />
@@ -57,7 +58,7 @@
         <entry key="..\:/Users/cloud/Desktop/PRUEBAS-OMAR/MVPLOGIN/app/src/main/res/layout/lista_clientes_admin.xml" value="0.271875" />
         <entry key="..\:/Users/cloud/Desktop/PRUEBAS-OMAR/MVPLOGIN/app/src/main/res/layout/lista_cops_admin.xml" value="0.3625" />
         <entry key="..\:/Users/cloud/Desktop/PRUEBAS-OMAR/MVPLOGIN/app/src/main/res/layout/listadatacopadmin.xml" value="0.3125" />
-        <entry key="..\:/Users/cloud/Desktop/PRUEBAS-OMAR/MVPLOGIN/app/src/main/res/layout/negative_dialog.xml" value="0.5421875" />
+        <entry key="..\:/Users/cloud/Desktop/PRUEBAS-OMAR/MVPLOGIN/app/src/main/res/layout/negative_dialog.xml" value="0.30526315789473685" />
         <entry key="..\:/Users/cloud/Desktop/PRUEBAS-OMAR/MVPLOGIN/app/src/main/res/layout/positive_dialog.xml" value="0.3043859649122807" />
         <entry key="..\:/Users/cloud/Desktop/PRUEBAS-OMAR/MVPLOGIN/app/src/main/res/menu/menuadmincop.xml" value="0.3625" />
         <entry key="..\:/Users/cloud/Desktop/PRUEBAS-OMAR/MVPLOGIN/app/src/main/res/menu/menucorresponsal.xml" value="0.3043859649122807" />
