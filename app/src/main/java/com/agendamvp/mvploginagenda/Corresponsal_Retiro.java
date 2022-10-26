@@ -53,67 +53,8 @@ public class Corresponsal_Retiro extends AppCompatActivity implements InterfaceR
             if (cedula.equals("") && monto.equals("")){
                 Toast.makeText(Corresponsal_Retiro.this, "Todos los campos son obligatorios", Toast.LENGTH_LONG).show();
             }else{
-
                 int valor = Integer.parseInt(monto);
-                AlertDialog.Builder builderpin = new AlertDialog.Builder(Corresponsal_Retiro.this);
-                LayoutInflater inflater = getLayoutInflater();
-                View view = inflater.inflate(R.layout.dialog_pin_pay_card,null);
-                builderpin.setView(view);
-                AlertDialog dialog = builderpin.create();
-                dialog.setCancelable(false);
-
-                dialog.setCanceledOnTouchOutside(false);
-                dialog.show();
-                EditText txtRetPin;
-                txtRetPin = view.findViewById(R.id.txtClientCardPin);
-
-                Button btnAceptar, btncancelar;
-                btnAceptar = view.findViewById(R.id.btnAceptCardPin);
-                btnAceptar.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        String datopin = txtRetPin.getText().toString();
-
-                        int pin = Integer.parseInt(datopin);
-                       AlertDialog.Builder builderpin = new AlertDialog.Builder(Corresponsal_Retiro.this);
-                        LayoutInflater inflater = getLayoutInflater();
-                        View view = inflater.inflate(R.layout.dialog_pin_confirm_retiro,null);
-                        builderpin.setView(view);
-                        AlertDialog dialog = builderpin.create();
-                        dialog.setCancelable(false);
-
-                        dialog.setCanceledOnTouchOutside(false);
-                        dialog.show();
-                        EditText txtConfirmPin;
-                        txtConfirmPin = view.findViewById(R.id.txtConfirmPinRet);
-
-                        Button btnAceptar;
-                        btnAceptar = view.findViewById(R.id.btnAceptConfirmPin);
-                        btnAceptar.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                String ConfirmPins = txtConfirmPin.getText().toString();
-                                    int ConfirmPin = Integer.parseInt(ConfirmPins);
-                                if (ConfirmPin != pin ){
-                                    Toast.makeText(Corresponsal_Retiro.this, "El pin coincide, intente nuevamente", Toast.LENGTH_LONG).show();
-                                }else{
-                                        redireccion(cedula,valor,ConfirmPin);
-                                }
-
-                            }
-                        });
-                    }
-                });
-
-                btncancelar = view.findViewById(R.id.btnCancelCardPin);
-                btncancelar.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        String mensaje = " Retiro cancelado";
-                        alertPerzonalizado(R.layout.negative_dialog,mensaje);
-                    }
-                });
-
+                pin(cedula,valor);
             }
             }
         });
@@ -133,6 +74,82 @@ public class Corresponsal_Retiro extends AppCompatActivity implements InterfaceR
         });
     }
 
+
+    public void pin(String cedula, int balance){
+
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(Corresponsal_Retiro.this);
+        View layoutview = getLayoutInflater().inflate(R.layout.dialog_pin_pay_card,null);
+/*        TextView txtmensaje = layoutview.findViewById(R.id.txtmensaje);
+        txtmensaje.setText(mensaje.toUpperCase());
+        Button btnExit = layoutview.findViewById(R.id.btnDialog);*/
+        dialogBuilder.setView(layoutview);
+        AlertDialog alert = dialogBuilder.create();
+        alert.show();
+        alert.setCancelable(false);
+        alert.setCanceledOnTouchOutside(false);
+        alert.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        alert.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        EditText txtRetPin;
+        txtRetPin = layoutview.findViewById(R.id.txtClientCardPin);
+
+        Button btnAceptar, btncancelar;
+        btnAceptar = layoutview.findViewById(R.id.btnAceptCardPin);
+        btnAceptar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String datopin = txtRetPin.getText().toString();
+                int pin = Integer.parseInt(datopin);
+                confirmPin(pin,cedula,balance);
+            }
+        });
+
+        btncancelar = layoutview.findViewById(R.id.btnCancelCardPin);
+        btncancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String mensaje = " Retiro cancelado";
+                alertPerzonalizado(R.layout.negative_dialog,mensaje);
+            }
+        });
+    }
+
+    public void confirmPin(int pin,String cedula, int balance){
+        AlertDialog.Builder builderpin = new AlertDialog.Builder(Corresponsal_Retiro.this);
+        View layoutview = getLayoutInflater().inflate(R.layout.dialog_pin_confirm_retiro,null);
+        builderpin.setView(layoutview);
+        AlertDialog dialog = builderpin.create();
+        dialog.show();
+        dialog.setCancelable(false);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        EditText txtConfirmPin;
+        txtConfirmPin = layoutview.findViewById(R.id.txtConfirmPinRet);
+
+                        Button btnAceptar,btnCancelar;
+                        btnAceptar = layoutview.findViewById(R.id.btnAceptConfirmPin);
+                        btnAceptar.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                String ConfirmPins = txtConfirmPin.getText().toString();
+                                    int ConfirmPin = Integer.parseInt(ConfirmPins);
+                                if (ConfirmPin != pin ){
+                                    Toast.makeText(Corresponsal_Retiro.this, "El pin no coincide, intente nuevamente", Toast.LENGTH_LONG).show();
+                                    txtConfirmPin.setText("");
+                                }else{
+                                        redireccion(cedula,balance,ConfirmPin);
+                                }
+
+                            }
+                        });
+                        btnCancelar = layoutview.findViewById(R.id.btnCancelConfirmPin);
+                        btnCancelar.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                inicio();
+                            }
+                        });
+    }
     @Override
     public void findElements() {
         txtCc = findViewById(R.id.txtRetiroCc);
@@ -143,8 +160,6 @@ public class Corresponsal_Retiro extends AppCompatActivity implements InterfaceR
         imgArrowback = findViewById(R.id.imgArrowbackRet);
         btnConfirm = findViewById(R.id.btnRetConfirm);
         btnCancel = findViewById(R.id.btnRetCancel);
-
-        /*https://www.youtube.com/watch?v=tK7MC8KzkYA&ab_channel=T0pCode*/
     }
 
 
@@ -159,6 +174,7 @@ public class Corresponsal_Retiro extends AppCompatActivity implements InterfaceR
         intent.putExtra("DATA_COP_BALANCE",balanceCop);
         startActivity(intent);
     }
+
     public void alertPerzonalizado(int layout,String mensaje){
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(Corresponsal_Retiro.this);
         View layoutview = getLayoutInflater().inflate(layout,null);
@@ -176,11 +192,11 @@ public class Corresponsal_Retiro extends AppCompatActivity implements InterfaceR
         btnExit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                redirigir();
+                inicio();
             }
         });
     }
-    public void redirigir(){
+    public void inicio(){
         Intent intent = new Intent(Corresponsal_Retiro.this, Corresponsal_Start.class);
         startActivity(intent);
     }

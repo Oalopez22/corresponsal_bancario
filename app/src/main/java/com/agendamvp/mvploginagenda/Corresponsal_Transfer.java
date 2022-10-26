@@ -37,7 +37,7 @@ public class Corresponsal_Transfer extends AppCompatActivity implements Interfac
         findElements();
 
         user = new Usuario();
-        datosCliente = new Usuario();
+
         datosClienteATransferir = new Usuario();
 
         sp = new SharedPreferences(this);
@@ -69,100 +69,11 @@ public class Corresponsal_Transfer extends AppCompatActivity implements Interfac
                     sp.setCcDeposit(ccATransferir);
                     datosCliente = presenter.datosCliente(sp);
                     datosClienteATransferir = presenter.datosClienteATransferir(sp);
-                            if ( datosCliente== null){
-                                txtCcClientTransfer.setError("No se encontro el cliente con ese numero de documento");
+                            if (datosCliente != null && datosClienteATransferir != null){
+                                pin(transferValue,datosCliente,datosClienteATransferir,copBalance);
+                            }else{
+                                Toast.makeText(Corresponsal_Transfer.this, "No se encontraron datos de los clientes", Toast.LENGTH_LONG).show();
                             }
-                            if (datosClienteATransferir== null){
-                                txtCcToTransfer.setError("No se encuentra un cliente registrado con ese numero de documento");
-                            }
-
-                    int pincliente = datosCliente.getPin();
-
-
-                                            /*  ALERTDIALOG PIN*/
-
-                    AlertDialog.Builder builderpin = new AlertDialog.Builder(Corresponsal_Transfer.this);
-                    LayoutInflater inflater = getLayoutInflater();
-                    View view = inflater.inflate(R.layout.dialog_pin_pay_card,null);
-                    builderpin.setView(view);
-                    AlertDialog dialog = builderpin.create();
-                    dialog.setCancelable(false);
-                    dialog.setCanceledOnTouchOutside(false);
-                    dialog.show();
-                    EditText txtPinTransfer = view.findViewById(R.id.txtClientCardPin);
-
-                    Button btnConfirmPin,btnCancelPinTransfer;
-                    btnConfirmPin = view.findViewById(R.id.btnAceptCardPin);
-                    btnConfirmPin.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            String pin = txtPinTransfer.getText().toString();
-                            int pinConvertido = Integer.parseInt(pin);
-                                /* ALERTDIALOG CONFIRMAR PIN */
-
-                            AlertDialog.Builder builderpin = new AlertDialog.Builder(Corresponsal_Transfer.this);
-                            LayoutInflater inflater = getLayoutInflater();
-                            View view = inflater.inflate(R.layout.dialog_pin_confirm_retiro,null);
-                            builderpin.setView(view);
-                            AlertDialog dialog = builderpin.create();
-                            dialog.setCancelable(false);
-                            dialog.setCanceledOnTouchOutside(false);
-                            dialog.show();
-                            EditText txtConfirmPin;
-                            Button btnConfirmPin,btnCancelConfirmPin;
-                            txtConfirmPin = view.findViewById(R.id.txtConfirmPinRet);
-
-                            btnConfirmPin = view.findViewById(R.id.btnAceptConfirmPin);
-                            btnConfirmPin.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    String confirmPin = txtConfirmPin.getText().toString();
-                                    int convertConfirm = Integer.parseInt(confirmPin);
-                                    if (convertConfirm == pinConvertido && convertConfirm == pincliente ){
-                                        int saldoCliente = datosCliente.getSaldo();
-                                        int saldoClienteTransferido = datosClienteATransferir.getSaldo_cliente_deposito();
-
-                                        if (saldoCliente < transferValue ){
-                                            Toast.makeText(Corresponsal_Transfer.this, "Saldo insuficiente", Toast.LENGTH_LONG).show();
-                                        }else{
-                                            user.setSaldo(saldoCliente);
-                                            user.setSaldo_cliente_deposito(saldoClienteTransferido);
-                                            user.setValor_pay_card_cop(transferValue);
-                                            user.setCorresponsal_balance(copBalance);
-                                            boolean exito = presenter.transferencia(user);
-                                            if (exito){
-                                                redireccion();
-                                                Toast.makeText(Corresponsal_Transfer.this, "Transferencia Exitosa", Toast.LENGTH_LONG).show();
-                                            }else{
-                                                Toast.makeText(Corresponsal_Transfer.this, "No se pudo hacer la transferencia", Toast.LENGTH_LONG).show();
-                                            }
-                                        }
-
-                                    }else {
-                                        Toast.makeText(Corresponsal_Transfer.this, "El pin no coincide", Toast.LENGTH_LONG).show();
-                                    }
-
-                                }
-                            });
-                            btnCancelConfirmPin = view.findViewById(R.id.btnCancelConfirmPin);
-                            btnCancelConfirmPin.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    String mensaje = "Transferencia cancelada";
-                                    alertPerzonalizado(R.layout.negative_dialog,mensaje);
-                                }
-                            });
-                        }
-                    });
-                    btnCancelPinTransfer = view.findViewById(R.id.btnCancelCardPin);
-                    btnCancelPinTransfer.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            String mensaje = "Transferencia cancelada";
-                           alertPerzonalizado(R.layout.negative_dialog,mensaje);
-                        }
-                    });
-
                 }else {
                     txtCcToTransfer.setError("Campo obligatorio");
                     txtCcClientTransfer.setError("Campo obligatorio");
@@ -178,10 +89,7 @@ public class Corresponsal_Transfer extends AppCompatActivity implements Interfac
             }
         });
     }
-        private void redireccion(){
-            Intent intent = new Intent(Corresponsal_Transfer.this,Corresponsal_Start.class);
-            startActivity(intent);
-        }
+
     @Override
     public void findElements() {
         tvCopName = findViewById(R.id.txtCopName);
@@ -195,6 +103,103 @@ public class Corresponsal_Transfer extends AppCompatActivity implements Interfac
         btnCancelTransfer = findViewById(R.id.btnCancelTransfer);
 
     }
+
+
+    public void pin(int balance, Usuario datosCliente, Usuario datosClienteAtransferir,int copBalance){
+
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(Corresponsal_Transfer.this);
+        View layoutview = getLayoutInflater().inflate(R.layout.dialog_pin_pay_card,null);
+        dialogBuilder.setView(layoutview);
+        AlertDialog alert = dialogBuilder.create();
+        alert.show();
+        alert.setCancelable(false);
+        alert.setCanceledOnTouchOutside(false);
+        alert.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        alert.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        EditText txtRetPin;
+        txtRetPin = layoutview.findViewById(R.id.txtClientCardPin);
+        int pincliente = datosCliente.getPin();
+        Button btnAceptar, btncancelar;
+        btnAceptar = layoutview.findViewById(R.id.btnAceptCardPin);
+        btnAceptar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String datopin = txtRetPin.getText().toString();
+                int pin = Integer.parseInt(datopin);
+                confirmPin(pin,pincliente,balance,datosClienteAtransferir,copBalance);
+            }
+        });
+        btncancelar = layoutview.findViewById(R.id.btnCancelCardPin);
+        btncancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String mensaje = " Retiro cancelado";
+                alertPerzonalizado(R.layout.negative_dialog,mensaje);
+            }
+        });
+    }
+
+
+
+    public void confirmPin (int pindigitado,int pincliente, int balance,Usuario datosClienteAtransferir, int copBalance){
+        AlertDialog.Builder builderpin = new AlertDialog.Builder(Corresponsal_Transfer.this);
+        View layoutview = getLayoutInflater().inflate(R.layout.dialog_pin_confirm_retiro,null);
+        builderpin.setView(layoutview);
+        AlertDialog dialog = builderpin.create();
+        dialog.show();
+        dialog.setCancelable(false);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        EditText txtConfirmPin;
+        txtConfirmPin = layoutview.findViewById(R.id.txtConfirmPinRet);
+        Button btnAceptar,btnCancelar;
+        btnAceptar = layoutview.findViewById(R.id.btnAceptConfirmPin);
+        btnAceptar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                user = new Usuario();
+                //String ConfirmPins = txtConfirmPin.getText().toString();
+                String confirmPin = txtConfirmPin.getText().toString();
+                int convertConfirm = Integer.parseInt(confirmPin);
+                if (convertConfirm == pindigitado && convertConfirm == pincliente ){
+                    int saldoCliente = datosCliente.getSaldo();
+                    int saldoClienteTransferido = datosClienteATransferir.getSaldo_cliente_deposito();
+
+                    if (saldoCliente < balance ){
+                        Toast.makeText(Corresponsal_Transfer.this, "Saldo insuficiente", Toast.LENGTH_LONG).show();
+                    }else{
+                        user.setSaldo(saldoCliente);
+                        user.setSaldo_cliente_deposito(saldoClienteTransferido);
+                        user.setValor_pay_card_cop(balance);
+                        user.setCorresponsal_balance(copBalance);
+                        boolean exito = presenter.transferencia(user);
+                        if (exito){
+                            String mensaje = "Transferencia exitosa";
+                            alertPerzonalizado(R.layout.positive_dialog,mensaje);
+                        }else{
+                            Toast.makeText(Corresponsal_Transfer.this, "No se pudo hacer la transferencia", Toast.LENGTH_LONG).show();
+                        }
+                    }
+
+                }else {
+                    Toast.makeText(Corresponsal_Transfer.this, "El pin no coincide", Toast.LENGTH_LONG).show();
+                }
+
+
+            }
+        });
+        btnCancelar = layoutview.findViewById(R.id.btnCancelConfirmPin);
+        btnCancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                /*String mensaje = "Transferencia cancelada";
+                alertPerzonalizado(R.layout.negative_dialog,mensaje);*/
+                dialog.dismiss();
+            }
+        });
+    }
+
     public void alertPerzonalizado(int layout,String mensaje){
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(Corresponsal_Transfer.this);
         View layoutview = getLayoutInflater().inflate(layout,null);

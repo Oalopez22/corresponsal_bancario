@@ -12,6 +12,7 @@
         <entry key="..\:/Users/cloud/Desktop/PRUEBAS-OMAR/MVPLOGIN/app/src/main/res/drawable/card_view_cancel_client.xml" value="0.264" />
         <entry key="..\:/Users/cloud/Desktop/PRUEBAS-OMAR/MVPLOGIN/app/src/main/res/drawable/circulo.xml" value="0.3635" />
         <entry key="..\:/Users/cloud/Desktop/PRUEBAS-OMAR/MVPLOGIN/app/src/main/res/drawable/dialog.xml" value="0.347" />
+        <entry key="..\:/Users/cloud/Desktop/PRUEBAS-OMAR/MVPLOGIN/app/src/main/res/drawable/dialog_background_rounded.xml" value="0.358" />
         <entry key="..\:/Users/cloud/Desktop/PRUEBAS-OMAR/MVPLOGIN/app/src/main/res/drawable/dialog_negative_round.xml" value="0.347" />
         <entry key="..\:/Users/cloud/Desktop/PRUEBAS-OMAR/MVPLOGIN/app/src/main/res/drawable/dialog_positive_round.xml" value="0.347" />
         <entry key="..\:/Users/cloud/Desktop/PRUEBAS-OMAR/MVPLOGIN/app/src/main/res/drawable/linea_debajo.xml" value="0.256" />
@@ -54,6 +55,7 @@
         <entry key="..\:/Users/cloud/Desktop/PRUEBAS-OMAR/MVPLOGIN/app/src/main/res/layout/dialog_pin_pay_card.xml" value="0.30526315789473685" />
         <entry key="..\:/Users/cloud/Desktop/PRUEBAS-OMAR/MVPLOGIN/app/src/main/res/layout/dialog_success_client.xml" value="0.3625" />
         <entry key="..\:/Users/cloud/Desktop/PRUEBAS-OMAR/MVPLOGIN/app/src/main/res/layout/drop_down_item.xml" value="0.2078125" />
+        <entry key="..\:/Users/cloud/Desktop/PRUEBAS-OMAR/MVPLOGIN/app/src/main/res/layout/layout_prueba.xml" value="0.2967079948696024" />
         <entry key="..\:/Users/cloud/Desktop/PRUEBAS-OMAR/MVPLOGIN/app/src/main/res/layout/list_history_cop.xml" value="0.4" />
         <entry key="..\:/Users/cloud/Desktop/PRUEBAS-OMAR/MVPLOGIN/app/src/main/res/layout/lista_clientes_admin.xml" value="0.271875" />
         <entry key="..\:/Users/cloud/Desktop/PRUEBAS-OMAR/MVPLOGIN/app/src/main/res/layout/lista_cops_admin.xml" value="0.3625" />

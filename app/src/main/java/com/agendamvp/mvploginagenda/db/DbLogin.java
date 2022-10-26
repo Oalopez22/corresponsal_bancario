@@ -498,7 +498,7 @@ public class DbLogin extends DbHelper{
             values.put("dato_relacion",sp.getCcUSer());
             values.put("corresponsal_email", sp.getEmailCop());
             values.put("fecha_realizado",fechaCompleta);
-            values.put("monto",montoCop);
+            values.put("monto",0);
             values.put("tipo_operacion",operacion.toUpperCase());
             db.insert(TABLE_HISTORICO_COP,null,values);
             db.execSQL(" UPDATE " + TABLE_CORRESPONSAL + " SET saldo_corresponsal = " + balanceCop + " WHERE " + COLUMNA_CORREO_CORRESPONSAL + " = '" + sp.getEmailCop() + "'");

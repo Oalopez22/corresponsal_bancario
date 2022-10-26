@@ -109,14 +109,18 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
+            app:boxStrokeColor="#39F"
+            app:hintTextColor="#39F"
+            android:textColorHint="#39F"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/txtRetiroCc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bordes_completo"
+                app:boxStrokeColor="#39F"
+                app:hintTextColor="#39F"
+                android:textColorHint="#389"
                 android:hint="@string/txtRetCopCc"
                 android:textAlignment="center"
                 android:textColor="#0C0C0C"
@@ -127,7 +131,10 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:startIconTint="  #39F"
+            app:boxStrokeColor="#39F"
+            android:textColorHint="#39F"
+            app:startIconTint="#39F"
+            app:hintTextColor="#39F"
             app:startIconDrawable="@drawable/ic_action_money_icon"
             android:layout_marginBottom="50dp">
 
@@ -135,7 +142,7 @@
                 android:id="@+id/txtRetiroBalance"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bordes_completo"
+
                 android:hint="@string/txtRetCopMonto"
                 android:inputType="number"
                 android:textAlignment="center"
