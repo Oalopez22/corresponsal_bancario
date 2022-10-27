@@ -93,7 +93,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingTop="150dp">
 
         <TextView
             android:id="@+id/textView13"
@@ -117,7 +118,10 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp">
+                android:layout_marginBottom="20dp"
+                app:boxStrokeColor="#39F"
+                app:hintTextColor="#39F"
+                android:textColorHint="#39F">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/txtCcClient"
@@ -131,7 +135,10 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp">
+                android:layout_marginBottom="20dp"
+                app:boxStrokeColor="#39F"
+                app:hintTextColor="#39F"
+                android:textColorHint="#39F">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/txtCcTarjet"
@@ -147,7 +154,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="40dp"
                 app:startIconDrawable="@drawable/ic_dollar_icon"
-                app:startIconTint="#39F">
+                app:startIconTint="#39F"
+                app:boxStrokeColor="#39F"
+                app:hintTextColor="#39F"
+                android:textColorHint="#39F">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/txtValueTarjet"

@@ -53,114 +53,11 @@ public class Corresponsal_Client_Balance extends AppCompatActivity implements In
             public void onClick(View v) {
                 String CcCliente = txtCcCliente.getText().toString();
                 sp.setCcUser(CcCliente);
-                if (!CcCliente.equals("")){
-                    LayoutInflater inflater = getLayoutInflater();
-                    View view = inflater.inflate(R.layout.dialog,null);
-                    AlertDialog.Builder builder = new AlertDialog.Builder(Corresponsal_Client_Balance.this,R.style.MyDialogAnimation);
-                    AlertDialog dialog = builder.setView(view).create();
-                    dialog.setCancelable(false);
-                    dialog.setCanceledOnTouchOutside(false);
-                    dialog = builder.show();
-                    Button btnSi,btnNo;
-                    btnSi = view.findViewById(R.id.btnSi);
-                    AlertDialog finalDialog = dialog;
-                    btnSi.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            user = presenter.datosDevueltos(sp);
-                            int pinDevuelto = user.getPin();
-                            int saldoCliente = user.getSaldo();
-                            if (user==null){
-
-                                Toast.makeText(Corresponsal_Client_Balance.this, "El usuario no existe", Toast.LENGTH_LONG).show();
-                            }else {
-                                finalDialog.dismiss();
-                                LayoutInflater inflater = getLayoutInflater();
-                                View view = inflater.inflate(R.layout.dialog_pin_pay_card,null);
-                                AlertDialog.Builder builder = new AlertDialog.Builder(Corresponsal_Client_Balance.this,R.style.MyDialogAnimation);
-                                AlertDialog dialog1 = builder.setView(view).create();
-                                dialog1.setCancelable(false);
-                                dialog1.setCanceledOnTouchOutside(false);
-                                dialog1 = builder.show();
-                                EditText txtPin = view.findViewById(R.id.txtClientCardPin);
-                                Button btnPin,btnCancelPin;
-                                btnPin = view.findViewById(R.id.btnAceptCardPin);
-                                btnPin.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        String pin = txtPin.getText().toString();
-                                        if (!pin.equals("")){
-                                            int pinuser = Integer.parseInt(pin);
-                                            LayoutInflater inflater = getLayoutInflater();
-                                            View view = inflater.inflate(R.layout.dialog_pin_confirm_retiro,null);
-                                            AlertDialog.Builder builder = new AlertDialog.Builder(Corresponsal_Client_Balance.this,R.style.MyDialogAnimation);
-                                            AlertDialog dialog = builder.setView(view).create();
-                                            dialog.setCancelable(false);
-                                            dialog.setCanceledOnTouchOutside(false);
-                                            dialog = builder.show();
-                                            EditText confirmpin = view.findViewById(R.id.txtConfirmPinRet);
-                                            Button btnconfirmPin, btnCancelPin;
-                                            btnconfirmPin = view.findViewById(R.id.btnAceptConfirmPin);
-                                            btnconfirmPin.setOnClickListener(new View.OnClickListener() {
-                                                @Override
-                                                public void onClick(View v) {
-                                                    String datoConfirm = confirmpin.getText().toString();
-                                                    if (!datoConfirm.equals("")){
-                                                        int newpin = Integer.parseInt(datoConfirm);
-                                                        if (newpin == pinuser && newpin == pinDevuelto){
-                                                            corresponsal = presenter.datosCorresponsal(sp);
-                                                            int copbalance = corresponsal.getCorresponsal_balance();
-                                                            consulta.setSaldo(saldoCliente);
-                                                            consulta.setCorresponsal_balance(copbalance);
-                                                            boolean consultarSaldo = presenter.consultarsaldo(consulta);
-                                                            if (consultarSaldo){
-                                                                redireccion();
-                                                            }else{
-                                                                Toast.makeText(Corresponsal_Client_Balance.this, "No se pudo hacer la consulta", Toast.LENGTH_LONG).show();
-                                                            }
-                                                        }else{
-                                                            Toast.makeText(Corresponsal_Client_Balance.this, "El pin no coincide", Toast.LENGTH_LONG).show();
-                                                        }
-                                                    }
-                                                }
-                                            });
-
-                                            btnCancelPin = view.findViewById(R.id.btnCancelConfirmPin);
-                                            btnCancelPin.setOnClickListener(new View.OnClickListener() {
-                                                @Override
-                                                public void onClick(View v) {
-
-                                                }
-                                            });
-
-                                        }else{
-                                            txtPin.setError("Campo obligatorio");
-                                        }
-                                    }
-                                });
-                                btnCancelPin = view.findViewById(R.id.btnCancelCardPin);
-                                btnCancelPin.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-
-                                    }
-                                });
-                            }
-
-
-                        }
-                    });
-                    btnNo = view.findViewById(R.id.btnNo);
-                    btnNo.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-
-                        }
-                    });
-                }else {
+                if (CcCliente.equals("")) {
                     txtCcCliente.setError("Campo obligatorio");
+                }else{
+                    mensaje();
                 }
-
 
             }
         });
@@ -174,7 +71,126 @@ public class Corresponsal_Client_Balance extends AppCompatActivity implements In
         });
     }
 
+    public void mensaje(){
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(Corresponsal_Client_Balance.this);
+        View layoutview = getLayoutInflater().inflate(R.layout.dialog,null);
+        dialogBuilder.setView(layoutview);
+        AlertDialog alert = dialogBuilder.create();
+        alert.show();
+        alert.setCancelable(false);
+        alert.setCanceledOnTouchOutside(false);
+        alert.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        alert.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        Button btnSi,btnNo;
+        btnSi = layoutview.findViewById(R.id.btnSi);
+        btnSi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pin();
+            }
+        });
 
+        btnNo = layoutview.findViewById(R.id.btnNo);
+        btnNo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alert.dismiss();
+            }
+        });
+    }
+
+    public void pin(){
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(Corresponsal_Client_Balance.this);
+        View layoutview = getLayoutInflater().inflate(R.layout.dialog_pin_pay_card,null);
+        dialogBuilder.setView(layoutview);
+        AlertDialog alert = dialogBuilder.create();
+        alert.show();
+        alert.setCancelable(false);
+        alert.setCanceledOnTouchOutside(false);
+        alert.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        alert.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        EditText txtRetPin;
+        txtRetPin = layoutview.findViewById(R.id.txtClientCardPin);
+
+        Button btnAceptar, btncancelar;
+        btnAceptar = layoutview.findViewById(R.id.btnAceptCardPin);
+        btnAceptar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String datopin = txtRetPin.getText().toString();
+                if (datopin.equals("")){
+
+                }else{
+                    int pin = Integer.parseInt(datopin);
+                    user = presenter.datosDevueltos(sp);
+                    confirmPin(pin,user);
+                }
+
+            }
+        });
+
+        btncancelar = layoutview.findViewById(R.id.btnCancelCardPin);
+        btncancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String mensaje = " Retiro cancelado";
+                alertPerzonalizado(R.layout.negative_dialog,mensaje);
+            }
+        });
+    }
+
+    public void confirmPin(int pinuser, Usuario user){
+        AlertDialog.Builder builderpin = new AlertDialog.Builder(Corresponsal_Client_Balance.this);
+        View layoutview = getLayoutInflater().inflate(R.layout.dialog_pin_confirm_retiro,null);
+        builderpin.setView(layoutview);
+        AlertDialog dialog = builderpin.create();
+        dialog.show();
+        dialog.setCancelable(false);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        EditText txtConfirmPin;
+        txtConfirmPin = layoutview.findViewById(R.id.txtConfirmPinRet);
+        if (user==null){
+            Toast.makeText(Corresponsal_Client_Balance.this, "El usuario no existe", Toast.LENGTH_LONG).show();
+        }
+            int pinDevuelto = user.getPin();
+            int saldoCliente = user.getSaldo();
+
+        Button btnAceptar,btnCancelar;
+        btnAceptar = layoutview.findViewById(R.id.btnAceptConfirmPin);
+        btnAceptar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String confirmaPin = txtConfirmPin.getText().toString();
+                if (!confirmaPin.equals("")){
+                    int newpin = Integer.parseInt(confirmaPin);
+                    if (newpin == pinuser && newpin == pinDevuelto){
+                        corresponsal = presenter.datosCorresponsal(sp);
+                        int copbalance = corresponsal.getCorresponsal_balance();
+                        consulta.setSaldo(saldoCliente);
+                        consulta.setCorresponsal_balance(copbalance);
+                        boolean consultarSaldo = presenter.consultarsaldo(consulta);
+                        if (consultarSaldo){
+                            redireccion();
+                        }else{
+                            Toast.makeText(Corresponsal_Client_Balance.this, "No se pudo hacer la consulta", Toast.LENGTH_LONG).show();
+                        }
+                    }else{
+                        Toast.makeText(Corresponsal_Client_Balance.this, "El pin no coincide", Toast.LENGTH_LONG).show();
+                    }
+                }
+
+            }
+        });
+        btnCancelar = layoutview.findViewById(R.id.btnCancelConfirmPin);
+        btnCancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+    }
 
     public void alertPerzonalizado(int layout,String mensaje){
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(Corresponsal_Client_Balance.this);
@@ -193,7 +209,7 @@ public class Corresponsal_Client_Balance extends AppCompatActivity implements In
         btnExit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                redireccion();
+                inicio();
             }
         });
     }

@@ -12,11 +12,16 @@ import com.agendamvp.mvploginagenda.Entidades.Usuario;
 import com.agendamvp.mvploginagenda.R;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class HistoryCopTransactionsAdapter extends RecyclerView.Adapter<HistoryCopTransactionsAdapter.DataViewHolder> {
     ArrayList<Usuario> datos;
+    ArrayList<Usuario> busqueda;
     public HistoryCopTransactionsAdapter(ArrayList<Usuario> datos){
         this.datos = datos;
+        this.busqueda = new ArrayList<>();
+        busqueda.addAll(datos);
     }
     @NonNull
     @Override
@@ -34,6 +39,28 @@ public class HistoryCopTransactionsAdapter extends RecyclerView.Adapter<HistoryC
         holder.tvid.setText(datos.get(position).getCorresponsal_transaccion_id());
     }
 
+    public void filtrado(String texto){
+        int longitud = texto.length();
+        if (longitud == 0){
+            datos.clear();
+            datos.addAll(busqueda);
+        }else{
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                List<Usuario> coleccion = datos.stream()
+                        .filter(i ->i.getCorresponsal_transaccion_ref().toLowerCase().contains(texto.toLowerCase()))
+                        .collect(Collectors.toList());
+                datos.clear();
+                datos.addAll(coleccion);
+            }else {
+                for (Usuario us: busqueda){
+                    if (us.getCorresponsa_transaccion_type().toLowerCase().contains(texto.toLowerCase())){
+                        datos.add(us);
+                    }
+                }
+            }
+        }
+        notifyDataSetChanged();
+    }
     @Override
     public int getItemCount() {
         return datos.size();

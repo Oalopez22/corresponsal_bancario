@@ -24,6 +24,7 @@ public class Usuario {
     private String corresponsal_password;
     private int corresponsal_status;
     private int corresponsal_balance;
+    private int corresponsal_rol;
     private String correponsal_ncuenta;
     private String corresponsal_transaccion_fecha;
     private String corresponsa_transaccion_type;
@@ -274,5 +275,13 @@ public class Usuario {
 
     public void setCorresponsal_transaccion_id(String corresponsal_transaccion_id) {
         this.corresponsal_transaccion_id = corresponsal_transaccion_id;
+    }
+
+    public int getCorresponsal_rol() {
+        return corresponsal_rol;
+    }
+
+    public void setCorresponsal_rol(int corresponsal_rol) {
+        this.corresponsal_rol = corresponsal_rol;
     }
 }

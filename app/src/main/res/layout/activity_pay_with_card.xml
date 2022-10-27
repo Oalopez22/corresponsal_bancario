@@ -113,14 +113,15 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
+            app:boxStrokeColor="#39F"
+            app:hintTextColor="#39F"
+            android:textColorHint="#39F"
             >
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/txtNcard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bordes_completo"
                 android:hint="@string/txtPayCardNumber"
                 android:inputType="number"
                 android:text="61232890497229810"
@@ -166,7 +167,10 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@+id/txtCvvPayCard"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.428">
+                app:layout_constraintVertical_bias="0.428"
+                app:boxStrokeColor="#39F"
+                app:hintTextColor="#39F"
+                android:textColorHint="#39F">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/txtMesPayCard"
@@ -192,7 +196,10 @@
 
                 app:layout_constraintStart_toEndOf="@+id/textInputLayout3"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.379">
+                app:layout_constraintVertical_bias="0.379"
+                app:boxStrokeColor="#39F"
+                app:hintTextColor="#39F"
+                android:textColorHint="#39F">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/txtDiaPayCard"
@@ -213,7 +220,10 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="50dp">
+            android:layout_marginBottom="50dp"
+            app:boxStrokeColor="#39F"
+            app:hintTextColor="#39F"
+            android:textColorHint="#39F">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/txtNameClientPayCard"
@@ -229,7 +239,8 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="214dp"
             android:layout_height="37dp"
-            android:layout_marginBottom="20dp">
+            android:layout_marginBottom="20dp"
+            >
 
             <Spinner
 
@@ -252,13 +263,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:startIconDrawable="@drawable/ic_action_money_icon"
-            app:startIconTint="#4670F1">
+            app:startIconTint="#4670F1"
+            app:boxStrokeColor="#39F"
+            app:hintTextColor="#39F"
+            android:textColorHint="#39F">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/txtValuePay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bordes_completo"
                 android:hint="@string/txtPayCardValor"
                 android:inputType="number"
                 android:text="10000"

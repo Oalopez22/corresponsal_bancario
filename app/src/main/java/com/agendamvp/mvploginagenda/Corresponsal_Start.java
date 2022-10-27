@@ -121,7 +121,7 @@ public class Corresponsal_Start extends AppCompatActivity  implements Interfaces
                         crear_cliente();
                         return true;
                     case R.id.menuExitCop:
-                        finish();
+                        cerrarSesion();
                         return true;
                 }
                 return false;
@@ -165,4 +165,9 @@ public class Corresponsal_Start extends AppCompatActivity  implements Interfaces
         startActivity(intent);
     }
 
+
+    private void cerrarSesion(){
+        Intent intent = new Intent(Corresponsal_Start.this,MainActivity.class);
+        startActivity(intent);
+    }
 }

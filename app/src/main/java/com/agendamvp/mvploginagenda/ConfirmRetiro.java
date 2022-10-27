@@ -39,6 +39,7 @@ public class ConfirmRetiro extends AppCompatActivity implements InterfaceRetiroC
     if (user != null){
         String nombre = user.getNombre();
         String nCuenta = user.getCard_number();
+
         txtClientName.setText("Estimado :"+ nombre);
         txtNcuenta.setText(nCuenta);
     }
@@ -50,16 +51,21 @@ public class ConfirmRetiro extends AppCompatActivity implements InterfaceRetiroC
             btnConfirmRet.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    user.setSaldo(balanceCliente);
-                    user.setValor_pay_cuotes_cop(value);
-                    user.setCorresponsal_balance(corresponsalBalance);
-                    boolean pago = presenter.retiro_cliente(user);
-                    if (pago){
-                        String mensaje = "Retiro exitoso";
-                        alertPerzonalizado(R.layout.positive_dialog,mensaje);
-                    }else {
-                        Toast.makeText(ConfirmRetiro.this, "Error al hacer el retiro", Toast.LENGTH_SHORT).show();
+                    if (value > balanceCliente){
+                        Toast.makeText(ConfirmRetiro.this, "Saldo insuficiente !".toUpperCase(), Toast.LENGTH_LONG).show();
+                    }else{
+                        user.setSaldo(balanceCliente);
+                        user.setValor_pay_cuotes_cop(value);
+                        user.setCorresponsal_balance(corresponsalBalance);
+                        boolean pago = presenter.retiro_cliente(user);
+                        if (pago){
+                            String mensaje = "Retiro exitoso";
+                            alertPerzonalizado(R.layout.positive_dialog,mensaje);
+                        }else {
+                            Toast.makeText(ConfirmRetiro.this, "Error al hacer el retiro", Toast.LENGTH_SHORT).show();
+                        }
                     }
+
                 }
             });
             btnCancelRet.setOnClickListener(new View.OnClickListener() {

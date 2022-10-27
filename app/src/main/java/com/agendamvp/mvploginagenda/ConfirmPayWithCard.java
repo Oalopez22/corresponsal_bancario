@@ -107,8 +107,6 @@ public class ConfirmPayWithCard extends AppCompatActivity implements InterfacesP
                 String datos_fecha1 = fechaInicial.substring(2, 4);
                 String datos2_fecha1 = fechaInicial.substring(5, 7);
                 String fechaIniciaCompleta = datos_fecha1+"-" + datos2_fecha1;
-
-
                 AlertDialog.Builder builderpin = new AlertDialog.Builder(ConfirmPayWithCard.this);
                 LayoutInflater inflater = getLayoutInflater();
                 View view = inflater.inflate(R.layout.dialog_pin_pay_card,null);
@@ -181,6 +179,8 @@ public class ConfirmPayWithCard extends AppCompatActivity implements InterfacesP
         btnCancelPay = findViewById(R.id.btnCancelPay);
 
     }
+
+
     public void alertPerzonalizado(int layout,String mensaje){
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(ConfirmPayWithCard.this);
         View layoutview = getLayoutInflater().inflate(layout,null);

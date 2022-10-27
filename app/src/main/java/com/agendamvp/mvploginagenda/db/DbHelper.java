@@ -30,30 +30,8 @@ public class DbHelper extends SQLiteOpenHelper {
     public static final String COLUMNA_ESTADO_CORRESPONSAL = "estado_corresponsal";
     public static final String COLUMNA_NCUENTA_CORRESPONSAL = "ncuenta_corresponsal";
     public static final String COLUMNA_SALDO_CORRESPONSAL = "saldo_corresponsal";
-    /* TABLA PAGO TARJETA CORRESPONSAL*/
-/*
-    public static final String TABLE_PAY_CARD_COP = "pago_tarjeta_cop";
-    public static final String COLUMNA_ID_PAGO = "id_pago_card";
-    public static final String COLUMNA_N_TARJETA_COP = "numero_tarjeta";
-    public static final String COLUMNA_FECHA_EXPIRA_COP = "fecha_expiracion_card";
-    public static final String COLUMNA_CVV_CARD_COP = "cvv_cliente";
-    public static final String COLUMNA_NOMBRE_CLIENTE = "nombre_cliente_cop";
-    public static final String COLUMNA_VALOR_PAGO_CARD = "valor_pagado";
-    public static final String COLUMNA_VALOR_CUOTAS = "valor_cuotas";
-    public static final String COLUMNA_FECHA_PAGO = "fecha_pago_tarjeta";
-    public static final String COLUMNA_CANTIDAD_CUOTAS = "cantidad_cuotas";
-    public static final String COLUMNA_CORRESPONSAL_DATA = "corresponsal_email";
-    public static final String COLUMNA_TIPO_TRANSACCION = "tipo_transaccion";
+    public static final String COLUMNA_TIPO_CORRESPONSAL = "tipo_corresponsal";
 
-
-    */
-/* TABLA RETIROS *//*
-
-    public static final String TABLE_RET_CLIENT = "retiro_cliente";
-    public static final String COLUMNA_ID_RETIRO = "id_retiro";
-    public static final String COLUMNA_DOCUMENTO_RETIRO = "documento_retiro";
-    public static final String COLUMNA_MONTO_RETIRO = "monto_retirado";
-*/
 
                     /* TABLA HISTORICO */
     public static final String TABLE_HISTORICO_COP = "historico";
@@ -77,13 +55,11 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL(" INSERT INTO " + TABLE_CLIENT + "(documento_cliente,nombre_cliente,saldo_cliente,pin_cliente,card_numero,card_cvv,fecha_expiracion) VALUES ('1095944947','Andres',120000,1232,'61095944947221232','315','27-11')");
 
                     /* TABLA CORRESPONSAL */
-        db.execSQL("CREATE TABLE " + TABLE_CORRESPONSAL + "(" + COLUMNA_ID_CORRESPONSAL + "  integer primary key autoincrement ," +COLUMNA_CORREO_CORRESPONSAL + " text," +
-                COLUMNA_NOMBRE_CORRESPONSAL + " text not null ," + COLUMNA_NIT_CORRESPONSAL + " text not null ," +
-                COLUMNA_PASSWORD_CORRESPONSAL + " text not null," + COLUMNA_ESTADO_CORRESPONSAL + " integer not null default 0," + COLUMNA_NCUENTA_CORRESPONSAL + " integer," + COLUMNA_SALDO_CORRESPONSAL + " integer not null default 0" + ")");
+        db.execSQL("CREATE TABLE " + TABLE_CORRESPONSAL + "(" + COLUMNA_ID_CORRESPONSAL + "  integer primary key autoincrement ," +COLUMNA_CORREO_CORRESPONSAL + " text," + COLUMNA_NOMBRE_CORRESPONSAL + " text not null ," + COLUMNA_NIT_CORRESPONSAL + " text not null ," + COLUMNA_PASSWORD_CORRESPONSAL + " text not null," + COLUMNA_ESTADO_CORRESPONSAL + " integer not null default 1," + COLUMNA_NCUENTA_CORRESPONSAL + " integer," + COLUMNA_SALDO_CORRESPONSAL + " integer not null default 0," + COLUMNA_TIPO_CORRESPONSAL + " integer not null default 1" + ")");
 
 
-        db.execSQL(" INSERT INTO " + TABLE_CORRESPONSAL + "(correo_corresponsal,nombre_corresponsal,nit_corresponsal,password_corresponsal,estado_corresponsal,ncuenta_corresponsal,saldo_corresponsal) VALUES ('bga@wposs.com','BGACOP','1232890497','Alopez123',0,'24022388887912328',4000)");
-
+        db.execSQL(" INSERT INTO " + TABLE_CORRESPONSAL + "(correo_corresponsal,nombre_corresponsal,nit_corresponsal,password_corresponsal,estado_corresponsal,ncuenta_corresponsal,saldo_corresponsal,tipo_corresponsal) VALUES ('bga@wposs.com','BGACOP','1232890497','Alopez123',0,'24022388887912328',4000,1)");
+        db.execSQL(" INSERT INTO " + TABLE_CORRESPONSAL + "(correo_corresponsal,nombre_corresponsal,nit_corresponsal,password_corresponsal,estado_corresponsal,ncuenta_corresponsal,saldo_corresponsal,tipo_corresponsal) VALUES ('admin@wposs.com','ADMINISTRADOR','000-000-000','Admin123*',0,'20022388887912320',0,0)");
 
         db.execSQL(" CREATE TABLE " + TABLE_HISTORICO_COP + " (" + COLUMNA_ID_HISTORICO + " integer primary key autoincrement ," + COLUMNA_DATA_HISTORICO + " text not null ," + COLUMNA_EMAIL_HISTORICO + " text not null, " + COLUMNA_FECHA_HISTORICO + " date not null ," + COLUMNA_TIPO_HISTORICO + " text not null ," + COLUMNA_MONTO_HISTORICO + " integer not null" + " )" );
     }

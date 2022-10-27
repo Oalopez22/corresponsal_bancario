@@ -15,21 +15,29 @@
             android:id="@+id/linearLayout"
             android:layout_width="247dp"
             android:layout_height="115dp"
-            android:orientation="horizontal"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.006"
             app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="0dp">
+            app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                android:id="@+id/txtAdminName"
-                android:layout_width="178dp"
-                android:layout_height="37dp"
-                android:text="Banco Wposs"
-                android:textAlignment="textStart"
-                android:textColor="#ED7575"
-                android:textSize="24sp"
+                android:id="@+id/textView30"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/txtAdminTittle"
+                android:textColor="#FF5F58"
+                android:textSize="34sp"
                 android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txtNombre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:textColor="#FF5F58"
+                android:textSize="20sp" />
         </LinearLayout>
 
         <LinearLayout

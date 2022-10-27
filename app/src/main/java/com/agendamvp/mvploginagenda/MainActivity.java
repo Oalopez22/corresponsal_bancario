@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     DbLogin  dblogin;
     DbHelper dbHelper;
     Usuario user;
+    Usuario login;
     SharedPreferences sp;
     InterfacesMainActivity.Presenter presenter;
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -39,7 +40,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         dblogin = new DbLogin(MainActivity.this);
         this.findElement();
         user = new Usuario();
-
+        login = new Usuario();
 
         sp = new SharedPreferences(MainActivity.this);
         presenter = new PresenterMainActivity(this,MainActivity.this);
@@ -49,16 +50,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 String email = txtLoginEmail.getText().toString();
                 String password = txtLoginPassword.getText().toString();
-                if (email.equals( "admin@wposs.com") & password.equals("Admin123*")){
-                    ingresoAdmin();
-                }else{
+
                     if (!email.equals("") && !password.equals("")){
                         user.setCorresponsal_email(email);
                         user.setCorresponsal_password(password);
                         sp.setEmailCop(email);
-                        boolean id = presenter.Ingresar(user);
-                        if (id){
-                            ingreso();
+                        login  = presenter.Ingresar(user);
+                        if (login != null){
+                            int rol = login.getCorresponsal_rol();
+
+                            int estado = login.getCorresponsal_status();
+                            String nombre = login.getCorresponsal_name();
+                            if (estado == 0){
+                                switch (rol){
+                                    case 0:
+                                        ingresoAdmin();
+                                    break;
+                                    case 1:
+                                        ingresoCop();
+                                        break;
+                                    default:
+                                        Toast.makeText(MainActivity.this, "Error al ingresar", Toast.LENGTH_LONG).show();
+                                }
+                            }else{
+                                Toast.makeText(MainActivity.this, "Su usuario aun no se encuentra habilitado", Toast.LENGTH_LONG).show();
+                            }
+
                         }else {
                             Toast.makeText(MainActivity.this, "No se encontro ningun usuario", Toast.LENGTH_SHORT).show();
                         }
@@ -67,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         txtLoginEmail.setError("Campo Email obligatorio");
                         txtLoginPassword.setError("Campo Contraseña obligatorio");
                     }
-                }
+
 
             }
         });
@@ -88,11 +105,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void ingresoAdmin(){
-
             Intent intent = new Intent(this,Admin_corresponsal.class);
             startActivity(intent);
     }
-    private void  ingreso(){
+    private void  ingresoCop(){
         Intent intent = new Intent(this,Corresponsal_Start.class);
         startActivity(intent);
     }

@@ -20,8 +20,8 @@ public class ModelMainActivity implements InterfacesMainActivity.Model {
     }
 
     @Override
-    public boolean Igresar(Usuario user) {
-        boolean id;
+    public Usuario Igresar(Usuario user) {
+        Usuario id = null;
         id = db.validar_Login(user);
         return id;
     }

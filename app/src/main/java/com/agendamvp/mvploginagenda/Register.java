@@ -7,7 +7,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -20,6 +21,7 @@ import android.widget.Toast;
 import com.agendamvp.mvploginagenda.Entidades.Usuario;
 import com.agendamvp.mvploginagenda.Interfaces.InterfacesRegister;
 import com.agendamvp.mvploginagenda.Presenter.PresenterRegister;
+import com.agendamvp.mvploginagenda.SharedPreferences.SharedPreferences;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -32,6 +34,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener,
     Button btnRegistrar,btnCancelar;
     InterfacesRegister.Presenter presenter;
     Usuario user;
+    SharedPreferences sp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,10 +48,10 @@ public class Register extends AppCompatActivity implements View.OnClickListener,
                 String nombre = txtnewNombre.getText().toString();
                 String documento = txtNewdocumento.getText().toString();
                 String balance = txtNewsaldo.getText().toString();
-
                 if ( cadenaVacia(nombre) && cadenaVacia(documento) && cadenaVacia(balance)){
                     int residue = Integer.parseInt(balance);
-                    dialogPersonal(nombre,documento,residue,Register.this);
+                        dialogPersonal(R.layout.dialog_pin,nombre,documento,residue,Register.this);
+
                 }else {
                     txtnewNombre.setError("Campo obigatorio");
                     txtNewdocumento.setError("Campo obligatorio");
@@ -59,23 +62,8 @@ public class Register extends AppCompatActivity implements View.OnClickListener,
         btnCancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder buildercancel = new AlertDialog.Builder(Register.this);
-
-                LayoutInflater inflater = getLayoutInflater();
-                View view = inflater.inflate(R.layout.dialog_cancel_client,null);
-                buildercancel.setView(view);
-                AlertDialog dialog = buildercancel.create();
-                dialog.setCancelable(false);
-                dialog.setCanceledOnTouchOutside(false);
-                dialog.show();
-                Button btnExit;
-                btnExit = view.findViewById(R.id.btnSalir);
-                btnExit.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        salir();
-                    }
-                });
+                String mensaje = "Registro cancelado";
+                alertPerzonalizado(R.layout.negative_dialog,mensaje);
             }
         });
     }
@@ -105,33 +93,31 @@ public class Register extends AppCompatActivity implements View.OnClickListener,
         txtNewsaldo.setText("");
     }
 
-    public void dialogPersonal(String nombre, String documento, int balance, Context contexto){
-        AlertDialog.Builder builder = new AlertDialog.Builder(contexto);
-
-        LayoutInflater inflater = getLayoutInflater();
-        View view = inflater.inflate(R.layout.dialog_pin,null);
-        builder.setView(view);
-
-        AlertDialog dialog = builder.create();
-
-        dialog.show();
-        dialog.setCancelable(false);
-        dialog.setCanceledOnTouchOutside(false);
+    public void dialogPersonal(int layout, String nombre, String documento, int balance, Context contexto){
+        sp = new SharedPreferences(this);
+        sp.setCcUser(documento);
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(Register.this);
+        View layoutview = getLayoutInflater().inflate(layout,null);
+        dialogBuilder.setView(layoutview);
+        AlertDialog alert = dialogBuilder.create();
+        alert.show();
+        alert.setCancelable(false);
+        alert.setCanceledOnTouchOutside(false);
+        alert.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        alert.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         EditText txtpin;
-        txtpin = view.findViewById(R.id.txtClientPin);
-
-
+        txtpin = layoutview.findViewById(R.id.txtClientPin);
         Button btnAceptPin,btnCancelPin;
-        btnAceptPin = view.findViewById(R.id.btnAceptPin);
-        btnCancelPin = view.findViewById(R.id.btnCancelPin);
+        btnAceptPin = layoutview.findViewById(R.id.btnAceptPin);
+        btnCancelPin = layoutview.findViewById(R.id.btnCancelPin);
         btnAceptPin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String ntxtpin = txtpin.getText().toString();
                 if (cadenaVacia(ntxtpin)){
                     int newpin = Integer.parseInt(ntxtpin);
-                 confirmarpin(nombre,documento,balance,newpin, contexto);
+                 confirmarpin(nombre,sp,documento,balance,newpin);
                 }else {
                     Toast.makeText(contexto, "Campo obligatorio", Toast.LENGTH_SHORT).show();
                 }
@@ -140,43 +126,29 @@ public class Register extends AppCompatActivity implements View.OnClickListener,
         btnCancelPin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder buildercancel = new AlertDialog.Builder(contexto);
-
-                LayoutInflater inflater = getLayoutInflater();
-                View view = inflater.inflate(R.layout.dialog_cancel_client,null);
-                buildercancel.setView(view);
-                AlertDialog dialog = buildercancel.create();
-                dialog.setCancelable(false);
-                dialog.setCanceledOnTouchOutside(false);
-                dialog.show();
-                Button btnExit;
-                btnExit = view.findViewById(R.id.btnSalir);
-                btnExit.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        salir();
-                    }
-                });
+                String mensaje = "Registro cancelado";
+                alertPerzonalizado(R.layout.negative_dialog,mensaje);
             }
 
         });
     }
 
-  public  void confirmarpin(String nombre, String documento, int balance,int newpin, Context contexto){
-        AlertDialog.Builder builderpin = new AlertDialog.Builder(contexto);
+  public  void confirmarpin(String nombre,SharedPreferences sp, String documento, int balance,int newpin){
+      AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(Register.this);
+      View layoutview = getLayoutInflater().inflate(R.layout.dialog_confirm_pin,null);
+      dialogBuilder.setView(layoutview);
+      AlertDialog alert = dialogBuilder.create();
+      alert.show();
+      alert.setCancelable(false);
+      alert.setCanceledOnTouchOutside(false);
+      alert.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+      alert.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
-        LayoutInflater inflater = getLayoutInflater();
-        View view = inflater.inflate(R.layout.dialog_confirm_pin,null);
-        builderpin.setView(view);
-        AlertDialog dialog = builderpin.create();
-        dialog.setCancelable(false);
-        dialog.setCanceledOnTouchOutside(false);
-        dialog.show();
-        EditText txtConfirmPin;
-        txtConfirmPin = view.findViewById(R.id.txtConfirmClientPin);
+      EditText txtConfirmPin;
+        txtConfirmPin = layoutview.findViewById(R.id.txtConfirmClientPin);
         Button btnAceptConfirmPin, btnCancelConfirm;
 
-        btnAceptConfirmPin = view.findViewById(R.id.btnConfirmAceptPin);
+        btnAceptConfirmPin = layoutview.findViewById(R.id.btnConfirmAceptPin);
         btnAceptConfirmPin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -185,43 +157,53 @@ public class Register extends AppCompatActivity implements View.OnClickListener,
                 if (cadenaVacia(confirm_pin)){
                     int newconfirmpin = Integer.parseInt(confirm_pin);
                     if (newconfirmpin != newpin){
-                        Toast.makeText(contexto, "El pin no coincide", Toast.LENGTH_LONG).show();
+                        Toast.makeText(Register.this, "El pin no coincide", Toast.LENGTH_LONG).show();
                         txtConfirmPin.setText("");
                     }else{
-                        redirigir(nombre,documento,balance,newconfirmpin,contexto);
+                        boolean info = presenter.validar_existencia(sp);
+                        if (info){
+                            Toast.makeText(Register.this, "Ya existe un usuario Registrado con este número de documento", Toast.LENGTH_LONG).show();
+                            alert.dismiss();
+                        }else {
+                            redirigir(nombre, documento, balance, newconfirmpin);
+                        }
                     }
                 }
             }
         });
-        btnCancelConfirm = view.findViewById(R.id.btnCancelConfirmPin);
+        btnCancelConfirm = layoutview.findViewById(R.id.btnCancelConfirmPin);
         btnCancelConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder buildercancel = new AlertDialog.Builder(contexto);
-
-                LayoutInflater inflater = getLayoutInflater();
-                View view = inflater.inflate(R.layout.dialog_cancel_client,null);
-                buildercancel.setView(view);
-                AlertDialog dialog = buildercancel.create();
-                dialog.setCancelable(false);
-                dialog.setCanceledOnTouchOutside(false);
-                dialog.show();
-                Button btnExit;
-                btnExit = view.findViewById(R.id.btnSalir);
-                btnExit.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        salir();
-                    }
-                });
+               alert.dismiss();
             }
         });
     }
 
+    public void alertPerzonalizado(int layout,String mensaje){
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(Register.this);
+        View layoutview = getLayoutInflater().inflate(layout,null);
+        Button btnExit = layoutview.findViewById(R.id.btnDialog);
+        TextView txtmensaje = layoutview.findViewById(R.id.txtmensaje);
+        txtmensaje.setText(mensaje.toUpperCase());
+        dialogBuilder.setView(layoutview);
+        AlertDialog alert = dialogBuilder.create();
+        alert.show();
+        alert.setCancelable(false);
+        alert.setCanceledOnTouchOutside(false);
+        alert.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        alert.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
+        btnExit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                salir();
+            }
+        });
+    }
 
-     public  void redirigir(String nombre, String documento, int balance,int pin,Context context){
-        Intent intent = new Intent(context,PinRegisterClientAdmin.class);
+     public  void redirigir(String nombre, String documento, int balance,int pin){
+        Intent intent = new Intent(Register.this,PinRegisterClientAdmin.class);
         intent.putExtra("DATA_CLIENT_NAME",nombre);
         intent.putExtra("DATA_CLIENT_CC",documento);
         intent.putExtra("DATA_CLIENT_BALANCE",balance);

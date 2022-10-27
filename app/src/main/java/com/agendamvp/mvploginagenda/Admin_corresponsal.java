@@ -9,19 +9,32 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.agendamvp.mvploginagenda.Entidades.Usuario;
+import com.agendamvp.mvploginagenda.Interfaces.InterfacesCopStart;
 import com.agendamvp.mvploginagenda.Interfaces.InterfacesRegisterCorresponsal;
+import com.agendamvp.mvploginagenda.Presenter.PresenterCopStart;
+import com.agendamvp.mvploginagenda.SharedPreferences.SharedPreferences;
 
-public class Admin_corresponsal extends AppCompatActivity implements InterfacesRegisterCorresponsal.view {
+public class Admin_corresponsal extends AppCompatActivity implements InterfacesCopStart.view {
     ImageView imgMenuAdmin;
+    TextView tvname;
     CardView cvNewCliente, cvCorresponsal,cvSearchCliente,cvSearcCorresponsal,cvListCliente,cvListCorresponsal;
+    InterfacesCopStart.presenter presenter;
+    SharedPreferences sp;
+    Usuario user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_corresponsal);
-        findelements();
-
+        findElements();
+        presenter = new PresenterCopStart(this,Admin_corresponsal.this);
+        user = new Usuario();
+        sp = new SharedPreferences(this);
+        user = presenter.data(sp);
+        tvname.setText(user.getCorresponsal_name());
         imgMenuAdmin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -93,7 +106,8 @@ public class Admin_corresponsal extends AppCompatActivity implements InterfacesR
         startActivity(intent);
     }
     @Override
-    public void findelements() {
+    public void findElements() {
+        tvname = findViewById(R.id.txtNombre);
         cvNewCliente = findViewById(R.id.cvNewCliente);
         cvCorresponsal = findViewById(R.id.cvNewCoresponsal);
         cvSearchCliente = findViewById(R.id.cvSearchCliente);
@@ -126,5 +140,6 @@ public class Admin_corresponsal extends AppCompatActivity implements InterfacesR
         });
         pm.show();
     }
+
 
 }

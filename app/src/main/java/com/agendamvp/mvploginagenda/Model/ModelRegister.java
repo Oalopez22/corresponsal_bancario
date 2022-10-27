@@ -10,6 +10,7 @@ import androidx.annotation.RequiresApi;
 import com.agendamvp.mvploginagenda.Entidades.Usuario;
 import com.agendamvp.mvploginagenda.Interfaces.InterfacesRegister;
 import com.agendamvp.mvploginagenda.Presenter.PresenterRegister;
+import com.agendamvp.mvploginagenda.SharedPreferences.SharedPreferences;
 import com.agendamvp.mvploginagenda.db.DbLogin;
 
 public class ModelRegister implements InterfacesRegister.Model {
@@ -22,6 +23,13 @@ public class ModelRegister implements InterfacesRegister.Model {
         db = new DbLogin(contexto);
     }
 
+
+    @Override
+    public boolean validar_existencia(SharedPreferences sp) {
+        boolean info = false;
+        info = db.validarExistenciaCliente(sp);
+        return info;
+    }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override

@@ -55,6 +55,12 @@ public class Corresponsal_Register_Client extends AppCompatActivity implements I
 
             }
         });
+        imgArrowBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     @Override

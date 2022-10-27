@@ -21,7 +21,8 @@
         android:text="@string/txtTitlePin"
         android:textColor="#000000"
         android:textSize="34sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/layout"
@@ -35,7 +36,10 @@
         android:layout_marginRight="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textView28">
+        app:layout_constraintTop_toBottomOf="@id/textView28"
+        app:boxStrokeColor="#39F"
+        app:hintTextColor="#39F"
+        android:textColorHint="#39F">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/txtClientCardPin"
@@ -68,21 +72,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/btnCancelPin"
-            android:textColor="#4670F1"
+            android:textColor="#39F"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.589"
             app:layout_constraintStart_toEndOf="@+id/btnAceptCardPin"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0"
-            app:strokeColor="#4670F1" />
+            app:strokeColor="#39F" />
 
         <Button
             android:id="@+id/btnAceptCardPin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="64dp"
-            android:backgroundTint="#4670F1"
+            android:backgroundTint="#39F"
             android:text="@string/btnAceptarPin"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"

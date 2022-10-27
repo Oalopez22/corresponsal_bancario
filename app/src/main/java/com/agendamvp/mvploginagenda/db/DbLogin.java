@@ -45,15 +45,22 @@ public class DbLogin extends DbHelper{
         sp = new SharedPreferences(context);
     }
 
-    public boolean validar_Login(Usuario user){
+    public Usuario validar_Login(Usuario user){
+        Usuario datos = null;
         db = getWritableDatabase();
-        Cursor cursor = db.rawQuery(" SELECT * FROM " + TABLE_CORRESPONSAL + " WHERE " + COLUMNA_CORREO_CORRESPONSAL + " =?" + " AND " + COLUMNA_PASSWORD_CORRESPONSAL + " =?",new String[]{user.getCorresponsal_email(), user.getCorresponsal_password()});
+        Cursor cursor = db.rawQuery(" SELECT * FROM " + TABLE_CORRESPONSAL + " WHERE " + COLUMNA_CORREO_CORRESPONSAL + " =?" + " AND " + COLUMNA_PASSWORD_CORRESPONSAL + " =?" + " AND " + COLUMNA_ESTADO_CORRESPONSAL + " = 0",new String[]{user.getCorresponsal_email(), user.getCorresponsal_password()});
         if (cursor.getCount()>0){
-            return true;
-        }else{
-            return false;
+            if (cursor.moveToFirst()){
+                datos = new Usuario();
+                datos.setCorresponsal_name(cursor.getString(2));
+                datos.setCorresponsal_status(cursor.getInt(5));
+                datos.setCorresponsal_rol(cursor.getInt(8));
+            }
         }
+        cursor.close();
+        return datos;
     }
+
     public Usuario validar_datos_cliente_cop(SharedPreferences sp){
         Usuario datos = null;
 
@@ -86,7 +93,6 @@ public class DbLogin extends DbHelper{
                 user.setCorresponsal_balance(cursor.getInt(7));
                 user.setCorreponsal_ncuenta(cursor.getString(6));
                 user.setCorresponsal_email(cursor.getString(1));
-                user.setCorresponsal_password(cursor.getString(4));
             }
 
         cursor.close();
@@ -124,10 +130,10 @@ public class DbLogin extends DbHelper{
             default:
                 Toast.makeText(context, "Numero de caracteres superado", Toast.LENGTH_LONG).show();
         }
-
         String numeros  =  tarjeta + pin;
         long id = 0;
         try {
+            db = dbhelper.getWritableDatabase();
             Random cardRandom = new Random();
             int numeroCvv = cardRandom.nextInt(999 - 100 + 1 )+100;
             LocalDate fecha = LocalDate.now();
@@ -136,7 +142,7 @@ public class DbLogin extends DbHelper{
             String dos_digitos = fechaConvertida.substring(2,4);
             String dos_ultimos = fechaConvertida.substring(5,7);
             String fecha_creacion = dos_digitos + "-" + dos_ultimos;
-            db = dbhelper.getWritableDatabase();
+
             ContentValues values = new ContentValues();
             values.put("documento_cliente",user.getDocumento());
             values.put("nombre_cliente",user.getNombre());
@@ -150,6 +156,15 @@ public class DbLogin extends DbHelper{
             ex.toString();
         }
         return id;
+    }
+
+    public boolean validarExistenciaCliente(SharedPreferences sp){
+        boolean info = false;
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_CLIENT + " WHERE " + COLUMNA_DOCUMENTO + " = ?", new String[]{sp.getCcUSer()} );
+        if (cursor.getCount() > 1 ){
+            info = true;
+        }
+        return info;
     }
 
     public long crearCorresponsal(Usuario user){
@@ -543,7 +558,6 @@ public class DbLogin extends DbHelper{
             default:
                 Toast.makeText(context, "Numero de caracteres superado", Toast.LENGTH_LONG).show();
         }
-
         String numeros  =  tarjeta + pin;
         long id = 0;
         try {

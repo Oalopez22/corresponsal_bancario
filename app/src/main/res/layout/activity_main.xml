@@ -23,15 +23,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_marginHorizontal="30dp">
+        android:layout_marginHorizontal="30dp"
+        app:endIconMode="clear_text"
+        app:boxStrokeColor="#39F"
+        app:hintTextColor="#39F"
+        android:textColorHint="#39F">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/txtLoginEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/txtLoginCorreo"
-            android:text="bga@wposs.com"
-            android:textSize="24sp" />
+            android:text="admin@wposs.com"
+            android:textSize="24sp"
+            />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -40,6 +45,11 @@
         android:layout_height="wrap_content"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_marginHorizontal="30dp"
+        app:endIconMode="password_toggle"
+        app:endIconTint="#39F"
+        app:boxStrokeColor="#39F"
+        app:hintTextColor="#39F"
+        android:textColorHint="#39F"
         >
 
         <com.google.android.material.textfield.TextInputEditText
@@ -48,7 +58,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/txtLoginPassword"
             android:inputType="textPassword"
-            android:text="Alopez123"
+            android:text="Admin123*"
             android:textSize="24sp" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -64,7 +74,7 @@
             android:id="@+id/btnLoginIngresar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="#70CA79"
+            android:backgroundTint="#39F"
             android:text="@string/btnIngresar"
             android:textSize="34sp" />
 
