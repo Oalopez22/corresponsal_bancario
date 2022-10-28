@@ -8,6 +8,38 @@
     android:orientation="vertical"
     tools:context=".RegisterAdminCorresponsal">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="115dp">
+
+        <LinearLayout
+            android:layout_width="164dp"
+            android:layout_height="158dp"
+            android:layout_marginStart="260dp"
+            android:layout_marginBottom="4dp"
+            android:background="@drawable/circulo"
+            android:backgroundTint="#E64C25"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/imgArrowBackAdmin"
+            android:layout_width="54dp"
+            android:layout_height="54dp"
+            android:layout_marginStart="290dp"
+            android:layout_marginBottom="25dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_action_arrowback"
+            app:tint="@color/white" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <TextView
         android:id="@+id/tvNewCorresponsal"
         android:layout_width="match_parent"
@@ -30,7 +62,12 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp">
+            android:layout_marginBottom="20dp"
+            app:boxStrokeColor="#FF5F58"
+            app:hintTextColor="#FF5F58"
+            android:textColorHint="#FF5F58"
+            app:endIconMode="clear_text"
+            app:endIconTint="#FF5F58">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/txtNewCop"
@@ -44,39 +81,61 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp">
+            android:layout_marginBottom="20dp"
+            app:boxStrokeColor="#FF5F58"
+            app:hintTextColor="#FF5F58"
+            android:textColorHint="#FF5F58"
+            app:endIconMode="clear_text"
+            app:endIconTint="#FF5F58"
+            app:counterEnabled="true"
+            app:counterMaxLength="12">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/txtnewnitcop"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/txtAddAdminNitcop" />
+                android:hint="@string/txtAddAdminNitcop"
+                android:inputType="number"
+                android:maxLength="12" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp">
+            android:layout_marginBottom="20dp"
+            app:boxStrokeColor="#FF5F58"
+            app:hintTextColor="#FF5F58"
+            android:textColorHint="#FF5F58"
+            app:endIconMode="clear_text"
+            app:endIconTint="#FF5F58"
+            >
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/txtNewEmailCop"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/txtAddAdminEmailcop" />
+                android:hint="@string/txtAddAdminEmailcop"
+                android:inputType="textEmailAddress"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="40dp">
+            android:layout_marginBottom="40dp"
+            app:boxStrokeColor="#FF5F58"
+            app:hintTextColor="#FF5F58"
+            android:textColorHint="#FF5F58"
+            app:endIconMode="password_toggle"
+            app:endIconTint="#FF5F58">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/txtNewPassCop"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/txtAddAminPascop" />
+                android:hint="@string/txtAddAminPascop"
+                android:inputType="textPassword"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout

@@ -5,6 +5,7 @@
       <map>
         <entry key="..\:/Users/cloud/.gradle/caches/transforms-3/48e56c303e0d31753f46166d8e551339/transformed/appcompat-1.5.1/res/layout/support_simple_spinner_dropdown_item.xml" value="0.3625" />
         <entry key="..\:/Users/cloud/Desktop/PRUEBAS-OMAR/MVPLOGIN/app/src/main/res/drawable/borde_card.xml" value="0.256" />
+        <entry key="..\:/Users/cloud/Desktop/PRUEBAS-OMAR/MVPLOGIN/app/src/main/res/drawable/border_register.xml" value="0.358" />
         <entry key="..\:/Users/cloud/Desktop/PRUEBAS-OMAR/MVPLOGIN/app/src/main/res/drawable/bordes.xml" value="0.256" />
         <entry key="..\:/Users/cloud/Desktop/PRUEBAS-OMAR/MVPLOGIN/app/src/main/res/drawable/bordes_completo.xml" value="0.3635" />
         <entry key="..\:/Users/cloud/Desktop/PRUEBAS-OMAR/MVPLOGIN/app/src/main/res/drawable/bordes_redondeados.xml" value="0.256" />
@@ -16,7 +17,9 @@
         <entry key="..\:/Users/cloud/Desktop/PRUEBAS-OMAR/MVPLOGIN/app/src/main/res/drawable/dialog_negative_round.xml" value="0.347" />
         <entry key="..\:/Users/cloud/Desktop/PRUEBAS-OMAR/MVPLOGIN/app/src/main/res/drawable/dialog_positive_round.xml" value="0.347" />
         <entry key="..\:/Users/cloud/Desktop/PRUEBAS-OMAR/MVPLOGIN/app/src/main/res/drawable/linea_debajo.xml" value="0.256" />
+        <entry key="..\:/Users/cloud/Desktop/PRUEBAS-OMAR/MVPLOGIN/app/src/main/res/drawable/pruebas.xml" value="0.264" />
         <entry key="..\:/Users/cloud/Desktop/PRUEBAS-OMAR/MVPLOGIN/app/src/main/res/drawable/rounded_dialog.xml" value="0.278" />
+        <entry key="..\:/Users/cloud/Desktop/PRUEBAS-OMAR/MVPLOGIN/app/src/main/res/drawable/sombra.xml" value="0.358" />
         <entry key="..\:/Users/cloud/Desktop/PRUEBAS-OMAR/MVPLOGIN/app/src/main/res/layout/activity_admin_corresponsal.xml" value="0.264" />
         <entry key="..\:/Users/cloud/Desktop/PRUEBAS-OMAR/MVPLOGIN/app/src/main/res/layout/activity_confirm_deposit.xml" value="0.30526315789473685" />
         <entry key="..\:/Users/cloud/Desktop/PRUEBAS-OMAR/MVPLOGIN/app/src/main/res/layout/activity_confirm_pay_with_card.xml" value="0.3625" />

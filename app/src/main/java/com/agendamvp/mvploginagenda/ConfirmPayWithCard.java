@@ -90,7 +90,7 @@ public class ConfirmPayWithCard extends AppCompatActivity implements InterfacesP
                 tvCardType.setText(master.toUpperCase(Locale.ROOT));
                 break;
             case '6':
-                String unoion = "UnionPlay";
+                String unoion = "UnionPay";
                 tvCardType.setText(unoion.toUpperCase(Locale.ROOT));
                 break;
             default:

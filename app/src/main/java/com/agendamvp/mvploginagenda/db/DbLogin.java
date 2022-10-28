@@ -63,7 +63,6 @@ public class DbLogin extends DbHelper{
 
     public Usuario validar_datos_cliente_cop(SharedPreferences sp){
         Usuario datos = null;
-
         db =getWritableDatabase();
         Cursor cursor = db.rawQuery(" SELECT * FROM " + TABLE_CLIENT + " WHERE card_numero =? ",new String[]{sp.getCardClient()});
         if (cursor.getCount()>0){
@@ -82,6 +81,19 @@ public class DbLogin extends DbHelper{
     }
 
 
+    public Usuario infoCopAdmin(SharedPreferences sp){
+        Usuario datos = null;
+        db =getWritableDatabase();
+        Cursor cursor = db.rawQuery(" SELECT * FROM " + TABLE_CORRESPONSAL + " WHERE nit_corresponsal =? ",new String[]{sp.getNitCopAdmin()});
+        if (cursor.getCount()>0){
+            if (cursor.moveToFirst()){
+                datos = new Usuario();
+                datos.setCorresponsal_name(cursor.getString(2));
+            }
+        }
+        cursor.close();
+        return datos;
+    }
 
     public Usuario infoCop(SharedPreferences sp){
         Usuario user = null;
@@ -159,10 +171,12 @@ public class DbLogin extends DbHelper{
     }
 
     public boolean validarExistenciaCliente(SharedPreferences sp){
-        boolean info = false;
+        boolean info;
         Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_CLIENT + " WHERE " + COLUMNA_DOCUMENTO + " = ?", new String[]{sp.getCcUSer()} );
-        if (cursor.getCount() > 1 ){
+        if (cursor.getCount() >= 1 ){
             info = true;
+        }else{
+            info = false;
         }
         return info;
     }
@@ -191,6 +205,16 @@ public class DbLogin extends DbHelper{
         }
         return id;
     }
+    public boolean validarExistenciaCorresponsal(SharedPreferences sp){
+        boolean info;
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_CORRESPONSAL + " WHERE " + COLUMNA_NIT_CORRESPONSAL + " = ?", new String[]{sp.getNitCop()} );
+        if (cursor.getCount() >= 1 ){
+            info = true;
+        }else{
+            info = false;
+        }
+        return info;
+    }
 
 /*    public boolean buscarCCcliente(Usuario user){
         db = getWritableDatabase();
@@ -202,8 +226,8 @@ public class DbLogin extends DbHelper{
         }
 
     }*/
-    public boolean buscarCorresponsal(Usuario user){
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_CORRESPONSAL + " WHERE " + COLUMNA_NIT_CORRESPONSAL + " = ?", new String[]{user.getCorresponsal_nit()} );
+    public boolean buscarCorresponsal(SharedPreferences sp){
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_CORRESPONSAL + " WHERE " + COLUMNA_NIT_CORRESPONSAL + " = ?", new String[]{sp.getNitCop()} );
         if (cursor.getCount() > 0){
             return true;
         }else{
@@ -227,11 +251,12 @@ public class DbLogin extends DbHelper{
         cursor.close();
         return dataUser;
     }
-    public  boolean actualizarEstado(SharedPreferences sp ,int status){
+    public  boolean actualizarEstado(Usuario user){
         boolean correcto;
+        int estado = user.getCorresponsal_status();
         try{
-            db.execSQL(" UPDATE " + TABLE_CORRESPONSAL + " SET estado_corresponsal =" + status + " WHERE nit_corresponsal " +"= '"+sp.getNitCop()+"'");
-            mostrarDataClient(sp);
+            db.execSQL(" UPDATE " + TABLE_CORRESPONSAL + " SET estado_corresponsal =" + estado + " WHERE nit_corresponsal " +"= '"+sp.getNitCop()+"'");
+            mostrarDataCop(sp);
             correcto = true;
         }catch (Exception ex){
             ex.toString();
@@ -239,6 +264,7 @@ public class DbLogin extends DbHelper{
         }finally {
             db.close();
         }
+
         return correcto;
     }
 

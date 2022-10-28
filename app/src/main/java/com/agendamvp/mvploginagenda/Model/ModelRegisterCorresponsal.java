@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.agendamvp.mvploginagenda.Entidades.Usuario;
 import com.agendamvp.mvploginagenda.Interfaces.InterfacesRegisterCorresponsal;
+import com.agendamvp.mvploginagenda.SharedPreferences.SharedPreferences;
 import com.agendamvp.mvploginagenda.db.DbLogin;
 
 public class ModelRegisterCorresponsal implements InterfacesRegisterCorresponsal.model {
@@ -16,6 +17,14 @@ public class ModelRegisterCorresponsal implements InterfacesRegisterCorresponsal
         this.contexto = contexto;
         db = new DbLogin(contexto);
     }
+
+    @Override
+    public boolean validar_existencia(SharedPreferences sp) {
+        boolean info = false;
+        info = db.validarExistenciaCorresponsal(sp);
+        return info;
+    }
+
     @Override
     public long registrar_corresponsal(Usuario user) {
         long id = 0;

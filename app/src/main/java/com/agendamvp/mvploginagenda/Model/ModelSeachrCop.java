@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.agendamvp.mvploginagenda.Entidades.Usuario;
 import com.agendamvp.mvploginagenda.Interfaces.InterfacesSeachCop;
+import com.agendamvp.mvploginagenda.SharedPreferences.SharedPreferences;
 import com.agendamvp.mvploginagenda.db.DbLogin;
 
 public class ModelSeachrCop implements InterfacesSeachCop.model {
@@ -16,9 +17,16 @@ public class ModelSeachrCop implements InterfacesSeachCop.model {
         db = new DbLogin(contexto);
     }
     @Override
-    public boolean buscarCorresponsal(Usuario user) {
+    public boolean buscarCorresponsal(SharedPreferences sp) {
         boolean id;
-        id = db.buscarCorresponsal(user);
+        id = db.buscarCorresponsal(sp);
         return id;
+    }
+
+    @Override
+    public Usuario info(SharedPreferences sp) {
+        Usuario user;
+        user = db.infoCopAdmin(sp);
+        return user;
     }
 }

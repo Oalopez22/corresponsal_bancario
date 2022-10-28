@@ -9,17 +9,34 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="63dp">
+        android:layout_height="115dp">
+
+        <LinearLayout
+            android:layout_width="164dp"
+            android:layout_height="158dp"
+            android:layout_marginStart="260dp"
+            android:layout_marginBottom="4dp"
+            android:background="@drawable/circulo"
+            android:backgroundTint="#E64C25"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+        </LinearLayout>
 
         <ImageView
             android:id="@+id/imgArrowBackAdmin"
-            android:layout_width="88dp"
-            android:layout_height="52dp"
+            android:layout_width="54dp"
+            android:layout_height="54dp"
+            android:layout_marginStart="290dp"
+            android:layout_marginBottom="25dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.948"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_action_arrowback"
-            tools:layout_editor_absoluteY="6dp" />
+            app:tint="@color/white" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
@@ -40,60 +57,111 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="640dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginTop="30dp"
         android:orientation="vertical"
-        android:layout_marginTop="30dp">
+        android:background="@drawable/border_register">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/RviewDataCop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center|center_vertical"
-            android:layout_marginHorizontal="40dp"
-            android:layout_marginBottom="30dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="384dp"
-            android:layout_height="92dp"
-            android:layout_marginHorizontal="10dp">
+            <TextView
+                android:id="@+id/txtDataEmailCop2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="weaeawe"
+                android:textAlignment="viewStart"
+                android:textColor="#070707"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
-            <Button
-                android:id="@+id/btndataHabilitar"
-                android:layout_width="143dp"
-                android:layout_height="40dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginBottom="26dp"
-                android:backgroundTint="#E64C25"
-                android:text="@string/btnDataHabilitarAdminCop"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/btndataDesabilitar"
-                app:layout_constraintHorizontal_bias="0.326"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0" />
+            <TextView
+                android:id="@+id/txtDataCopNit2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:gravity="center"
+                android:text="weaeawe"
+                android:textAlignment="viewStart"
+                android:textColor="#070707"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
-            <Button
-                android:id="@+id/btndataDesabilitar"
-                style="?attr/materialButtonOutlinedStyle"
-                android:layout_width="156dp"
-                android:layout_height="46dp"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="25dp"
-                android:layout_marginEnd="36dp"
-                android:layout_marginBottom="25dp"
-                android:text="@string/btnDataDeshabilitarAdminCop"
-                android:textColor="#E64C25"
-                android:textSize="15sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/btnsearchcop"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="1.0"
-                app:strokeColor="#E64C25" />
+            <TextView
+                android:id="@+id/txtDataCopName2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:gravity="center"
+                android:text="weaeawe"
+                android:textAlignment="viewStart"
+                android:textColor="#070707"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
+            <TextView
+                android:id="@+id/txtDataSaldoCop2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:gravity="center"
+                android:text="weaeawe"
+                android:textAlignment="viewStart"
+                android:textColor="#070707"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </LinearLayout>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="384dp"
+        android:layout_height="92dp"
+        android:layout_marginHorizontal="10dp">
+
+        <Button
+            android:id="@+id/btndataHabilitar"
+            android:layout_width="143dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="26dp"
+            android:backgroundTint="#E64C25"
+            android:text="@string/btnDataHabilitarAdminCop"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btndataDesabilitar"
+            app:layout_constraintHorizontal_bias="0.326"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <Button
+            android:id="@+id/btndataDesabilitar"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="156dp"
+            android:layout_height="46dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="36dp"
+            android:layout_marginBottom="25dp"
+            android:text="@string/btnDataDeshabilitarAdminCop"
+            android:textColor="#E64C25"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/btnsearchcop"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0"
+            app:strokeColor="#E64C25" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>

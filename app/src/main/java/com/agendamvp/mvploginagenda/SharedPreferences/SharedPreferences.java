@@ -11,7 +11,6 @@ public class SharedPreferences {
         datos = contexto.getSharedPreferences("all_sp",Context.MODE_PRIVATE);
         editor = datos.edit();
     }
-
     public void setNitCop(String nitcop){
         editor.putString("nit",nitcop);
         editor.apply();
@@ -20,6 +19,12 @@ public class SharedPreferences {
         return datos.getString("nit","Dato no encontrado");
     }
 
+    public void setNitCopAdmin(String nitcopAdmin){
+        editor.putString("nitAdmin",nitcopAdmin);
+        editor.apply();
+    }
+
+    public String getNitCopAdmin(){return datos.getString("nitAdmin", "Dato no encontrado");}
     public void setCcUser(String cc){
         editor.putString("cc",cc);
         editor.apply();

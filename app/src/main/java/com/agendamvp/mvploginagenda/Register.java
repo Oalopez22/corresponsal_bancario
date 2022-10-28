@@ -34,12 +34,14 @@ public class Register extends AppCompatActivity implements View.OnClickListener,
     Button btnRegistrar,btnCancelar;
     InterfacesRegister.Presenter presenter;
     Usuario user;
+    boolean info;
     SharedPreferences sp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         presenter = new PresenterRegister(this,Register.this);
+        sp = new SharedPreferences(this);
         user = new Usuario();
         this.findElements();
         btnRegistrar.setOnClickListener(new View.OnClickListener() {
@@ -49,8 +51,15 @@ public class Register extends AppCompatActivity implements View.OnClickListener,
                 String documento = txtNewdocumento.getText().toString();
                 String balance = txtNewsaldo.getText().toString();
                 if ( cadenaVacia(nombre) && cadenaVacia(documento) && cadenaVacia(balance)){
+                    sp.setCcUser(documento);
                     int residue = Integer.parseInt(balance);
+                    info = presenter.validar_existencia(sp);
+                    if (info){
+                        Toast.makeText(Register.this, "Ya existe un usuario Registrado con este número de documento", Toast.LENGTH_LONG).show();
+
+                    }else{
                         dialogPersonal(R.layout.dialog_pin,nombre,documento,residue,Register.this);
+                    }
 
                 }else {
                     txtnewNombre.setError("Campo obigatorio");
@@ -94,8 +103,6 @@ public class Register extends AppCompatActivity implements View.OnClickListener,
     }
 
     public void dialogPersonal(int layout, String nombre, String documento, int balance, Context contexto){
-        sp = new SharedPreferences(this);
-        sp.setCcUser(documento);
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(Register.this);
         View layoutview = getLayoutInflater().inflate(layout,null);
         dialogBuilder.setView(layoutview);
@@ -117,7 +124,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener,
                 String ntxtpin = txtpin.getText().toString();
                 if (cadenaVacia(ntxtpin)){
                     int newpin = Integer.parseInt(ntxtpin);
-                 confirmarpin(nombre,sp,documento,balance,newpin);
+                 confirmarpin(nombre,documento,balance,newpin);
                 }else {
                     Toast.makeText(contexto, "Campo obligatorio", Toast.LENGTH_SHORT).show();
                 }
@@ -133,7 +140,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener,
         });
     }
 
-  public  void confirmarpin(String nombre,SharedPreferences sp, String documento, int balance,int newpin){
+  public  void confirmarpin(String nombre, String documento, int balance,int newpin){
       AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(Register.this);
       View layoutview = getLayoutInflater().inflate(R.layout.dialog_confirm_pin,null);
       dialogBuilder.setView(layoutview);
@@ -143,7 +150,6 @@ public class Register extends AppCompatActivity implements View.OnClickListener,
       alert.setCanceledOnTouchOutside(false);
       alert.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
       alert.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-
       EditText txtConfirmPin;
         txtConfirmPin = layoutview.findViewById(R.id.txtConfirmClientPin);
         Button btnAceptConfirmPin, btnCancelConfirm;
@@ -160,13 +166,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener,
                         Toast.makeText(Register.this, "El pin no coincide", Toast.LENGTH_LONG).show();
                         txtConfirmPin.setText("");
                     }else{
-                        boolean info = presenter.validar_existencia(sp);
-                        if (info){
-                            Toast.makeText(Register.this, "Ya existe un usuario Registrado con este número de documento", Toast.LENGTH_LONG).show();
-                            alert.dismiss();
-                        }else {
                             redirigir(nombre, documento, balance, newconfirmpin);
-                        }
                     }
                 }
             }

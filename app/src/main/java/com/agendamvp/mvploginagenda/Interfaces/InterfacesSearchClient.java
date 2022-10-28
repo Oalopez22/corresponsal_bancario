@@ -9,8 +9,10 @@ public interface InterfacesSearchClient {
     }
     interface  presenter{
         boolean buscar_cliente(SharedPreferences sp);
+        Usuario mostrardatos(SharedPreferences sp);
     }
     interface model{
         boolean buscar_cliente(SharedPreferences sp);
+        Usuario mostrardatos(SharedPreferences sp);
     }
 }

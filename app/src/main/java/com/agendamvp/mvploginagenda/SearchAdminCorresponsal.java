@@ -38,9 +38,9 @@ public class SearchAdminCorresponsal extends AppCompatActivity  implements Inter
                 String nit = SeachCop.getText().toString();
                 if (cadenaVacia(nit)){
                     user.setCorresponsal_nit(nit);
-                    boolean id = presenter.buscarCorresponsal(user);
+                    sp.setNitCopAdmin(nit);
+                    boolean id = presenter.buscarcop(sp);
                     if (id){
-                        sp.setNitCop(nit);
                         vistaDatosCorresponsal();
                     }else{
                         Toast.makeText(SearchAdminCorresponsal.this, "Error al buscar el corresponsal", Toast.LENGTH_SHORT).show();

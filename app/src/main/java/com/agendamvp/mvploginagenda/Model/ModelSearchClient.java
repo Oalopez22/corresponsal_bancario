@@ -26,5 +26,12 @@ public class ModelSearchClient implements InterfacesSearchClient.model {
         id = db.buscarCliente(sp);
         return id;
     }
+
+    @Override
+    public Usuario mostrardatos(SharedPreferences sp) {
+        Usuario info = null;
+        info = db.mostrarDataClient(sp);
+        return info;
+    }
 }
 

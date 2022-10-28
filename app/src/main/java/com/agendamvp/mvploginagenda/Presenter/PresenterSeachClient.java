@@ -23,4 +23,11 @@ public class PresenterSeachClient implements InterfacesSearchClient.presenter {
         id = model.buscar_cliente(sp);
         return id;
     }
+
+    @Override
+    public Usuario mostrardatos(SharedPreferences sp) {
+        Usuario info = null;
+        info = this.model.mostrardatos(sp);
+        return info;
+    }
 }
