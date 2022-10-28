@@ -29,4 +29,11 @@ public class ModelSeachrCop implements InterfacesSeachCop.model {
         user = db.infoCopAdmin(sp);
         return user;
     }
+
+    @Override
+    public boolean actualizar_estado(Usuario user) {
+        boolean id;
+        id = db.actualizarEstado(user);
+        return id;
+    }
 }

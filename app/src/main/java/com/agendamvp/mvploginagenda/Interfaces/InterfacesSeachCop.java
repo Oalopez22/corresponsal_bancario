@@ -10,10 +10,12 @@ public interface InterfacesSeachCop {
     interface presenter{
         boolean buscarcop(SharedPreferences sp);
         Usuario info(SharedPreferences sp);
+        boolean actualizar_estado(Usuario user);
     }
     interface  model{
         boolean buscarCorresponsal(SharedPreferences sp);
         Usuario info(SharedPreferences sp);
+        boolean actualizar_estado(Usuario user);
     }
 
 }

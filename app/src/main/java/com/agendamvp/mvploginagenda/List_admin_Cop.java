@@ -19,7 +19,7 @@ public class List_admin_Cop extends AppCompatActivity implements SearchView.OnQu
     Usuario user;
     ImageView imgArrowBack;
     ListAdminCopsAdapter adapter;
-    TextView viewCopName,viewCopNit,viewCopStatus;
+    TextView viewCopName,viewCopNit,viewCopStatus,viewCopBalance,viewCopNacount;
     SearchView svCop;
     RecyclerView RviewCops;
     @Override
@@ -31,6 +31,8 @@ public class List_admin_Cop extends AppCompatActivity implements SearchView.OnQu
         viewCopName = findViewById(R.id.txtCopsName);
         viewCopNit = findViewById(R.id.txtCopsNit);
         viewCopStatus = findViewById(R.id.txtCopsStatus);
+        viewCopBalance = findViewById(R.id.txtLisBalanceCop);
+        viewCopNacount = findViewById(R.id.txtCopsNumber);
         svCop = findViewById(R.id.svCops);
         imgArrowBack = findViewById(R.id.imgArrowBackAdmin);
         RviewCops = findViewById(R.id.RviewCops);

@@ -33,5 +33,6 @@ public class ModelSearchClient implements InterfacesSearchClient.model {
         info = db.mostrarDataClient(sp);
         return info;
     }
+
 }
 

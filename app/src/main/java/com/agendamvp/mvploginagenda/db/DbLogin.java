@@ -88,7 +88,11 @@ public class DbLogin extends DbHelper{
         if (cursor.getCount()>0){
             if (cursor.moveToFirst()){
                 datos = new Usuario();
+                datos.setCorresponsal_email(cursor.getString(1));
+                datos.setCorresponsal_nit(cursor.getString(3));
                 datos.setCorresponsal_name(cursor.getString(2));
+                datos.setCorresponsal_balance(cursor.getInt(7));
+                datos.setCorresponsal_status(cursor.getInt(5));
             }
         }
         cursor.close();
@@ -255,7 +259,7 @@ public class DbLogin extends DbHelper{
         boolean correcto;
         int estado = user.getCorresponsal_status();
         try{
-            db.execSQL(" UPDATE " + TABLE_CORRESPONSAL + " SET estado_corresponsal =" + estado + " WHERE nit_corresponsal " +"= '"+sp.getNitCop()+"'");
+            db.execSQL(" UPDATE " + TABLE_CORRESPONSAL + " SET estado_corresponsal =" + estado + " WHERE nit_corresponsal " +"= '"+sp.getNitCopAdmin()+"'");
             mostrarDataCop(sp);
             correcto = true;
         }catch (Exception ex){
@@ -303,6 +307,7 @@ public class DbLogin extends DbHelper{
                 data.setDocumento(cursorlistaclientes.getString(1));
                 data.setNombre(cursorlistaclientes.getString(2));
                 data.setSaldo(cursorlistaclientes.getInt(3));
+                data.setCard_number(cursorlistaclientes.getString(5));
                 data.setPin(cursorlistaclientes.getInt(4));
                 listaClientes.add(data);
             } while (cursorlistaclientes.moveToNext());
@@ -322,6 +327,7 @@ public class DbLogin extends DbHelper{
                 data.setCorresponsal_name(cursorlistacops.getString(2));
                 data.setCorresponsal_nit(cursorlistacops.getString(3));
                 data.setCorresponsal_status(cursorlistacops.getInt(5));
+                data.setCorreponsal_ncuenta(cursorlistacops.getString(6));
                 data.setCorresponsal_balance(cursorlistacops.getInt(7));
                 listaCop.add(data);
             } while (cursorlistacops.moveToNext());

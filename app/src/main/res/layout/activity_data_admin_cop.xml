@@ -75,9 +75,9 @@
                 android:id="@+id/txtDataEmailCop2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
+                android:layout_marginBottom="20dp"
                 android:text="weaeawe"
-                android:textAlignment="viewStart"
+
                 android:textColor="#070707"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -87,9 +87,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
-                android:gravity="center"
+
                 android:text="weaeawe"
-                android:textAlignment="viewStart"
+
                 android:textColor="#070707"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -99,9 +99,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
-                android:gravity="center"
+
                 android:text="weaeawe"
-                android:textAlignment="viewStart"
+
                 android:textColor="#070707"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -111,9 +111,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
-                android:gravity="center"
                 android:text="weaeawe"
-                android:textAlignment="viewStart"
+
                 android:textColor="#070707"
                 android:textSize="20sp"
                 android:textStyle="bold" />

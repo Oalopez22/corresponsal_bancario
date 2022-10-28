@@ -29,4 +29,11 @@ public class PresenterSeachCop implements InterfacesSeachCop.presenter {
         user = this.model.info(sp);
         return user;
     }
+
+    @Override
+    public boolean actualizar_estado(Usuario user) {
+        boolean id ;
+        id = this.model.actualizar_estado(user);
+        return id;
+    }
 }

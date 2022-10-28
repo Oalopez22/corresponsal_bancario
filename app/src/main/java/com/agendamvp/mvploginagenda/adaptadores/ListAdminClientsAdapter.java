@@ -35,7 +35,8 @@ public class ListAdminClientsAdapter extends RecyclerView.Adapter<ListAdminClien
     public void onBindViewHolder(@NonNull DataViewHolder holder, int position) {
             holder.viewClientName.setText(ListAdminClients.get(position).getNombre());
             holder.viewClientCc.setText(ListAdminClients.get(position).getDocumento());
-            /*holder.viewBalanceClient.setText(ListAdminClients.get(position).getSaldo());*/
+            holder.viewClientAcout.setText(ListAdminClients.get(position).getCard_number());
+            holder.viewBalanceClient.setText(String.valueOf(ListAdminClients.get(position).getSaldo()));
     }
     public  void buscarcliente(final String cc){
         int longitud = cc.length();
@@ -66,12 +67,13 @@ public class ListAdminClientsAdapter extends RecyclerView.Adapter<ListAdminClien
     }
 
     public class DataViewHolder extends RecyclerView.ViewHolder {
-        TextView viewClientName,viewClientCc,viewBalanceClient;
+        TextView viewClientName,viewClientCc,viewBalanceClient,viewClientAcout;
         public DataViewHolder(@NonNull View itemView) {
             super(itemView);
             viewClientName = itemView.findViewById(R.id.txtListClientName);
             viewClientCc = itemView.findViewById(R.id.txtListCcClient);
             viewBalanceClient = itemView.findViewById(R.id.txtListBalanceClient);
+            viewClientAcout = itemView.findViewById(R.id.txtListAcout);
         }
     }
 }

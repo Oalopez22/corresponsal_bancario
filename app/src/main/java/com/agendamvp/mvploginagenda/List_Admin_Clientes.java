@@ -21,7 +21,7 @@ public class List_Admin_Clientes extends AppCompatActivity  implements  SearchVi
     Usuario user;
     ImageView imgArrowback;
     ListAdminClientsAdapter adapter;
-    TextView viewClientName,viewClientCc,viewClientBalance;
+    TextView viewClientName,viewClientCc,viewClientBalance, viewClientAcount;
     SearchView SvClient;
     RecyclerView RviewClients;
     @Override
@@ -33,6 +33,7 @@ public class List_Admin_Clientes extends AppCompatActivity  implements  SearchVi
         viewClientName = findViewById(R.id.txtListClientName);
         viewClientCc = findViewById(R.id.txtListCcClient);
         viewClientBalance = findViewById(R.id.txtListBalanceClient);
+        viewClientAcount = findViewById(R.id.txtListAcout);
         SvClient = findViewById(R.id.svClientCC);
 
         imgArrowback = findViewById(R.id.imgArrowBackAdmin);

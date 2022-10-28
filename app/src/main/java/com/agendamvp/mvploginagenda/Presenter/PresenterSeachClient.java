@@ -30,4 +30,5 @@ public class PresenterSeachClient implements InterfacesSearchClient.presenter {
         info = this.model.mostrardatos(sp);
         return info;
     }
+
 }
