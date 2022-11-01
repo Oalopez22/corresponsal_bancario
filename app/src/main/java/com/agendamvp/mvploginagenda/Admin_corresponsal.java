@@ -132,13 +132,17 @@ public class Admin_corresponsal extends AppCompatActivity implements InterfacesC
                         Toast.makeText(Admin_corresponsal.this, "Boton Cliente Presionado", Toast.LENGTH_SHORT).show();
                         return true;
                     case R.id.MenuCloseSession:
-                        finish();
+                        inicio();
                         return true;
                 }
                 return false;
             }
         });
         pm.show();
+    }
+    public  void inicio(){
+        Intent intent = new Intent(Admin_corresponsal.this,MainActivity.class);
+        startActivity(intent);
     }
 
 
